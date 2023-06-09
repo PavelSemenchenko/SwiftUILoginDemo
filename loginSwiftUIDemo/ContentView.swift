@@ -85,10 +85,11 @@ struct ContentView: View {
                 }
             }
             //        описываем отступы содержимого в стеке
-            .padding(EdgeInsets(top: 50, leading: 32, bottom: 50, trailing: 32))
-            //            .background(Color(UIColor.lightGray))
+            .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             .background(LinearGradient(gradient: Gradient(colors: [.blue, .green, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all))
+            .edgesIgnoringSafeArea(.all)
         }
     }
 }
@@ -106,6 +107,9 @@ struct AnotherView: View {
 struct AnotherView2: View {
     var body: some View {
         Text("Windows 2 opened")
+            .frame(height: UIScreen.main.bounds.height)
+            .background(Color.red)
+            
             
     }
 }
