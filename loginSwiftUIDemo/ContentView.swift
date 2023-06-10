@@ -27,13 +27,13 @@ struct ContentView: View {
     @State private var isShowingModal = false
     //
     private var emailBackgroung : Color {
-        loginVM.isEmailCorrect ? .cyan : .red
+        loginVM.isEmailCorrect ? .white : .red
     }
     
     private var passwordBackground: Color {
         get {
             if loginVM.isPaswordCorrect {
-                return .cyan
+                return .white
             } else {
                 return .red
             }
@@ -47,18 +47,25 @@ struct ContentView: View {
         }
         return BlueButton(color: color)
     }
+//    не работает смена цвета
+    init() {
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
+    }
     
     var body: some View {
-        
+
         NavigationView {
             VStack {
                 Image(systemName: "globe")
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
+                    .padding(20)
                 TextField("Email", text: $loginVM.email)
                     .border(emailBackgroung)
+                    .foregroundColor(.white)
                 TextField("Password", text: $loginVM.password)
                     .border(passwordBackground)
+                    .foregroundColor(.white)
                 Button("Sign in") {
                     Task {
                         await loginVM.login()
@@ -68,6 +75,7 @@ struct ContentView: View {
                     .padding()
                 VStack {
                     NavigationLink("window 2 ", destination: AnotherView2())
+                        .foregroundColor(.white)
                     HStack {
                         Text("label 1")
                         Text("label 2")
@@ -87,7 +95,7 @@ struct ContentView: View {
             //        описываем отступы содержимого в стеке
             .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            .background(LinearGradient(gradient: Gradient(colors: [.blue, .green, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            .background(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all))
             .edgesIgnoringSafeArea(.all)
         }
