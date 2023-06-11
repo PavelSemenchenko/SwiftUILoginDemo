@@ -56,7 +56,8 @@ struct ContentView: View {
 
         NavigationView {
             VStack {
-                Image(systemName: "globe")
+                Image(systemName: "figure.wave")
+                    .font(.largeTitle)
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                     .padding(20)
@@ -73,6 +74,7 @@ struct ContentView: View {
                 }.buttonStyle(signInButtonStyle)
                     .disabled(!loginVM.canLogin || loginVM.loginActive)
                     .padding()
+                
                 VStack {
                     NavigationLink("window 2 ", destination: AnotherView2())
                         .foregroundColor(.white)
@@ -90,8 +92,13 @@ struct ContentView: View {
                     }.sheet(isPresented: $isShowingModal) {
                         AnotherView()
                     }.navigationBarTitle("Entering")
+                    
                 }
-            }
+            }   .padding(20)
+                .background(Color.gray).opacity(0.9)
+                .border(.black)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+            
             //        описываем отступы содержимого в стеке
             .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
