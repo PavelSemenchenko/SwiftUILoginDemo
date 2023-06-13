@@ -68,15 +68,10 @@ struct SignInScreen: View {
                 
                 
                 VStack {
-                    NavigationLink("Sign Up", destination: AnotherView2())
-                        .foregroundColor(.white)
                     HStack {
-                        Text("label 1")
-                        Text("label 2")
-                    }
-                    HStack {
-                        Text("label 3")
-                        Text("label 4")
+                        Spacer()
+                        NavigationLink("Sign Up", destination: SignUpScreen())
+                            .foregroundColor(.white)
                     }
                     Button("Agreements") {
                         isShowingModal.toggle()
