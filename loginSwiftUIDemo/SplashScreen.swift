@@ -11,22 +11,33 @@ import SwiftUI
 struct SplashView: View {
     @State private var isActive = false
     @State private var currentColorIndex = 0
-    private let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .pink]
+    private let gradients: [Gradient] = [
+        Gradient(colors: [.red, .orange]),
+        Gradient(colors: [.red, .orange, .yellow])
+    ]
     
     var body: some View {
         VStack {
             Text("splash screen")
                 .font(.largeTitle)
-                .foregroundColor(colors[currentColorIndex])
-                .animation(.easeInOut(duration: 1.0))
-                .onAppear {
-                    withAnimation {
-                        startColorAnimation()
-                    }
-                }
+                .foregroundColor(.white)
+                .padding()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(
+            LinearGradient(
+                gradient: gradients[currentColorIndex],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+        .animation(.easeInOut(duration: 1.0))
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            withAnimation {
+                startColorAnimation()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                 isActive = true
             }
         }
@@ -36,8 +47,8 @@ struct SplashView: View {
     }
     
     private func startColorAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { timer in
-            currentColorIndex = (currentColorIndex + 1) % colors.count
+        Timer.scheduledTimer(withTimeInterval: 0.7, repeats: true) { timer in
+            currentColorIndex = (currentColorIndex + 1) % gradients.count
         }
     }
 }
