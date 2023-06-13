@@ -9,9 +9,12 @@ import Foundation
 import SwiftUI
 
 struct EditField: View {
-    var backgroundColor: Color
+    var valid: Bool
     var placeholder: String
     var text: Binding<String>
+    private var backgroundColor: Color {
+        valid ? .cyan : .red
+    }
     
     var body: some View {
         TextField(placeholder, text: text)
@@ -19,3 +22,4 @@ struct EditField: View {
             .padding(EdgeInsets(top: 8, leading: 36, bottom: 8, trailing: 36))
     }
 }
+

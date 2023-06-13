@@ -20,9 +20,9 @@ struct BlueButton : ButtonStyle {
 }
 
 struct SignInScreen: View {
-    let textFieldPadding = EdgeInsets(top: 8, leading: 32, bottom: 8, trailing: 32)
     
     @ObservedObject private var loginVM = SignInVM()
+//     var signUp = SignUpScreen()
     // observ another page
     @State private var isShowingModal = false
     //
@@ -40,12 +40,12 @@ struct SignInScreen: View {
         }
     }
     
-    private var signInButtonStyle: some ButtonStyle {
+    private var signInButtonColor: Color {
         var color: Color = !loginVM.canLogin ? .red : .blue
         if loginVM.loginActive {
             color = .orange
         }
-        return BlueButton(color: color)
+        return color
     }
 //    не работает смена цвета
     init() {
@@ -61,22 +61,14 @@ struct SignInScreen: View {
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                     .padding(20)
-                TextField("Email", text: $loginVM.email)
-                    .border(emailBackgroung)
-                    .foregroundColor(.white)
-                TextField("Password", text: $loginVM.password)
-                    .border(passwordBackground)
-                    .foregroundColor(.white)
-                Button("Sign in") {
-                    Task {
-                        await loginVM.login()
-                    }
-                }.buttonStyle(signInButtonStyle)
-                    .disabled(!loginVM.canLogin || loginVM.loginActive)
-                    .padding()
+                EditField(valid: loginVM.isEmailCorrect, placeholder: "Email", text: $loginVM.email)
+                EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
+                
+                MainButton(text: "Sign In", enabled: loginVM.canLogin || !loginVM.loginActive, busy: loginVM.loginActive)
+                
                 
                 VStack {
-                    NavigationLink("window 2 ", destination: AnotherView2())
+                    NavigationLink("Sign Up", destination: AnotherView2())
                         .foregroundColor(.white)
                     HStack {
                         Text("label 1")
@@ -86,7 +78,6 @@ struct SignInScreen: View {
                         Text("label 3")
                         Text("label 4")
                     }
-                    //                going to another page
                     Button("Agreements") {
                         isShowingModal.toggle()
                     }.sheet(isPresented: $isShowingModal) {
@@ -96,14 +87,14 @@ struct SignInScreen: View {
                     
                 }
             }   .padding(20)
-                .background(Color.gray).opacity(0.9)
+//                .background(Color.gray).opacity(0.9)
                 .border(.black)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
             
             //        описываем отступы содержимого в стеке
             .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            .background(LinearGradient(gradient: Gradient(colors: [.blue, .yellow]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            .background(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all))
             .edgesIgnoringSafeArea(.all)
         }

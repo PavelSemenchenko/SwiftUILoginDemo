@@ -11,6 +11,7 @@ import SwiftUI
 fileprivate struct MainButtonStyle: ButtonStyle {
     
     let color: Color
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
@@ -23,21 +24,31 @@ fileprivate struct MainButtonStyle: ButtonStyle {
 struct MainButton: View {
     let text: String
     let enabled: Bool
-    let color: Color
+    let busy: Bool
+    
+    private var color: Color {
+        var color: Color = enabled ? .blue : .red
+        if busy {
+            color = .orange
+        }
+        return color
+    }
     
     var body: some View {
         Button(text) {
             
         }.buttonStyle(MainButtonStyle(color: color))
-            .disabled(!enabled)
+            .disabled(!enabled || busy)
     }
 }
 
 struct MainButton_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            MainButton(text: "Enter", enabled: true, color: .blue)
-            MainButton(text: "Exit", enabled: false, color: .black)
+            MainButton(text: "Enter", enabled: true, busy: false)
+            MainButton(text: "Enter", enabled: false, busy: false)
+            MainButton(text: "Enter", enabled: true, busy: true)
+            MainButton(text: "Enter", enabled: false, busy: true)
         }
     }
 }
