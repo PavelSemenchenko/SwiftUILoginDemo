@@ -28,6 +28,7 @@
 		0429BE3D2A37AB12002EF45F /* EditField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0429BE3C2A37AB12002EF45F /* EditField.swift */; };
 		0429BE3F2A37ACBF002EF45F /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0429BE3E2A37ACBF002EF45F /* MainButton.swift */; };
 		0429BE412A37AE07002EF45F /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0429BE402A37AE07002EF45F /* SignUpScreen.swift */; };
+		2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3848E62A38B9F5007FF32D /* SplashScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		0429BE3C2A37AB12002EF45F /* EditField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditField.swift; sourceTree = "<group>"; };
 		0429BE3E2A37ACBF002EF45F /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		0429BE402A37AE07002EF45F /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		2A3848E62A38B9F5007FF32D /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				0419BCCB2A325BD40079BFFF /* SignInVM.swift */,
 				0426DF3D2A2E717500BB5790 /* SignInScreen.swift */,
 				0429BE402A37AE07002EF45F /* SignUpScreen.swift */,
+				2A3848E62A38B9F5007FF32D /* SplashScreen.swift */,
 				0429BE3C2A37AB12002EF45F /* EditField.swift */,
 				0429BE3E2A37ACBF002EF45F /* MainButton.swift */,
 				0419BCCD2A325D050079BFFF /* GoogleService-Info.plist */,
@@ -196,6 +199,7 @@
 			files = (
 				0429BE3D2A37AB12002EF45F /* EditField.swift in Sources */,
 				0429BE412A37AE07002EF45F /* SignUpScreen.swift in Sources */,
+				2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */,
 				0426DF3E2A2E717500BB5790 /* SignInScreen.swift in Sources */,
 				0426DF3C2A2E717500BB5790 /* loginSwiftUIDemoApp.swift in Sources */,
 				0419BCCC2A325BD40079BFFF /* SignInVM.swift in Sources */,
