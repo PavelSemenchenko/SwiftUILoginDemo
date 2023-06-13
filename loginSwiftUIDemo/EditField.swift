@@ -13,12 +13,13 @@ struct EditField: View {
     var placeholder: String
     var text: Binding<String>
     private var backgroundColor: Color {
-        valid ? .cyan : .red
+        valid ? .white : .red
     }
     
     var body: some View {
         TextField(placeholder, text: text)
-            .background(backgroundColor)
+            .border(backgroundColor)
+            //.background(backgroundColor)
             .padding(EdgeInsets(top: 8, leading: 36, bottom: 8, trailing: 36))
     }
 }

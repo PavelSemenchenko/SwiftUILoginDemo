@@ -22,14 +22,18 @@ struct SignUpScreen: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "figure.wave")
+            Image(systemName: "figure.wave.circle.fill")
                 .font(.largeTitle)
                 .imageScale(.large)
+                .padding(20)
             EditField(valid: loginVM.isEmailCorrect, placeholder: "Email", text: $loginVM.email)
             EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
             MainButton(text: "Sign Up", enabled: loginVM.canLogin, busy: loginVM.loginActive)
-        }.background(Color.gray)
-            .padding()
+        }.padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            .background(LinearGradient(gradient: Gradient(colors: [.orange,.yellow, .red]), startPoint:.topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all))
+            .edgesIgnoringSafeArea(.all)
     }
 }
 

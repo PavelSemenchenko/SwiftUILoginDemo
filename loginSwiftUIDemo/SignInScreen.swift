@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+/*
 struct BlueButton : ButtonStyle {
     let color : Color
     
@@ -17,15 +17,15 @@ struct BlueButton : ButtonStyle {
             .foregroundColor(.white)
             .clipShape(Capsule())
     }
-}
+}*/
 
 struct SignInScreen: View {
     
     @ObservedObject private var loginVM = SignInVM()
-//     var signUp = SignUpScreen()
     // observ another page
     @State private var isShowingModal = false
-    //
+    
+    /*
     private var emailBackgroung : Color {
         loginVM.isEmailCorrect ? .white : .red
     }
@@ -46,7 +46,8 @@ struct SignInScreen: View {
             color = .orange
         }
         return color
-    }
+    }*/
+    
 //    не работает смена цвета
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
@@ -59,7 +60,6 @@ struct SignInScreen: View {
                 Image(systemName: "figure.wave")
                     .font(.largeTitle)
                     .imageScale(.large)
-                    .foregroundColor(.accentColor)
                     .padding(20)
                 EditField(valid: loginVM.isEmailCorrect, placeholder: "Email", text: $loginVM.email)
                 EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
@@ -81,10 +81,10 @@ struct SignInScreen: View {
                         .foregroundColor(.red)
                     
                 }
-            }   .padding(20)
+            }   //.padding(20)
 //                .background(Color.gray).opacity(0.9)
-                .border(.black)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+                //.border(.black)
+               // .clipShape(RoundedRectangle(cornerRadius: 20))
             
             //        описываем отступы содержимого в стеке
             .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
