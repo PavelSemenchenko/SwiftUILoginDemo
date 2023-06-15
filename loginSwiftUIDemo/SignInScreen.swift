@@ -6,96 +6,65 @@
 //
 
 import SwiftUI
-/*
-struct BlueButton : ButtonStyle {
-    let color : Color
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding()
-            .background(color)
-            .foregroundColor(.white)
-            .clipShape(Capsule())
-    }
-}*/
 
 struct SignInScreen: View {
     
-    @ObservedObject private var loginVM = SignInVM()
+    @EnvironmentObject private var loginVM : SignInVM
+    @Environment(\.navigationRouter) var navigationRouter : NavigationRouter
     // observ another page
     @State private var isShowingModal = false
     
-    /*
-    private var emailBackgroung : Color {
-        loginVM.isEmailCorrect ? .white : .red
-    }
-    
-    private var passwordBackground: Color {
-        get {
-            if loginVM.isPaswordCorrect {
-                return .white
-            } else {
-                return .red
-            }
-        }
-    }
-    
-    private var signInButtonColor: Color {
-        var color: Color = !loginVM.canLogin ? .red : .blue
-        if loginVM.loginActive {
-            color = .orange
-        }
-        return color
-    }*/
-    
-//    не работает смена цвета
+    //    не работает смена цвета
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
     }
     
     var body: some View {
-
-        NavigationView {
-            VStack {
-                Image(systemName: "figure.wave")
-                    .font(.largeTitle)
-                    .imageScale(.large)
-                    .padding(20)
-                EditField(valid: loginVM.isEmailCorrect, placeholder: "Email", text: $loginVM.email)
-                EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
-                
-                MainButton(text: "Sign In", enabled: loginVM.canLogin || !loginVM.loginActive, busy: loginVM.loginActive)
-                
-                
-                VStack {
-                    HStack {
-                        Spacer()
-                        NavigationLink("Sign Up", destination: SignUpScreen())
-                            .foregroundColor(.white)
-                    }
-                    Button("Agreements") {
-                        isShowingModal.toggle()
-                    }.sheet(isPresented: $isShowingModal) {
-                        AnotherView()
-                    }.navigationBarTitle("Entering")
-                        .foregroundColor(.red)
-                    
-                }
-            }   //.padding(20)
-//                .background(Color.gray).opacity(0.9)
-                //.border(.black)
-               // .clipShape(RoundedRectangle(cornerRadius: 20))
+        
+        VStack {
+            Image(systemName: "figure.wave")
+                .font(.largeTitle)
+                .imageScale(.large)
+                .padding(20)
+            EditField(valid: loginVM.isEmailCorrect, placeholder: "Email", text: $loginVM.email)
+            EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
             
-            //        описываем отступы содержимого в стеке
-            .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            .background(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                .edgesIgnoringSafeArea(.all))
-            .edgesIgnoringSafeArea(.all)
-        }
+            MainButton(text: "Sign In", enabled: loginVM.canLogin, busy: loginVM.busy) {
+                Task {
+                    await loginVM.signIn()
+                }
+            }
+            
+            
+            VStack {
+                HStack {
+                    Spacer()
+                    NavigationLink(destination: navigationRouter.signUpRoute) {
+                        MainButton(text: "Create account", enabled: true, busy: false) {
+                            
+                        }
+                    }
+                    NavigationLink("Create account", destination: navigationRouter.signUpRoute)
+                        .foregroundColor(.white)
+                }
+                Button("Agreements") {
+                    isShowingModal.toggle()
+                }.sheet(isPresented: $isShowingModal) {
+                    AnotherView()
+                }.navigationBarTitle("Entering")
+                    .foregroundColor(.red)
+                
+            }
+        } 
+        .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        .background(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            .edgesIgnoringSafeArea(.all))
+        .edgesIgnoringSafeArea(.all)
     }
 }
-//another page in this window
+
+// Agreements
 struct AnotherView: View {
     var body: some View {
         ScrollView {
@@ -111,13 +80,13 @@ struct AnotherView2: View {
         Text("Windows 2 opened")
             .frame(height: UIScreen.main.bounds.height)
             .background(Color.red)
-            
-            
+        
+        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInScreen()
+        SignInScreen().environmentObject(SignInVM())
     }
 }

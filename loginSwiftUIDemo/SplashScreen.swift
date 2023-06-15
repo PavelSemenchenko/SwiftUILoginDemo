@@ -18,7 +18,7 @@ struct SplashView: View {
     
     var body: some View {
         VStack {
-            Text("splash screen")
+            Text("loadind world")
                 .font(.largeTitle)
                 .foregroundColor(.white)
                 .padding()

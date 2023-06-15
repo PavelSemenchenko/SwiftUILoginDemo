@@ -25,6 +25,7 @@ struct MainButton: View {
     let text: String
     let enabled: Bool
     let busy: Bool
+    let action: () -> Void
     
     private var color: Color {
         var color: Color = enabled ? .blue : .red
@@ -35,20 +36,9 @@ struct MainButton: View {
     }
     
     var body: some View {
-        Button(text) {
-            
-        }.buttonStyle(MainButtonStyle(color: color))
+        Button(text, action: action)
+            .buttonStyle(MainButtonStyle(color: color))
             .disabled(!enabled || busy)
     }
 }
 
-struct MainButton_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            MainButton(text: "Enter", enabled: true, busy: false)
-            MainButton(text: "Enter", enabled: false, busy: false)
-            MainButton(text: "Enter", enabled: true, busy: true)
-            MainButton(text: "Enter", enabled: false, busy: true)
-        }
-    }
-}

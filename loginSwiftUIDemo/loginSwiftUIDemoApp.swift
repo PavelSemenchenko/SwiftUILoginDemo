@@ -19,9 +19,25 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct loginSwiftUIDemoApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
-            SplashView()
+            NavigationView {
+                SplashView()
+                    .environmentObject(SignInVM())
+            }
         }
+    }
+}
+
+struct DependenciesKey: EnvironmentKey {
+    static var defaultValue: NavigationRouter = NavigationRouter()
+    typealias Value = NavigationRouter
+}
+
+extension EnvironmentValues {
+    var navigationRouter: NavigationRouter {
+        get { self[DependenciesKey.self] }
+        set { self[DependenciesKey.self] = newValue}
     }
 }

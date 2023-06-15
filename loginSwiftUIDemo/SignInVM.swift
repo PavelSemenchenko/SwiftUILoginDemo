@@ -12,7 +12,7 @@ import FirebaseAuthCombineSwift
 class SignInVM: ObservableObject {
     @Published var email : String = "test@test.com"
     @Published var password: String = "qwerty"
-    @Published var loginActive: Bool = false
+    @Published var busy: Bool = false
     
     
     var isEmailCorrect: Bool {
@@ -29,14 +29,24 @@ class SignInVM: ObservableObject {
         return isEmailCorrect && isPaswordCorrect
     }
     
-    @MainActor func login() async {
-        loginActive = true
+    @MainActor func signIn() async {
+        busy = true
         do {
             let result = try? await Auth.auth().signIn(withEmail: email, password: password)
 //            open home
         } catch {
             
         }
-        loginActive = false
+        busy = false
+    }
+    @MainActor func signUp() async {
+        busy = true
+        do {
+            let result = try? await Auth.auth().createUser(withEmail: email, password: password)
+//            open home
+        } catch {
+            
+        }
+        busy = false
     }
 }
