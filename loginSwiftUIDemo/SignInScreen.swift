@@ -20,47 +20,49 @@ struct SignInScreen: View {
     }
     
     var body: some View {
-        
-        VStack {
-            Image(systemName: "figure.wave")
-                .font(.largeTitle)
-                .imageScale(.large)
-                .padding(20)
-            EditField(valid: loginVM.isEmailCorrect, placeholder: "Email", text: $loginVM.email)
-            EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
-            
-            MainButton(text: "Sign In", enabled: loginVM.canLogin, busy: loginVM.busy) {
-                Task {
-                    await loginVM.signIn()
-                }
-            }
-            
-            
+        NavigationView {
             VStack {
-                HStack {
-                    Spacer()
-                    NavigationLink(destination: navigationRouter.signUpRoute) {
-                        MainButton(text: "Create account", enabled: true, busy: false) {
-                            
-                        }
-                    }
-                    NavigationLink("Create account", destination: navigationRouter.signUpRoute)
-                        .foregroundColor(.white)
-                }
-                Button("Agreements") {
-                    isShowingModal.toggle()
-                }.sheet(isPresented: $isShowingModal) {
-                    AnotherView()
-                }.navigationBarTitle("Entering")
-                    .foregroundColor(.red)
+                Image(systemName: "figure.wave")
+                    .font(.largeTitle)
+                    .imageScale(.large)
+                    .padding(20)
+                EditField(valid: loginVM.isEmailCorrect, placeholder: "Email", text: $loginVM.email)
+                EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
                 
+                MainButton(text: "Sign In", enabled: loginVM.canLogin, busy: loginVM.busy) {
+                    Task {
+                        await loginVM.signIn()
+                    }
+                }
+                
+                VStack {
+                    HStack {
+                        NavigationLink(destination: navigationRouter.signUpRoute) {
+                            MainButton(text: "Create account", enabled: true, busy: false) {
+                                
+                            }
+                        }
+                        NavigationLink("Create account") {
+                            SignUpScreen()
+                        }
+                        .foregroundColor(.white)
+                    }
+                    Button("Agreements") {
+                        isShowingModal.toggle()
+                    }.sheet(isPresented: $isShowingModal) {
+                        AnotherView()
+                    }.navigationBarTitle("Entering")
+                        .foregroundColor(.red)
+                    
+                }
             }
-        } 
-        .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
-        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        .background(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .topLeading, endPoint: .bottomTrailing)
-            .edgesIgnoringSafeArea(.all))
-        .edgesIgnoringSafeArea(.all)
+            .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            .background(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all))
+            .edgesIgnoringSafeArea(.all)
+        }
+        
     }
 }
 

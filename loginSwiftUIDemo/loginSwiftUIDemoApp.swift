@@ -24,8 +24,8 @@ struct loginSwiftUIDemoApp: App {
         WindowGroup {
             NavigationView {
                 SplashView()
-                    .environmentObject(SignInVM())
             }
+            .environmentObject(SignInVM())
         }
     }
 }
