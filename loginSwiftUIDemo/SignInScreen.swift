@@ -69,9 +69,14 @@ struct AnotherView: View {
                 Button {
                     print("ok")
                 } label: {
-                    Text("get license")
-                }.background(Color.black)
-
+                    VStack {
+                        Image(systemName: "key")
+                            .font(.largeTitle)
+                            .imageScale(.large)
+                            .padding(20)
+                        Text("get license")
+                    }.background(Color.black)
+                }
                 Text("Правила использования приложения : Мы будем использовать все получаемые данные в коммерческих целях и использовать в публичном доступе. Если вы не согласны с открытой публикацией ваших данный фото-видео -текстового контента - виявите свое заявление перед посещением и использованием нашего сервиса.")
                     .padding(EdgeInsets(top: 36, leading: 16, bottom: 36, trailing: 16))
                     .frame(maxWidth: .infinity)
