@@ -20,7 +20,7 @@ struct SignInScreen: View {
     }
     
     var body: some View {
-        NavigationView {
+        //NavigationView {
             VStack {
                 Image(systemName: "figure.wave")
                     .font(.largeTitle)
@@ -38,7 +38,7 @@ struct SignInScreen: View {
                 VStack {
                     HStack {
                         NavigationLink(destination: navigationRouter.signUpRoute) {
-                            MainButton(text: "Create account", enabled: true, busy: false) {
+                            MainButton(text: "Create account", enabled: false, busy: false) {
                                 
                             }
                         }
@@ -63,7 +63,7 @@ struct SignInScreen: View {
             .edgesIgnoringSafeArea(.all)
         }
         
-    }
+   // }
 }
 
 // Agreements

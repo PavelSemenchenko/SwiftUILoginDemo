@@ -27,7 +27,7 @@ struct SignUpScreen: View {
                         await loginVM.signUp()
                     }
                 }.padding()
-                NavigationLink("Sign In", destination: navigationRouter.signInRoute)
+                NavigationLink("Enter account", destination: navigationRouter.signInRoute)
                     .foregroundColor(.white).padding(30)
             }
         }.padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
