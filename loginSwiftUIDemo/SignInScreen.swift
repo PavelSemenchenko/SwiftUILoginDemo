@@ -20,8 +20,7 @@ struct SignInScreen: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
+        VStack {
                 Image(systemName: "figure.wave")
                     .font(.largeTitle)
                     .imageScale(.large)
@@ -38,8 +37,7 @@ struct SignInScreen: View {
                 VStack {
                     HStack {
                         NavigationLink(destination: navigationRouter.signUpRoute) {
-                            MainButton(text: "Create account", enabled: true, busy: false) {
-                                
+                            MainButton(text: "Create account", enabled: false, busy: false) {
                             }
                         }
                         NavigationLink("Create account") {
@@ -53,7 +51,6 @@ struct SignInScreen: View {
                         AnotherView()
                     }.navigationBarTitle("Entering")
                         .foregroundColor(.red)
-                    
                 }
             }
             .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
@@ -62,18 +59,31 @@ struct SignInScreen: View {
                 .edgesIgnoringSafeArea(.all))
             .edgesIgnoringSafeArea(.all)
         }
-        
-    }
 }
 
 // Agreements
 struct AnotherView: View {
     var body: some View {
-        ScrollView {
-            Text("Правила использования приложения : Мы будем использовать все получаемые данные в коммерческих целях и использовать в публичном доступе. Если вы не согласны с открытой публикацией ваших данный фото-видео -текстового контента - виявите свое заявление перед посещением и использованием нашего сервиса.")
-                .padding(EdgeInsets(top: 36, leading: 16, bottom: 36, trailing: 16))
-                .frame(maxWidth: .infinity)
-                .padding()
+        HStack {
+            ScrollView {
+                Button {
+                    print("ok")
+                } label: {
+                    VStack {
+                        Image(systemName: "key")
+                            .font(.largeTitle)
+                            .imageScale(.large)
+                            .padding(20)
+                        Text("get license")
+                    }.background(Color.black)
+                }
+                Text("Правила использования приложения : Мы будем использовать все получаемые данные в коммерческих целях и использовать в публичном доступе. Если вы не согласны с открытой публикацией ваших данный фото-видео -текстового контента - виявите свое заявление перед посещением и использованием нашего сервиса.")
+                    .padding(EdgeInsets(top: 36, leading: 16, bottom: 36, trailing: 16))
+                    .frame(maxWidth: .infinity)
+                    .padding(10)
+            }
+            
+            
         }
     }
 }
