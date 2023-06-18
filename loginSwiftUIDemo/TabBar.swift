@@ -46,7 +46,7 @@ struct TabBar: View {
             }.foregroundColor(self.selected == 3 ? .black : .gray)
         }.padding()
             .padding(.horizontal, 20)
-            .background(Color(.cyan))
+            .background(Color(.cyan))  
     
     }*/
     var body: some View {
