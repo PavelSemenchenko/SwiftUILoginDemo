@@ -10,9 +10,9 @@ import SwiftUI
 
 
 struct TabBar: View {
-    
-    @State var selected = 0
     /*
+    @State var selected = 0
+    
     var body: some View {
         HStack {
             Button(action: {
@@ -49,34 +49,42 @@ struct TabBar: View {
             .background(Color(.cyan))  
     
     }*/
+    @Environment(\.navigationRouter) var navigationRouter : NavigationRouter
+    
     var body: some View {
             TabView {
                 // Вкладка 1
-                Text("Вкладка 1")
+                Text("0")
                     .tabItem {
-                        Image(systemName: "1.square.fill")
-                        Text("Вкладка 1")
+                        Image(systemName: "house")
+                        NavigationLink("Login") {
+                            SignInScreen()
+                        }
+//                        Text("Вкладка 1")
                     }
                 
                 // Вкладка 2
-                Text("Вкладка 2")
+                Text("1")
                     .tabItem {
-                        Image(systemName: "2.square.fill")
-                        Text("Вкладка 2")
+                        Image(systemName: "message.fill")
+                        NavigationLink("Create account") {
+                            SignUpScreen()
+                        }
+//                        Text("Вкладка 2")
                     }
                 
                 // Вкладка 3
-                Text("Menu")
+                Text("2")
                     .tabItem {
-                        Image(systemName: "3.square.fill")
+                        Image(systemName: "bolt.horizontal.fill")
 //                        Text("Вкладка 3")
                     }
-                Text("Menu")
+                Text("3")
                     .tabItem {
-                        Image(systemName: "4.square.fill")
-                        Text("Вкладка 4")
+                        Image(systemName: "line.3.horizontal")
+//                        Text("Вкладка 4")
                     }
-            }
+            }.background(Color.green)
         }
 }
 

@@ -44,6 +44,9 @@ struct SignInScreen: View {
                             SignUpScreen()
                         }
                         .foregroundColor(.white)
+                        NavigationLink("TabBar") {
+                            TabBar()
+                        }
                     }
                     Button("Agreements") {
                         isShowingModal.toggle()
