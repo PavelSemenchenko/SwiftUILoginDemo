@@ -29,6 +29,7 @@
 		0429BE3F2A37ACBF002EF45F /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0429BE3E2A37ACBF002EF45F /* MainButton.swift */; };
 		0429BE412A37AE07002EF45F /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0429BE402A37AE07002EF45F /* SignUpScreen.swift */; };
 		045CB98E2A3F655500CF26C1 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CB98D2A3F655500CF26C1 /* TabBar.swift */; };
+		048A91032A41A3D70068BC16 /* TodoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A91022A41A3D70068BC16 /* TodoVM.swift */; };
 		2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */; };
 		2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3848E62A38B9F5007FF32D /* SplashScreen.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		0429BE3E2A37ACBF002EF45F /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		0429BE402A37AE07002EF45F /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		045CB98D2A3F655500CF26C1 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		048A91022A41A3D70068BC16 /* TodoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoVM.swift; sourceTree = "<group>"; };
 		2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		2A3848E62A38B9F5007FF32D /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 				2A3848E62A38B9F5007FF32D /* SplashScreen.swift */,
 				045CB98D2A3F655500CF26C1 /* TabBar.swift */,
 				2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */,
+				048A91022A41A3D70068BC16 /* TodoVM.swift */,
 				0429BE3C2A37AB12002EF45F /* EditField.swift */,
 				0429BE3E2A37ACBF002EF45F /* MainButton.swift */,
 				0419BCCD2A325D050079BFFF /* GoogleService-Info.plist */,
@@ -203,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048A91032A41A3D70068BC16 /* TodoVM.swift in Sources */,
 				0429BE3D2A37AB12002EF45F /* EditField.swift in Sources */,
 				0429BE412A37AE07002EF45F /* SignUpScreen.swift in Sources */,
 				2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */,
