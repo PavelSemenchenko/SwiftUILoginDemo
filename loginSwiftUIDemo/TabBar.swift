@@ -8,17 +8,17 @@
 import Foundation
 import SwiftUI
 
-
 struct TabBar: View {
-    /*
-    @State var selected = 0
     
+    @State var selected = 0
+    /*
+
     var body: some View {
         HStack {
             Button(action: {
                 self.selected = 0
             }) {
-               Image(systemName: "house")
+                Image(systemName: "house")
             }.foregroundColor(self.selected == 0 ? .black : .gray)
             
             Spacer()
@@ -45,10 +45,13 @@ struct TabBar: View {
                 Image(systemName: "line.3.horizontal")
             }.foregroundColor(self.selected == 3 ? .black : .gray)
         }.padding()
-            .padding(.horizontal, 20)
-            .background(Color(.cyan))  
+            .padding(.bottom, 10)
+            .background(Color(.cyan))
+        
+    }
     
-    }*/
+}
+*/
     @Environment(\.navigationRouter) var navigationRouter : NavigationRouter
     
     var body: some View {
@@ -67,9 +70,11 @@ struct TabBar: View {
                 Text("1")
                     .tabItem {
                         Image(systemName: "message.fill")
-                        NavigationLink("Create account") {
-                            SignUpScreen()
-                        }
+//                        NavigationLink("Create account") {
+//                            SignUpScreen()
+//                        }
+                        NavigationLink("Перейти на второй экран", destination: TodosScreen()) // Переход на второй экран
+                                       
 //                        Text("Вкладка 2")
                     }
                 
@@ -82,6 +87,9 @@ struct TabBar: View {
                 Text("3")
                     .tabItem {
                         Image(systemName: "line.3.horizontal")
+                        NavigationLink("Todo") {
+                            TodosScreen()
+                        }
 //                        Text("Вкладка 4")
                     }
             }.background(Color.green)
