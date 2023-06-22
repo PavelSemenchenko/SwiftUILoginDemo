@@ -11,7 +11,8 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseFirestoreCombineSwift
 
-struct Todo: Codable {
+struct Todo: Codable, Identifiable {
+    @DocumentID var id: String?
     let title: String
 }
 

@@ -11,6 +11,7 @@ struct TodosScreen: View {
     
     var todosVM = TodoVM()
     @State var todosCount = "---"
+    @State var todos: [Todo] = []
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -30,19 +31,31 @@ struct TodosScreen: View {
                         await todosVM.delete(id: "ZicsJQMjb6J0r992Iejy")
                     }
                 }
+            }.padding(5)
+            HStack {
+                Text("All todo :").font(.largeTitle).bold()
+                    .padding(.leading,20)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                Text(todosCount).onReceive(todosVM.todos) { items in
+                    todosCount = "\(items.count)"
+                    todos = items
+                }.padding(.trailing, 20)
             }
-            Text(todosCount).onReceive(todosVM.todos) { items in
-                todosCount = "\(items.count)"
+            List(todos) { e in
+                HStack {
+                    Text(e.id ?? "--")
+                    Text(e.title ?? "--")
+                }
             }
-            Text("All todo :").font(.largeTitle).bold()
-                .padding(.leading,20)
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            Text("end of the list")
+            
+            /*
             ForEach(1..<20) { id in
                 Text("Todo# \(id)")
-            }.padding(.leading, 30)
+            }.padding(.leading, 30)*/
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .edgesIgnoringSafeArea(.all)
+        //.edgesIgnoringSafeArea(.all)
         .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.4 ))
     }
 }
