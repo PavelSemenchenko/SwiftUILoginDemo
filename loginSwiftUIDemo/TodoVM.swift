@@ -26,6 +26,22 @@ class TodoVM: ObservableObject {
             }.compactMap { $0 }
         }.eraseToAnyPublisher()
     
+    @MainActor func delete(id: String) async {
+        try? await Firestore.firestore().collection("todos")
+            .document(id)
+            .delete()
+    }
+    @MainActor func update(id: String, title: String) async {
+        try? Firestore.firestore().collection("todos")
+            .document(id)
+            .setData(from: Todo(title: title))
+    }
+    
+    @MainActor func create(title: String) async {
+        try? Firestore.firestore().collection("todos")
+            .addDocument(from: Todo(title: title))
+    }
+    
 //    ----- or ------
     
 //    read data once

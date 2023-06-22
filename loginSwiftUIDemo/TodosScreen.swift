@@ -8,8 +8,28 @@
 import SwiftUI
 
 struct TodosScreen: View {
+    
+    var todosVM = TodoVM()
+    
     var body: some View {
         VStack(alignment: .leading) {
+            HStack{
+                Button("create") {
+                    Task {
+                        await todosVM.create(title: "doing homework")
+                    }
+                }
+                Button("edit") {
+                    Task {
+                        await todosVM.update(id: "ZicsJQMjb6J0r992Iejy", title:"has been updated")
+                    }
+                }
+                Button("delete") {
+                    Task {
+                        await todosVM.delete(id: "ZicsJQMjb6J0r992Iejy")
+                    }
+                }
+            }
             Text("All todo :").font(.largeTitle).bold()
                 .padding(.leading,20)
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)

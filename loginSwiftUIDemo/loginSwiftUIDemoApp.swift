@@ -23,7 +23,7 @@ struct loginSwiftUIDemoApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                SignInScreen()
+                TodosScreen()
                // SplashView()
             }
             .environmentObject(SignInVM())
