@@ -10,6 +10,7 @@ import SwiftUI
 struct TodosScreen: View {
     
     var todosVM = TodoVM()
+    @State var todosCount = "---"
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -29,6 +30,9 @@ struct TodosScreen: View {
                         await todosVM.delete(id: "ZicsJQMjb6J0r992Iejy")
                     }
                 }
+            }
+            Text(todosCount).onReceive(todosVM.todos) { items in
+                todosCount = "\(items.count)"
             }
             Text("All todo :").font(.largeTitle).bold()
                 .padding(.leading,20)

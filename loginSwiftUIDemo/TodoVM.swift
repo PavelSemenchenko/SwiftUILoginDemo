@@ -18,13 +18,15 @@ struct Todo: Codable {
 class TodoVM: ObservableObject {
     
     //    subscribe to recive updates
-    let todos: AnyPublisher<[Todo], Error> = Firestore.firestore().collection("todos")
+    let todos: AnyPublisher<[Todo], Never> = Firestore.firestore().collection("todos")
         .snapshotPublisher()
         .map {snapshot in
             snapshot.documents.map { doc in
                 try? doc.data(as: Todo.self)
             }.compactMap { $0 }
-        }.eraseToAnyPublisher()
+        }
+        .replaceError(with: [])
+        .eraseToAnyPublisher()
     
     @MainActor func delete(id: String) async {
         try? await Firestore.firestore().collection("todos")
