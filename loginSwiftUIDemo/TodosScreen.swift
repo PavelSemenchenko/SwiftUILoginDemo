@@ -16,10 +16,8 @@ struct TodosScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack{
-                Button("create") {
-                    Task {
-                        await todosVM.create(title: "doing homework")
-                    }
+                NavigationLink("Create todo") {
+                    CreateTodoScreen()
                 }
                 Button("edit") {
                     Task {
@@ -43,7 +41,7 @@ struct TodosScreen: View {
             }
             List(todos) { currentTodo in
                 HStack {
-                    Text(currentTodo.id ?? "--")
+                   // Text(currentTodo.id ?? "--")
                     Text(currentTodo.title ?? "--")
                     Button {
                         guard let id = currentTodo.id else {

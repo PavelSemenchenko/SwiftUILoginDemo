@@ -31,6 +31,7 @@
 		045CB98E2A3F655500CF26C1 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CB98D2A3F655500CF26C1 /* TabBar.swift */; };
 		048A91032A41A3D70068BC16 /* TodoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A91022A41A3D70068BC16 /* TodoVM.swift */; };
 		048A91052A41A64D0068BC16 /* TodosScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A91042A41A64D0068BC16 /* TodosScreen.swift */; };
+		2A04397F2A4CB50200881A44 /* CreateTodoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */; };
 		2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */; };
 		2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3848E62A38B9F5007FF32D /* SplashScreen.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		045CB98D2A3F655500CF26C1 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		048A91022A41A3D70068BC16 /* TodoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoVM.swift; sourceTree = "<group>"; };
 		048A91042A41A64D0068BC16 /* TodosScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosScreen.swift; sourceTree = "<group>"; };
+		2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoScreen.swift; sourceTree = "<group>"; };
 		2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		2A3848E62A38B9F5007FF32D /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +105,7 @@
 				045CB98D2A3F655500CF26C1 /* TabBar.swift */,
 				2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */,
 				048A91042A41A64D0068BC16 /* TodosScreen.swift */,
+				2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */,
 				048A91022A41A3D70068BC16 /* TodoVM.swift */,
 				0429BE3C2A37AB12002EF45F /* EditField.swift */,
 				0429BE3E2A37ACBF002EF45F /* MainButton.swift */,
@@ -212,6 +215,7 @@
 				048A91032A41A3D70068BC16 /* TodoVM.swift in Sources */,
 				0429BE3D2A37AB12002EF45F /* EditField.swift in Sources */,
 				048A91052A41A64D0068BC16 /* TodosScreen.swift in Sources */,
+				2A04397F2A4CB50200881A44 /* CreateTodoScreen.swift in Sources */,
 				0429BE412A37AE07002EF45F /* SignUpScreen.swift in Sources */,
 				2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */,
 				045CB98E2A3F655500CF26C1 /* TabBar.swift in Sources */,

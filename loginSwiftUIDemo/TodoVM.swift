@@ -17,6 +17,7 @@ struct Todo: Codable, Identifiable {
 }
 
 class TodoVM: ObservableObject {
+    @Published var editingTitle: String = ""
     
     //    subscribe to recive updates
     let todos: AnyPublisher<[Todo], Never> = Firestore.firestore().collection("todos")
