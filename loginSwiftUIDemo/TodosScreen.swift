@@ -41,10 +41,21 @@ struct TodosScreen: View {
                     todos = items
                 }.padding(.trailing, 20)
             }
-            List(todos) { e in
+            List(todos) { currentTodo in
                 HStack {
-                    Text(e.id ?? "--")
-                    Text(e.title ?? "--")
+                    Text(currentTodo.id ?? "--")
+                    Text(currentTodo.title ?? "--")
+                    Button {
+                        guard let id = currentTodo.id else {
+                            return
+                        }
+                        Task {
+                            await todosVM.delete(id: id)
+                        }
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+
                 }
             }
             Text("end of the list")

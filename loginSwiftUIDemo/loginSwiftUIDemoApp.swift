@@ -23,10 +23,25 @@ struct loginSwiftUIDemoApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                TodosScreen()
+                TodoView()
+                //TodosScreen()
                // SplashView()
             }
             .environmentObject(SignInVM())
+        }
+    }
+}
+
+struct TodoView: View {
+    var body: some View {
+        TabView {
+            TodosScreen().tabItem {
+                Image(systemName: "house")
+            }
+            SignInScreen().tabItem {
+                Image(systemName: "person")
+            }
+            
         }
     }
 }
