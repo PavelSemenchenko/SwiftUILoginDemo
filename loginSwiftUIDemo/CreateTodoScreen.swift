@@ -16,6 +16,11 @@ struct CreateTodoScreen: View {
     var body: some View {
         VStack {
             TextField("Type title here", text: $currentTitle)
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.white, lineWidth: 1)
+                )
             Button("Save") {
                 guard currentTitle.count >= 3 else {
                     return
@@ -33,6 +38,8 @@ struct CreateTodoScreen: View {
             .onAppear {
                 self.currentTitle = todo?.title ?? ""
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.3 ))
     }
 }
 
