@@ -13,6 +13,7 @@ import FirebaseFirestoreCombineSwift
 
 struct Todo: Codable, Identifiable {
     @DocumentID var id: String?
+    @ServerTimestamp var created: Date?
     let title: String
 }
 
@@ -21,6 +22,7 @@ class TodoVM: ObservableObject {
     
     //    subscribe to recive updates
     let todos: AnyPublisher<[Todo], Never> = Firestore.firestore().collection("todos")
+        .order(by: "created")
         .snapshotPublisher()
         .map {snapshot in
             snapshot.documents.map { doc in

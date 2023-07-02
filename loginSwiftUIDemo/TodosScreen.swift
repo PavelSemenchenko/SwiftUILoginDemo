@@ -16,10 +16,12 @@ struct TodosScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack{
-                NavigationLink("Create todo") {
+                NavigationLink {
                     CreateTodoScreen(todo: nil)
+                } label: {
+                    Image(systemName: "square.and.pencil")
                 }
-            }.padding(5)
+            }.padding(15)
             HStack {
                 Text("All todo :").font(.largeTitle).bold()
                     .padding(.leading,20)
@@ -38,7 +40,7 @@ struct TodosScreen: View {
                         CreateTodoScreen(todo: currentTodo)
                     } label: {
                         Image(systemName: "pencil")
-                    }.buttonStyle(PlainButtonStyle())
+                    }.buttonStyle(PlainButtonStyle()).fixedSize()
                     
                     Button {
                         guard let id = currentTodo.id else {
