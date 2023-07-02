@@ -54,12 +54,7 @@ struct TodosScreen: View {
                     }.buttonStyle(PlainButtonStyle())
                 }
             }
-            Text("end of the list")
-            
-            /*
-            ForEach(1..<20) { id in
-                Text("Todo# \(id)")
-            }.padding(.leading, 30)*/
+            Text("иначе таблица скрывает таббар")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         //.edgesIgnoringSafeArea(.all)
