@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreateTodoScreen: View {
-    let todo: Todo?
+    private (set) var todo: Todo?
     @Environment(\.dismiss) var dismiss
     @ObservedObject var todosVM = TodoVM()
     @State private var currentTitle = ""
@@ -26,7 +26,6 @@ struct CreateTodoScreen: View {
                     } else {
                         await todosVM.create(title: currentTitle)
                     }
-                    
                 }
                 dismiss()
             }
@@ -39,6 +38,6 @@ struct CreateTodoScreen: View {
 
 struct CreateTodoScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CreateTodoScreen(todo: nil)
+        CreateTodoScreen()
     }
 }

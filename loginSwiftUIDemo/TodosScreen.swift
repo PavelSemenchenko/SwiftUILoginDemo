@@ -19,16 +19,6 @@ struct TodosScreen: View {
                 NavigationLink("Create todo") {
                     CreateTodoScreen(todo: nil)
                 }
-                Button("edit") {
-                    Task {
-                        await todosVM.update(id: "ZicsJQMjb6J0r992Iejy", title:"has been updated")
-                    }
-                }
-                Button("delete") {
-                    Task {
-                        await todosVM.delete(id: "ZicsJQMjb6J0r992Iejy")
-                    }
-                }
             }.padding(5)
             HStack {
                 Text("All todo :").font(.largeTitle).bold()
@@ -48,8 +38,8 @@ struct TodosScreen: View {
                         CreateTodoScreen(todo: currentTodo)
                     } label: {
                         Image(systemName: "pencil")
-                    }
-                    /*
+                    }.buttonStyle(PlainButtonStyle())
+                    
                     Button {
                         guard let id = currentTodo.id else {
                             return
@@ -59,8 +49,7 @@ struct TodosScreen: View {
                         }
                     } label: {
                         Image(systemName: "trash")
-                    }
-*/
+                    }.buttonStyle(PlainButtonStyle())
                 }
             }
             Text("end of the list")
