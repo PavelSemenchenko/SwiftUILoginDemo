@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CreateTodoScreen: View {
+    let todo: Todo?
     @Environment(\.dismiss) var dismiss
     @ObservedObject var todosVM = TodoVM()
     @State private var currentTitle = ""
@@ -20,46 +21,24 @@ struct CreateTodoScreen: View {
                     return
                 }
                 Task {
-                    await todosVM.create(title: currentTitle)
-                }
-                dismiss()
-            }
-        }.padding()
-    }
-}
-
-struct EditTodoScreen: View {
-    let todo: Todo
-    @Environment(\.dismiss) var dismiss
-    @ObservedObject var todosVM = TodoVM()
-    @State private var currentTitle = ""
-    
-    init(todo: Todo) {
-        self.todo = todo
-    }
-    
-    var body: some View {
-        VStack {
-            TextField("Type title here", text: $currentTitle)
-            Button("Save") {
-                guard currentTitle.count >= 3 else {
-                    return
-                }
-                Task {
-                    await todosVM.update(id: todo.id! ,title: currentTitle)
+                    if let id = todo?.id {
+                        await todosVM.update(id: id, title: currentTitle)
+                    } else {
+                        await todosVM.create(title: currentTitle)
+                    }
+                    
                 }
                 dismiss()
             }
         }.padding()
             .onAppear {
-                self.currentTitle = todo.title
+                self.currentTitle = todo?.title ?? ""
             }
     }
 }
 
-
 struct CreateTodoScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CreateTodoScreen()
+        CreateTodoScreen(todo: nil)
     }
 }

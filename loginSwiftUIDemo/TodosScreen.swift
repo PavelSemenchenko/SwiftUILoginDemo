@@ -17,7 +17,7 @@ struct TodosScreen: View {
         VStack(alignment: .leading) {
             HStack{
                 NavigationLink("Create todo") {
-                    CreateTodoScreen()
+                    CreateTodoScreen(todo: nil)
                 }
                 Button("edit") {
                     Task {
@@ -45,7 +45,7 @@ struct TodosScreen: View {
                     Text(currentTodo.title ?? "--")
                     
                     NavigationLink {
-                        EditTodoScreen(todo: currentTodo)
+                        CreateTodoScreen(todo: currentTodo)
                     } label: {
                         Image(systemName: "pencil")
                     }
