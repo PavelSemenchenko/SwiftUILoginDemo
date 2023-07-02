@@ -43,6 +43,13 @@ struct TodosScreen: View {
                 HStack {
                    // Text(currentTodo.id ?? "--")
                     Text(currentTodo.title ?? "--")
+                    
+                    NavigationLink {
+                        EditTodoScreen(todo: currentTodo)
+                    } label: {
+                        Image(systemName: "pencil")
+                    }
+                    /*
                     Button {
                         guard let id = currentTodo.id else {
                             return
@@ -53,7 +60,7 @@ struct TodosScreen: View {
                     } label: {
                         Image(systemName: "trash")
                     }
-
+*/
                 }
             }
             Text("end of the list")
