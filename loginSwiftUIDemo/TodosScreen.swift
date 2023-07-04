@@ -31,35 +31,70 @@ struct TodosScreen: View {
                     todos = items
                 }.padding(.trailing, 20)
             }
-            List(todos) { currentTodo in
-                HStack {
-                   // Text(currentTodo.id ?? "--")
-                    Text(currentTodo.title ?? "--")
-                    
-                    NavigationLink {
-                        CreateTodoScreen(todo: currentTodo)
-                    } label: {
-                        Image(systemName: "pencil")
-                    }.buttonStyle(PlainButtonStyle()).fixedSize()
-                    
-                    Button {
-                        guard let id = currentTodo.id else {
-                            return
+            
+            List {
+                ForEach(todos) { currentTodo in
+                    HStack {
+                        Text(currentTodo.title ?? "--")
+                        
+                        NavigationLink {
+                            CreateTodoScreen(todo: currentTodo)
+                        } label: {
+                            Image(systemName: "pencil")
                         }
-                        Task {
-                            await todosVM.delete(id: id)
+                        .buttonStyle(PlainButtonStyle())
+                        .fixedSize()
+                    }
+                    .swipeActions {
+                        Button(action: {
+                            deleteTodo(currentTodo)
+                        }) {
+                            Image(systemName: "trash")
                         }
-                    } label: {
-                        Image(systemName: "trash")
-                    }.buttonStyle(PlainButtonStyle())
+                        .tint(.red)
+                    }
                 }
             }
+            
+            /*
+             List(todos) { currentTodo in
+             HStack {
+             Text(currentTodo.title ?? "--")
+             
+             NavigationLink {
+             CreateTodoScreen(todo: currentTodo)
+             } label: {
+             Image(systemName: "pencil")
+             }.buttonStyle(PlainButtonStyle()).fixedSize()
+             
+             Button {
+             guard let id = currentTodo.id else {
+             return
+             }
+             Task {
+             await todosVM.delete(id: id)
+             }
+             } label: {
+             Image(systemName: "trash")
+             }.buttonStyle(PlainButtonStyle())
+             }
+             }*/
             Text("иначе таблица скрывает таббар")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         //.edgesIgnoringSafeArea(.all)
         .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.4 ))
     }
+    
+    func deleteTodo(_ todo: Todo) {
+            guard let id = todo.id else {
+                return
+            }
+            
+            Task {
+                await todosVM.delete(id: id)
+            }
+        }
 }
 
 struct TodosScreen_Previews: PreviewProvider {
