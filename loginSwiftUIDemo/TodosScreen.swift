@@ -27,7 +27,7 @@ struct TodosScreen: View {
                     .padding(.leading,20)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 Text(todosCount).onReceive(todosVM.todos) { items in
-                    todosCount = "\(items.count)"
+                    todosCount = "# \(items.count)"
                     todos = items
                 }.padding(.trailing, 20)
             }
@@ -55,30 +55,6 @@ struct TodosScreen: View {
                     }
                 }
             }
-            
-            /*
-             List(todos) { currentTodo in
-             HStack {
-             Text(currentTodo.title ?? "--")
-             
-             NavigationLink {
-             CreateTodoScreen(todo: currentTodo)
-             } label: {
-             Image(systemName: "pencil")
-             }.buttonStyle(PlainButtonStyle()).fixedSize()
-             
-             Button {
-             guard let id = currentTodo.id else {
-             return
-             }
-             Task {
-             await todosVM.delete(id: id)
-             }
-             } label: {
-             Image(systemName: "trash")
-             }.buttonStyle(PlainButtonStyle())
-             }
-             }*/
             Text("иначе таблица скрывает таббар")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
