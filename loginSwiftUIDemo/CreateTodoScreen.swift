@@ -30,9 +30,9 @@ struct CreateTodoScreen: View {
   */
     var body: some View {
         VStack {
-            Text("enter new todo :")
+            Text("Enter new todo :")
             TextEditor(text: $currentTitle)
-//                .padding()
+                .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.indigo, lineWidth: 2)
@@ -55,7 +55,7 @@ struct CreateTodoScreen: View {
                     }
                 }
                 dismiss()
-            }.padding(10)
+            }
         }.padding()
             .onAppear {
                 self.currentTitle = todo?.title ?? ""
