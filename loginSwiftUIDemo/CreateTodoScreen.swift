@@ -20,14 +20,6 @@ struct CreateTodoScreen: View {
     var keyboardHeight: CGFloat {
         keyboardResponder.keyboardHeight
     }
-/*
-    private var minHeight: CGFloat {
-        let lineCount = currentTitle.components(separatedBy: "\n").count
-            let lineHeight: CGFloat = 22 // Высота одной строки текста
-            let minHeight = lineHeight * CGFloat(lineCount)
-            return max(minHeight, 50) // Минимальная высота 50 пунктов
-        }
-  */
     var body: some View {
         VStack {
             Text("Enter new todo :")
@@ -39,8 +31,8 @@ struct CreateTodoScreen: View {
                 )
                 .background(Color.white)
                         .cornerRadius(8)
-                        .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0)
-                        .frame(minHeight: 50, maxHeight: 150)
+//                        .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0)
+                        .frame(minHeight: 100, maxHeight: 150)
                         .fixedSize(horizontal: false, vertical: true)
             
             Button("Save") {
@@ -57,6 +49,7 @@ struct CreateTodoScreen: View {
                 dismiss()
             }
         }.padding()
+            .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0)
             .onAppear {
                 self.currentTitle = todo?.title ?? ""
                 
@@ -71,6 +64,7 @@ struct CreateTodoScreen: View {
         
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.3 ))
+            .ignoresSafeArea(.keyboard)
     }
 }
 
