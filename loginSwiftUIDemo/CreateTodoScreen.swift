@@ -20,20 +20,28 @@ struct CreateTodoScreen: View {
     var keyboardHeight: CGFloat {
         keyboardResponder.keyboardHeight
     }
-
-    
-    
+/*
+    private var minHeight: CGFloat {
+        let lineCount = currentTitle.components(separatedBy: "\n").count
+            let lineHeight: CGFloat = 22 // Высота одной строки текста
+            let minHeight = lineHeight * CGFloat(lineCount)
+            return max(minHeight, 50) // Минимальная высота 50 пунктов
+        }
+  */
     var body: some View {
         VStack {
-            TextField("Type title here", text: $currentTitle)
-                .padding()
+            Text("enter new todo :")
+            TextEditor(text: $currentTitle)
+//                .padding()
                 .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.white, lineWidth: 1)
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.indigo, lineWidth: 2)
                 )
-                .background(Color.gray)
+                .background(Color.white)
                         .cornerRadius(8)
                         .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0)
+                        .frame(minHeight: 50, maxHeight: 150)
+                        .fixedSize(horizontal: false, vertical: true)
             
             Button("Save") {
                 guard currentTitle.count >= 3 else {
@@ -47,7 +55,7 @@ struct CreateTodoScreen: View {
                     }
                 }
                 dismiss()
-            }
+            }.padding(10)
         }.padding()
             .onAppear {
                 self.currentTitle = todo?.title ?? ""
