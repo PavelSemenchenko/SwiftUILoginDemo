@@ -45,6 +45,7 @@ struct TodosScreen: View {
                         .buttonStyle(PlainButtonStyle())
                         .fixedSize()
                     }
+                    .frame(maxHeight: 46)
                     .swipeActions {
                         Button(action: {
                             deleteTodo(currentTodo)
