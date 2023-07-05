@@ -31,8 +31,7 @@ struct CreateTodoScreen: View {
                 )
                 .background(Color.white)
                         .cornerRadius(8)
-//                        .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0)
-                        .frame(minHeight: 100, maxHeight: 150)
+                        .frame(minHeight: 30, maxHeight: 150)
                         .fixedSize(horizontal: false, vertical: true)
             
             Button("Save") {
