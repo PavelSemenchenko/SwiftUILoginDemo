@@ -29,6 +29,10 @@ class SignInVM: ObservableObject {
         return isEmailCorrect && isPaswordCorrect
     }
     
+    class var isAuthenticated: Bool {
+        Auth.auth().currentUser != nil
+    }
+    
     @MainActor func signIn() async {
         busy = true
         do {

@@ -23,9 +23,11 @@ struct loginSwiftUIDemoApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                TodoView()
-                //TodosScreen()
-               // SplashView()
+                if SignInVM.isAuthenticated {
+                    TodoView()
+                } else {
+                    SignInScreen()
+                }
             }
             .environmentObject(SignInVM())
         }
