@@ -13,6 +13,7 @@ struct TodosScreen: View {
     @State var todosCount = 0
     @State var todos: [Todo] = []
     @State var visible = true
+    @State var wellcomeText: String? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,6 +23,7 @@ struct TodosScreen: View {
                 } label: {
                     Image(systemName: "square.and.pencil")
                 }
+                
                 Button("change") {
                     visible.toggle()
                 }
@@ -29,6 +31,13 @@ struct TodosScreen: View {
                     Text("U can see")
                 } else {
                     Text("hidden").hidden()
+                }
+                
+                Button("Hi") {
+                    wellcomeText = "Pressed hi !"
+                }
+                if wellcomeText != nil {
+                    Text(wellcomeText!)
                 }
                 
             }.padding(15)
@@ -41,7 +50,7 @@ struct TodosScreen: View {
                     todos = items
                 }.padding(.trailing, 20)
             }
-            if todosCount == 0 {
+            if todos.isEmpty {
                 Text("There is no todos,create one ..")
             } else {
                 List {
