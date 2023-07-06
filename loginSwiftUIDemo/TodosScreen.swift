@@ -10,8 +10,9 @@ import SwiftUI
 struct TodosScreen: View {
     
     var todosVM = TodoVM()
-    @State var todosCount = "---"
+    @State var todosCount = 0
     @State var todos: [Todo] = []
+    @State var visible = true
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,41 +22,55 @@ struct TodosScreen: View {
                 } label: {
                     Image(systemName: "square.and.pencil")
                 }
+                Button("change") {
+                    visible.toggle()
+                }
+                if visible {
+                    Text("U can see")
+                } else {
+                    Text("hidden").hidden()
+                }
+                
             }.padding(15)
             HStack {
                 Text("All todo :").font(.largeTitle).bold()
                     .padding(.leading,20)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                Text(todosCount).onReceive(todosVM.todos) { items in
-                    todosCount = "# \(items.count)"
+                Text("\(todosCount)").onReceive(todosVM.todos) { items in
+                    todosCount = items.count
                     todos = items
                 }.padding(.trailing, 20)
             }
-            
-            List {
-                ForEach(todos) { currentTodo in
-                    HStack {
-                        Text(currentTodo.title ?? "--")
-                        
-                        NavigationLink {
-                            CreateTodoScreen(todo: currentTodo)
-                        } label: {
-                            Image(systemName: "pencil")
+            if todosCount == 0 {
+                Text("There is no todos,create one ..")
+            } else {
+                List {
+                    ForEach(todos) { currentTodo in
+                        HStack {
+                            Text(currentTodo.title ?? "--")
+                            
+                            NavigationLink {
+                                CreateTodoScreen(todo: currentTodo)
+                            } label: {
+                                Image(systemName: "pencil")
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .fixedSize()
                         }
-                        .buttonStyle(PlainButtonStyle())
-                        .fixedSize()
-                    }
-                    .frame(maxHeight: 46)
-                    .swipeActions {
-                        Button(action: {
-                            deleteTodo(currentTodo)
-                        }) {
-                            Image(systemName: "trash")
+                        .frame(maxHeight: 46)
+                        .swipeActions {
+                            Button(action: {
+                                deleteTodo(currentTodo)
+                            }) {
+                                Image(systemName: "trash")
+                            }
+                            .tint(.red)
                         }
-                        .tint(.red)
                     }
                 }
             }
+            
+            
             Text("иначе таблица скрывает таббар")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
