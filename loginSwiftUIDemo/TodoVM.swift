@@ -24,8 +24,12 @@ class TodoVM: ObservableObject {
     let todos: AnyPublisher<[Todo], Never> = Firestore.firestore().collection("todos")
         .order(by: "created")
         .snapshotPublisher(includeMetadataChanges: true)
+        .filter { snapshot in
+            !snapshot.metadata.isFromCache
+        }
         .map {snapshot in
             print("is from cache \(snapshot.metadata.isFromCache)")
+            // need return тк больше одной строки
             return snapshot.documents.map { doc in
                 try? doc.data(as: Todo.self)
             }.compactMap { $0 }
