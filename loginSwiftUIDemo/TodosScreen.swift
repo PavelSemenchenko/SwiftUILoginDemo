@@ -29,6 +29,7 @@ struct TodosScreen: View {
                 }
                 if visible {
                     Text("U can see")
+                        .font(/*@START_MENU_TOKEN@*/.headline/*@END_MENU_TOKEN@*/)
                 } else {
                     Text("hidden").hidden()
                 }
