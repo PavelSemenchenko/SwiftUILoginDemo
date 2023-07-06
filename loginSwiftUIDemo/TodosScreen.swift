@@ -11,7 +11,7 @@ struct TodosScreen: View {
     
     var todosVM = TodoVM()
     @State var todosCount = 0
-    @State var todos: [Todo] = []
+    @State var todos: [Todo]?
     @State var visible = true
     @State var wellcomeText: String? = nil
     
@@ -36,8 +36,8 @@ struct TodosScreen: View {
                 Button("Hi") {
                     wellcomeText = "Pressed hi !"
                 }
-                if wellcomeText != nil {
-                    Text(wellcomeText!)
+                if let checkWellcome = wellcomeText {
+                    Text(checkWellcome)
                 }
                 
             }.padding(15)
@@ -50,34 +50,42 @@ struct TodosScreen: View {
                     todos = items
                 }.padding(.trailing, 20)
             }
-            if todos.isEmpty {
-                Text("There is no todos,create one ..")
-            } else {
-                List {
-                    ForEach(todos) { currentTodo in
-                        HStack {
-                            Text(currentTodo.title ?? "--")
-                            
-                            NavigationLink {
-                                CreateTodoScreen(todo: currentTodo)
-                            } label: {
-                                Image(systemName: "pencil")
+            
+            if let todos = todos {
+                if todos.isEmpty {
+                    Text("There is no todos,create one ..")
+                        .padding()
+                } else {
+                    List {
+                        ForEach(todos) { currentTodo in
+                            HStack {
+                                Text(currentTodo.title ?? "--")
+                                
+                                NavigationLink {
+                                    CreateTodoScreen(todo: currentTodo)
+                                } label: {
+                                    Image(systemName: "pencil")
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                .fixedSize()
                             }
-                            .buttonStyle(PlainButtonStyle())
-                            .fixedSize()
-                        }
-                        .frame(maxHeight: 46)
-                        .swipeActions {
-                            Button(action: {
-                                deleteTodo(currentTodo)
-                            }) {
-                                Image(systemName: "trash")
+                            .frame(maxHeight: 46)
+                            .swipeActions {
+                                Button(action: {
+                                    deleteTodo(currentTodo)
+                                }) {
+                                    Image(systemName: "trash")
+                                }
+                                .tint(.red)
                             }
-                            .tint(.red)
                         }
                     }
                 }
+            } else {
+                ProgressView()
             }
+            
+            
             
             
             Text("иначе таблица скрывает таббар")
