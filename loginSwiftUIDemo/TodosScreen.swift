@@ -17,7 +17,7 @@ struct TodosScreen: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack{
+            HStack(alignment: .center, spacing: 20) {
                 NavigationLink {
                     CreateTodoScreen(todo: nil)
                 } label: {
