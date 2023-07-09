@@ -20,8 +20,30 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct loginSwiftUIDemoApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @State var currentRoute: NavigationRoute = .splash
+    
     var body: some Scene {
         WindowGroup {
+            
+            switch currentRoute {
+            case .splash:
+                ProgressView().onAppear {
+                    currentRoute = SignInVM.isAuthenticated ? .todos : .signIn
+                }
+            case .signIn:
+                SignInScreen(currentRoute: $currentRoute)
+                    .environmentObject(SignInVM())
+            case .signUp:
+                SignUpScreen(currentRoute: $currentRoute)
+                    .environmentObject(SignInVM())
+            case .todos:
+                TodosScreen(currentRoute: $currentRoute)
+                    .environmentObject(TodoVM())
+            case .createTodo:
+                CreateTodoScreen(currentRoute: $currentRoute)
+                    .environmentObject(TodoVM())
+            }
+            /*
             NavigationView {
                 if SignInVM.isAuthenticated {
                     TodoView()
@@ -30,10 +52,11 @@ struct loginSwiftUIDemoApp: App {
                 }
             }
             .environmentObject(SignInVM())
+             */
         }
     }
 }
-
+/*
 struct TodoView: View {
     var body: some View {
         TabView {
@@ -47,7 +70,7 @@ struct TodoView: View {
         }
     }
 }
-
+*/
 struct DependenciesKey: EnvironmentKey {
     static var defaultValue: NavigationRouter = NavigationRouter()
     typealias Value = NavigationRouter

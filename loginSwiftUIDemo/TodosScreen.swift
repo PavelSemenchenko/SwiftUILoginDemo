@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TodosScreen: View {
-    
+    @Binding var currentRoute: NavigationRoute
     var todosVM = TodoVM()
     @State var todosCount = 0
     @State var todos: [Todo]?
@@ -19,7 +19,7 @@ struct TodosScreen: View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 20) {
                 NavigationLink {
-                    CreateTodoScreen(todo: nil)
+                    CreateTodoScreen(todo: nil, currentRoute: $currentRoute)
                 } label: {
                     Image(systemName: "square.and.pencil")
                 }
@@ -63,7 +63,7 @@ struct TodosScreen: View {
                                 Text(currentTodo.title ?? "--")
                                 
                                 NavigationLink {
-                                    CreateTodoScreen(todo: currentTodo)
+                                    CreateTodoScreen(todo: currentTodo, currentRoute: $currentRoute)
                                 } label: {
                                     Image(systemName: "pencil")
                                 }
@@ -106,9 +106,9 @@ struct TodosScreen: View {
             }
         }
 }
-
+/*
 struct TodosScreen_Previews: PreviewProvider {
     static var previews: some View {
         TodosScreen()
     }
-}
+}*/

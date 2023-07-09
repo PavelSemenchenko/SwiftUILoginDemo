@@ -10,6 +10,7 @@ import Combine
 
 struct CreateTodoScreen: View {
     private (set) var todo: Todo?
+    @Binding var currentRoute: NavigationRoute
     @Environment(\.dismiss) var dismiss
     @ObservedObject var todosVM = TodoVM()
     @State private var currentTitle = ""
@@ -89,9 +90,9 @@ final class KeyboardResponder: ObservableObject {
             .store(in: &cancellables)
     }
 }
-
+/*
 struct CreateTodoScreen_Previews: PreviewProvider {
     static var previews: some View {
         CreateTodoScreen()
     }
-}
+}*/

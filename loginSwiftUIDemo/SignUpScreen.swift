@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SignUpScreen: View {
-    
+    @Binding var currentRoute: NavigationRoute
     @EnvironmentObject private var loginVM: SignInVM
     @Environment(\.navigationRouter) var navigationRouter: NavigationRouter
        
@@ -37,9 +37,9 @@ struct SignUpScreen: View {
             .edgesIgnoringSafeArea(.all)
     }
 }
-
+/*
 struct SignUpScreen_Previews: PreviewProvider {
     static var previews: some View {
         SignUpScreen().environmentObject(SignInVM())
     }
-}
+}*/

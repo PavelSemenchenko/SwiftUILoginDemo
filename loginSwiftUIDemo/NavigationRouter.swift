@@ -8,6 +8,15 @@
 import Foundation
 import SwiftUI
 
+enum NavigationRoute {
+    case signIn
+    case signUp
+    case todos
+    case createTodo
+    case splash
+    
+}
+
 class NavigationRouter {
     var signInRoute: () -> some View {
         func route() -> SignInScreen {
