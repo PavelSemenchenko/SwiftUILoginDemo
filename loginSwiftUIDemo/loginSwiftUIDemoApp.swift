@@ -41,8 +41,8 @@ struct loginSwiftUIDemoApp: App {
                     .environmentObject(SignInVM())
                     .environmentObject(TodoVM())
             case .createTodo:
-                CreateTodoScreen()
-                    .environmentObject(SignInVM())
+                CreateTodoScreen(currentRoute: $currentRoute)
+//                    .environmentObject(SignInVM())
             }
             /*
             NavigationView {

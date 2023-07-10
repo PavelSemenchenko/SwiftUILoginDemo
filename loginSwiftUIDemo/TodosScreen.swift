@@ -20,7 +20,7 @@ struct TodosScreen: View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 20) {
                 NavigationLink {
-                    CreateTodoScreen(todo: nil, currentRoute: $currentRoute)
+                    CreateTodoScreen(currentRoute: $currentRoute)
                 } label: {
                     Image(systemName: "square.and.pencil")
                 }
