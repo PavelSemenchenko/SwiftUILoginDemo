@@ -39,8 +39,9 @@ struct loginSwiftUIDemoApp: App {
             case .todos:
                 TodosScreen(currentRoute: $currentRoute)
                     .environmentObject(SignInVM())
+                    .environmentObject(TodoVM())
             case .createTodo:
-                CreateTodoScreen(currentRoute: $currentRoute)
+                CreateTodoScreen()
                     .environmentObject(SignInVM())
             }
             /*
@@ -71,6 +72,14 @@ struct TodoView: View {
     }
 }
 */
+/*
+class DemoDependecies: ObservedObject {
+    let signInVM = signInVM(name: "in")
+    let signUpVM = signInVM(name: "up")
+}
+ */
+
+
 struct DependenciesKey: EnvironmentKey {
     static var defaultValue: NavigationRouter = NavigationRouter()
     typealias Value = NavigationRouter

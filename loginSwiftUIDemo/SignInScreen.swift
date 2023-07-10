@@ -42,10 +42,9 @@ struct SignInScreen: View {
                             MainButton(text: "Create account", enabled: false, busy: false) {
                             }
                         }
-                        NavigationLink("Create account") {
-                            SignUpScreen()
+                        MainButton(text: "Create acciunt", enabled: true, busy: false) {
+                            currentRoute = .signUp
                         }
-                        .foregroundColor(.white)
                         NavigationLink("TabBar") {
 //                            TabBar()
                         }
