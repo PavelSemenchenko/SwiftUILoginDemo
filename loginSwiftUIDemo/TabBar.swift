@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct TabBar: View {
-    
+    @Binding var currentRoute: NavigationRoute
     @State var selected = 0
     /*
 
@@ -61,7 +61,7 @@ struct TabBar: View {
                     .tabItem {
                         Image(systemName: "house")
                         NavigationLink("Login") {
-                            SignInScreen()
+//                            SignUpScreen(navigationRouter: $currentRoute)
                         }
 //                        Text("Вкладка 1")
                     }
@@ -73,7 +73,7 @@ struct TabBar: View {
 //                        NavigationLink("Create account") {
 //                            SignUpScreen()
 //                        }
-                        NavigationLink("Перейти на второй экран", destination: TodosScreen()) // Переход на второй экран
+//                        NavigationLink("Перейти на второй экран", destination: TodosScreen()) // Переход на второй экран
                                        
 //                        Text("Вкладка 2")
                     }
@@ -88,16 +88,16 @@ struct TabBar: View {
                     .tabItem {
                         Image(systemName: "line.3.horizontal")
                         NavigationLink("Todo") {
-                            TodosScreen()
+//                            TodosScreen()
                         }
 //                        Text("Вкладка 4")
                     }
             }.background(Color.green)
         }
 }
-
+/*
 struct STabBar_Previews: PreviewProvider {
     static var previews: some View {
-        TabBar()
+        TabBar(currentRoute: $currentRoute)
     }
-}
+}*/

@@ -33,6 +33,10 @@ class SignInVM: ObservableObject {
         Auth.auth().currentUser != nil
     }
     
+    @MainActor func logOut() {
+        try? Auth.auth().signOut()
+    }
+    
     @MainActor func signIn() async {
         busy = true
         do {

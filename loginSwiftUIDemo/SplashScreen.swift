@@ -11,6 +11,8 @@ import SwiftUI
 struct SplashView: View {
     @State private var isActive = false
     @State private var currentColorIndex = 0
+    @Binding var currentRoute: NavigationRoute
+    
     private let gradients: [Gradient] = [
         Gradient(colors: [.red, .orange]),
         Gradient(colors: [.red, .orange, .yellow])
@@ -42,7 +44,7 @@ struct SplashView: View {
             }
         }
         .fullScreenCover(isPresented: $isActive, content: {
-            SignInScreen()
+            SignInScreen(currentRoute: $currentRoute)
         })
     }
     
@@ -79,9 +81,9 @@ struct SplashView: View {
                 })
         }
     }
-}*/
+}
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
         SplashView()
     }
-}
+}*/

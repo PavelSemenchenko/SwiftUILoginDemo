@@ -14,6 +14,7 @@ struct TodosScreen: View {
     @State var todos: [Todo]?
     @State var visible = true
     @State var wellcomeText: String? = nil
+    @EnvironmentObject private var loginVM: SignInVM
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -40,7 +41,10 @@ struct TodosScreen: View {
                 if let checkWellcome = wellcomeText {
                     Text(checkWellcome)
                 }
-                
+                Button("logout") {
+                    loginVM.logOut()
+                    currentRoute = .splash
+                }
             }.padding(15)
             HStack {
                 Text("All todo :").font(.largeTitle).bold()

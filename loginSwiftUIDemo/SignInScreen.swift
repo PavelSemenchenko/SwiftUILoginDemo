@@ -43,11 +43,11 @@ struct SignInScreen: View {
                             }
                         }
                         NavigationLink("Create account") {
-                            SignUpScreen(currentRoute: $currentRoute)
+                            SignUpScreen()
                         }
                         .foregroundColor(.white)
                         NavigationLink("TabBar") {
-                            TabBar()
+//                            TabBar()
                         }
                     }
                     Button("Agreements") {

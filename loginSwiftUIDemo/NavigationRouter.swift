@@ -19,8 +19,8 @@ enum NavigationRoute {
 
 class NavigationRouter {
     var signInRoute: () -> some View {
-        func route() -> SignInScreen {
-            SignInScreen()
+        func route() -> SignUpScreen {
+            SignUpScreen()
         }
         return route
     }

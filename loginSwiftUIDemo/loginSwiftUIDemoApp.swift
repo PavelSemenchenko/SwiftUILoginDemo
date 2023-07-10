@@ -34,14 +34,14 @@ struct loginSwiftUIDemoApp: App {
                 SignInScreen(currentRoute: $currentRoute)
                     .environmentObject(SignInVM())
             case .signUp:
-                SignUpScreen(currentRoute: $currentRoute)
+                SignUpScreen()
                     .environmentObject(SignInVM())
             case .todos:
                 TodosScreen(currentRoute: $currentRoute)
-                    .environmentObject(TodoVM())
+                    .environmentObject(SignInVM())
             case .createTodo:
                 CreateTodoScreen(currentRoute: $currentRoute)
-                    .environmentObject(TodoVM())
+                    .environmentObject(SignInVM())
             }
             /*
             NavigationView {
