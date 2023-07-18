@@ -17,6 +17,17 @@ enum NavigationRoute {
     
 }
 
+class NavigationVM: ObservableObject {
+    @Published var currentRoute: NavigationPath = NavigationPath()
+    
+    func pushScreen(route: NavigationRoute) {
+        currentRoute.append(route)
+    }
+    func popScreen() {
+        currentRoute.removeLast()
+    }
+}
+
 class NavigationRouter {
     var signInRoute: () -> some View {
         func route() -> SignUpScreen {

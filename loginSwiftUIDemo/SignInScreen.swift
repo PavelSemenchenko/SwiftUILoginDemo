@@ -39,10 +39,10 @@ struct SignInScreen: View {
                 VStack {
                     HStack {
                         NavigationLink(destination: navigationRouter.signUpRoute) {
-                            MainButton(text: "Create account", enabled: false, busy: false) {
+                            MainButton(text: "Create account", enabled: loginVM.canLogin, busy: false) {
                             }
                         }
-                        MainButton(text: "Create acciunt", enabled: true, busy: false) {
+                        MainButton(text: "Create account", enabled: true, busy: false) {
                             currentRoute = .signUp
                         }
                         NavigationLink("TabBar") {

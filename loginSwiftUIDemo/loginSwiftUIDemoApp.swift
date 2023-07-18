@@ -20,65 +20,39 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct loginSwiftUIDemoApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @State var currentRoute: NavigationRoute = .splash
+    @ObservedObject var navigationVM = NavigationVM()
+    @State var currentRoute = NavigationPath()
     
     var body: some Scene {
         WindowGroup {
-            
-            switch currentRoute {
-            case .splash:
-                ProgressView().onAppear {
-                    currentRoute = SignInVM.isAuthenticated ? .todos : .signIn
-                }
-            case .signIn:
-                SignInScreen(currentRoute: $currentRoute)
-                    .environmentObject(SignInVM())
-            case .signUp:
-                SignUpScreen()
-                    .environmentObject(SignInVM())
-            case .todos:
-                TodosScreen(currentRoute: $currentRoute)
-                    .environmentObject(SignInVM())
-                    .environmentObject(TodoVM())
-            case .createTodo:
-                CreateTodoScreen(currentRoute: $currentRoute)
-//                    .environmentObject(SignInVM())
-            }
-            /*
-            NavigationView {
-                if SignInVM.isAuthenticated {
-                    TodoView()
-                } else {
-                    SignInScreen()
-                }
-            }
-            .environmentObject(SignInVM())
-             */
+            NavigationStack(path: $currentRoute) {
+                ProgressView()
+                    .navigationDestination(for: NavigationRoute.self) { route in
+                        switch currentRoute {
+                        case .splash:
+                            ProgressView().onAppear {
+                                currentRoute = SignInVM.isAuthenticated ? .todos : .signIn
+                            }
+                        case .signIn:
+                            SignInScreen(currentRoute: $currentRoute)
+                                .environmentObject(SignInVM())
+                        case .signUp:
+                            SignUpScreen()
+                                .environmentObject(SignInVM())
+                        case .todos:
+                            TodosScreen(currentRoute: $currentRoute)
+                                .environmentObject(SignInVM())
+                                .environmentObject(TodoVM())
+                        case .createTodo:
+                            CreateTodoScreen(currentRoute: $currentRoute)
+                        }
+                    }
+            }.task {
+                currentRoute.append(SignInVM.isAuthenticated ? NavigationRoute.todos : NavigationRoute.signIn)
+            }.environmentObject(navigationVM)
         }
     }
 }
-/*
-struct TodoView: View {
-    var body: some View {
-        TabView {
-            TodosScreen().tabItem {
-                Image(systemName: "house")
-            }
-            SignInScreen().tabItem {
-                Image(systemName: "person")
-            }
-            
-        }
-    }
-}
-*/
-/*
-class DemoDependecies: ObservedObject {
-    let signInVM = signInVM(name: "in")
-    let signUpVM = signInVM(name: "up")
-}
- */
-
 
 struct DependenciesKey: EnvironmentKey {
     static var defaultValue: NavigationRouter = NavigationRouter()

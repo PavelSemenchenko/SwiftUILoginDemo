@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct TodosScreen: View {
-    @Binding var currentRoute: NavigationRoute
+    //@Binding var currentRoute: NavigationRoute
     @State var todosCount = 0
     @State var todos: [Todo]?
     @State var visible = true
     @State var wellcomeText: String? = nil
     @EnvironmentObject private var loginVM: SignInVM
-    @EnvironmentObject var todosVM: TodoVM
+    @EnvironmentObject private var todosVM: TodoVM
+    @EnvironmentObject private var navigationVM: NavigationVM
     
     var body: some View {
         VStack(alignment: .leading) {
