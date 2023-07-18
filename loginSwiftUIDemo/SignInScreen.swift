@@ -8,16 +8,11 @@
 import SwiftUI
 
 struct SignInScreen: View {
-    @Binding var currentRoute: NavigationRoute
+    @EnvironmentObject private var navigarionVM: NavigationVM
     @EnvironmentObject private var loginVM : SignInVM
     @Environment(\.navigationRouter) var navigationRouter : NavigationRouter
-    // observ another page
+    
     @State private var isShowingModal = false
-    /*
-    //    не работает смена цвета
-    init() {
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.red]
-    }*/
     
     var body: some View {
         VStack {
@@ -32,7 +27,7 @@ struct SignInScreen: View {
                     Task {
                         await loginVM.signIn()
                         // open TODOs
-                        currentRoute = .todos
+                        navigarionVM.pushScreen(route: .todos)
                     }
                 }
                 
@@ -43,7 +38,7 @@ struct SignInScreen: View {
                             }
                         }
                         MainButton(text: "Create account", enabled: true, busy: false) {
-                            currentRoute = .signUp
+                            navigarionVM.pushScreen(route: .signUp)
                         }
                         NavigationLink("TabBar") {
 //                            TabBar()

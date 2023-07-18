@@ -8,11 +8,12 @@
 import Foundation
 import SwiftUI
 
-enum NavigationRoute {
+enum NavigationRoute: Hashable {
     case signIn
     case signUp
     case todos
     case createTodo
+    case editTodo(todo: Todo )
     case splash
     
 }
@@ -25,6 +26,10 @@ class NavigationVM: ObservableObject {
     }
     func popScreen() {
         currentRoute.removeLast()
+    }
+    func popUntilRootScreen() {
+        currentRoute.removeLast(currentRoute.count)
+        pushScreen(route: .splash)
     }
 }
 

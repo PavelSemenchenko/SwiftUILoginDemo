@@ -21,34 +21,36 @@ struct loginSwiftUIDemoApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @ObservedObject var navigationVM = NavigationVM()
-    @State var currentRoute = NavigationPath()
+   // @State var currentRoute = NavigationPath()
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack(path: $currentRoute) {
+            NavigationStack(path: $navigationVM.currentRoute) {
                 ProgressView()
                     .navigationDestination(for: NavigationRoute.self) { route in
-                        switch currentRoute {
+                        switch route {
                         case .splash:
                             ProgressView().onAppear {
-                                currentRoute = SignInVM.isAuthenticated ? .todos : .signIn
+                                SignInVM.isAuthenticated ? NavigationRoute.todos : NavigationRoute.signIn
                             }
                         case .signIn:
-                            SignInScreen(currentRoute: $currentRoute)
+                            SignInScreen()
                                 .environmentObject(SignInVM())
                         case .signUp:
                             SignUpScreen()
                                 .environmentObject(SignInVM())
                         case .todos:
-                            TodosScreen(currentRoute: $currentRoute)
+                            TodosScreen()
                                 .environmentObject(SignInVM())
                                 .environmentObject(TodoVM())
                         case .createTodo:
-                            CreateTodoScreen(currentRoute: $currentRoute)
+                            CreateTodoScreen()
+                        case .editTodo(let todo):
+                            CreateTodoScreen(todo: todo)
                         }
                     }
             }.task {
-                currentRoute.append(SignInVM.isAuthenticated ? NavigationRoute.todos : NavigationRoute.signIn)
+                navigationVM.pushScreen(route: SignInVM.isAuthenticated ? .todos : .signIn)
             }.environmentObject(navigationVM)
         }
     }

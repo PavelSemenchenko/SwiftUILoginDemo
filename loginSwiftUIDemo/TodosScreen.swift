@@ -20,8 +20,9 @@ struct TodosScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 20) {
+               // NavigationLink("create td", value: NavigationRoute.createTodo)
                 NavigationLink {
-                    CreateTodoScreen(currentRoute: $currentRoute)
+                    CreateTodoScreen()
                 } label: {
                     Image(systemName: "square.and.pencil")
                 }
@@ -44,7 +45,7 @@ struct TodosScreen: View {
                 }
                 Button("logout") {
                     loginVM.logOut()
-                    currentRoute = .splash
+                    navigationVM.popUntilRootScreen()
                 }
             }.padding(15)
             HStack {
@@ -67,8 +68,12 @@ struct TodosScreen: View {
                             HStack {
                                 Text(currentTodo.title ?? "--")
                                 
+                                NavigationLink(value: NavigationRoute.editTodo(todo: currentTodo)) {
+                                    Image(systemName: "pencil")
+                                }
+                                
                                 NavigationLink {
-                                    CreateTodoScreen(todo: currentTodo, currentRoute: $currentRoute)
+                                    CreateTodoScreen(todo: currentTodo)
                                 } label: {
                                     Image(systemName: "pencil")
                                 }

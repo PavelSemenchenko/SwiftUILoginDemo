@@ -44,7 +44,7 @@ struct SplashView: View {
             }
         }
         .fullScreenCover(isPresented: $isActive, content: {
-            SignInScreen(currentRoute: $currentRoute)
+            SignInScreen()
         })
     }
     
@@ -54,36 +54,3 @@ struct SplashView: View {
         }
     }
 }
-/*
-struct SplashView: View {
-    @State private var isActive = false
-    @State private var isColorChanged = false
-    
-    var body: some View {
-        VStack {
-            Text("splash screen")
-                .font(.largeTitle)
-                .foregroundColor(isColorChanged ? .red : .blue)
-                .animation(.easeInOut(duration: 1.0))
-                .onAppear {
-                    withAnimation {
-                        isColorChanged.toggle()
-                    }            // Ваш логотип или содержимое сплэш-экрана
-                }
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
-                        isActive = true
-                        
-                    }
-                }
-                .fullScreenCover(isPresented: $isActive, content: {
-                    SignInScreen()
-                })
-        }
-    }
-}
-struct SplashView_Previews: PreviewProvider {
-    static var previews: some View {
-        SplashView()
-    }
-}*/

@@ -11,7 +11,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseFirestoreCombineSwift
 
-struct Todo: Codable, Identifiable {
+struct Todo: Codable, Identifiable, Hashable {
     @DocumentID var id: String?
     @ServerTimestamp var created: Date?
     let title: String
