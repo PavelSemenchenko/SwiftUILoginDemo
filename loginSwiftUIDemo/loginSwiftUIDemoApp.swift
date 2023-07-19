@@ -31,9 +31,13 @@ struct loginSwiftUIDemoApp: App {
                         switch route {
                         
                         case .splash:
+                            SplashView()
+                                
+                            /*
                             ProgressView().onAppear {
                                 SignInVM.isAuthenticated ? NavigationRoute.todos : NavigationRoute.signIn
                             }
+                             */
                         case .signIn:
                             SignInScreen()
                                 .environmentObject(SignInVM())
