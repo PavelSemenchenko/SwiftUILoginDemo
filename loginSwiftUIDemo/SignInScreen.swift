@@ -27,7 +27,8 @@ struct SignInScreen: View {
                     Task {
                         await loginVM.signIn()
                         // open TODOs
-                        navigarionVM.pushScreen(route: .todos)
+                        navigarionVM.pushHome()
+                        //navigarionVM.pushScreen(route: .todos)
                     }
                 }
                 

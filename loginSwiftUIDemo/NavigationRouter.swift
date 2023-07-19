@@ -24,6 +24,10 @@ class NavigationVM: ObservableObject {
     func pushScreen(route: NavigationRoute) {
         currentRoute.append(route)
     }
+    func pushHome() {
+        currentRoute.removeLast(currentRoute.count)
+        pushScreen(route: .todos)
+    }
     func popScreen() {
         currentRoute.removeLast()
     }

@@ -55,7 +55,8 @@ struct loginSwiftUIDemoApp: App {
                         }
                     }
             }.task {
-                navigationVM.pushScreen(route: SignInVM.isAuthenticated ? .todos : .signIn)
+                SignInVM.isAuthenticated ? navigationVM.pushHome() : navigationVM.popUntilRootScreen()
+                // navigationVM.pushScreen(route: SignInVM.isAuthenticated ? .todos : .signIn)
             }.environmentObject(navigationVM)
         }
     }
