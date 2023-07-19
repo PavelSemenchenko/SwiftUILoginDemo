@@ -32,7 +32,7 @@ struct loginSwiftUIDemoApp: App {
                         
                         case .splash:
                             SplashView()
-                                
+                                .environmentObject(SignInVM())
                             /*
                             ProgressView().onAppear {
                                 SignInVM.isAuthenticated ? NavigationRoute.todos : NavigationRoute.signIn
