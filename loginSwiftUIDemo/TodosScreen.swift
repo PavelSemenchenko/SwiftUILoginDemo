@@ -11,7 +11,7 @@ struct TodosScreen: View {
     //@Binding var currentRoute: NavigationRoute
     @State var todosCount = 0
     @State var todos: [Todo]?
-    @State var visible = true
+    @State var visible = true // keyboard
     @State var wellcomeText: String? = nil
     @EnvironmentObject private var loginVM: SignInVM
     @EnvironmentObject private var todosVM: TodoVM
@@ -20,13 +20,11 @@ struct TodosScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 20) {
-               // NavigationLink("create td", value: NavigationRoute.createTodo)
-                NavigationLink {
-                    CreateTodoScreen()
-                } label: {
+                NavigationLink(value: NavigationRoute.createTodo) {
                     Image(systemName: "square.and.pencil")
                 }
                 
+                /*
                 Button("change") {
                     visible.toggle()
                 }
@@ -42,7 +40,7 @@ struct TodosScreen: View {
                 }
                 if let checkWellcome = wellcomeText {
                     Text(checkWellcome)
-                }
+                }*/
                 Button("logout") {
                     loginVM.logOut()
                     navigationVM.popUntilRootScreen()
@@ -69,16 +67,9 @@ struct TodosScreen: View {
                                 Text(currentTodo.title ?? "--")
                                 
                                 NavigationLink(value: NavigationRoute.editTodo(todo: currentTodo)) {
-                                    Image(systemName: "pencil")
-                                }
-                                
-                                NavigationLink {
-                                    CreateTodoScreen(todo: currentTodo)
-                                } label: {
-                                    Image(systemName: "pencil")
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                                .fixedSize()
+                                    Image(systemName: "pencil.line")
+                                }.buttonStyle(PlainButtonStyle())
+                                    .fixedSize()
                             }
                             .frame(maxHeight: 46)
                             .swipeActions {
