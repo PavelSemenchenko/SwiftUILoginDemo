@@ -23,7 +23,7 @@ struct TodosScreen: View {
                 NavigationLink(value: NavigationRoute.createTodo) {
                     Image(systemName: "square.and.pencil")
                 }
-                
+                Spacer()
                 /*
                 Button("change") {
                     visible.toggle()
@@ -44,8 +44,10 @@ struct TodosScreen: View {
                 Button("logout") {
                     loginVM.logOut()
                     navigationVM.popUntilRootScreen()
-                }
+                }.frame(alignment: .trailing)
             }.padding(15)
+                
+        
             HStack {
                 Text("All todo :").font(.largeTitle).bold()
                     .padding(.leading,20)
