@@ -41,10 +41,19 @@ struct TodosScreen: View {
                 if let checkWellcome = wellcomeText {
                     Text(checkWellcome)
                 }*/
+                
+                Button(action: {
+                    loginVM.logOut()
+                    navigationVM.popUntilRootScreen()
+                }) {
+                    Image(systemName: "eject.circle")
+                }
+                /*
                 Button("logout") {
                     loginVM.logOut()
                     navigationVM.popUntilRootScreen()
-                }.frame(alignment: .trailing)
+                }*/
+                .frame(alignment: .trailing)
             }.padding(15)
                 
         
