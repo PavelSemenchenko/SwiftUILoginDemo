@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignInScreen: View {
-    @EnvironmentObject private var navigarionVM: NavigationVM
+    @EnvironmentObject private var navigationVM: NavigationVM
     @EnvironmentObject private var loginVM : SignInVM
     @Environment(\.navigationRouter) var navigationRouter : NavigationRouter
     
@@ -27,17 +27,19 @@ struct SignInScreen: View {
                     Task {
                         await loginVM.signIn()
                         // open TODOs
-                        navigarionVM.pushHome()
+                        navigationVM.pushHome()
                         //navigarionVM.pushScreen(route: .todos)
                     }
                 }
                 
                 VStack {
                     HStack {
-                        
+                        // 2 way change screen
                         MainButton(text: "Create account", enabled: true, busy: false) {
-                            navigarionVM.pushScreen(route: .signUp)
+                             navigationVM.pushScreen(route: .signUp)
+                            print("0000000")
                         }
+                        //NavigationLink("name", value: NavigationRoute.createTodo)
                         NavigationLink("TabBar") {
 //                            TabBar()
                         }
