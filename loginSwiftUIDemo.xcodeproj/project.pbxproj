@@ -28,7 +28,6 @@
 		0429BE3D2A37AB12002EF45F /* EditField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0429BE3C2A37AB12002EF45F /* EditField.swift */; };
 		0429BE3F2A37ACBF002EF45F /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0429BE3E2A37ACBF002EF45F /* MainButton.swift */; };
 		0429BE412A37AE07002EF45F /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0429BE402A37AE07002EF45F /* SignUpScreen.swift */; };
-		045CB98E2A3F655500CF26C1 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045CB98D2A3F655500CF26C1 /* TabBar.swift */; };
 		048A91032A41A3D70068BC16 /* TodoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A91022A41A3D70068BC16 /* TodoVM.swift */; };
 		048A91052A41A64D0068BC16 /* TodosScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A91042A41A64D0068BC16 /* TodosScreen.swift */; };
 		2A04397F2A4CB50200881A44 /* CreateTodoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */; };
@@ -47,7 +46,6 @@
 		0429BE3C2A37AB12002EF45F /* EditField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditField.swift; sourceTree = "<group>"; };
 		0429BE3E2A37ACBF002EF45F /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		0429BE402A37AE07002EF45F /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
-		045CB98D2A3F655500CF26C1 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		048A91022A41A3D70068BC16 /* TodoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoVM.swift; sourceTree = "<group>"; };
 		048A91042A41A64D0068BC16 /* TodosScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosScreen.swift; sourceTree = "<group>"; };
 		2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoScreen.swift; sourceTree = "<group>"; };
@@ -97,15 +95,10 @@
 		0426DF3A2A2E717500BB5790 /* loginSwiftUIDemo */ = {
 			isa = PBXGroup;
 			children = (
+				2AE5B0AB2A686E9100F8703C /* Screens */,
+				2AE5B0AA2A686E2500F8703C /* Services */,
 				0426DF3B2A2E717500BB5790 /* loginSwiftUIDemoApp.swift */,
 				0419BCCB2A325BD40079BFFF /* SignInVM.swift */,
-				0426DF3D2A2E717500BB5790 /* SignInScreen.swift */,
-				0429BE402A37AE07002EF45F /* SignUpScreen.swift */,
-				2A3848E62A38B9F5007FF32D /* SplashScreen.swift */,
-				045CB98D2A3F655500CF26C1 /* TabBar.swift */,
-				2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */,
-				048A91042A41A64D0068BC16 /* TodosScreen.swift */,
-				2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */,
 				048A91022A41A3D70068BC16 /* TodoVM.swift */,
 				0429BE3C2A37AB12002EF45F /* EditField.swift */,
 				0429BE3E2A37ACBF002EF45F /* MainButton.swift */,
@@ -122,6 +115,26 @@
 				0426DF422A2E717700BB5790 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2AE5B0AA2A686E2500F8703C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2AE5B0AB2A686E9100F8703C /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				2A3848E62A38B9F5007FF32D /* SplashScreen.swift */,
+				0426DF3D2A2E717500BB5790 /* SignInScreen.swift */,
+				0429BE402A37AE07002EF45F /* SignUpScreen.swift */,
+				2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */,
+				048A91042A41A64D0068BC16 /* TodosScreen.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,7 +231,6 @@
 				2A04397F2A4CB50200881A44 /* CreateTodoScreen.swift in Sources */,
 				0429BE412A37AE07002EF45F /* SignUpScreen.swift in Sources */,
 				2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */,
-				045CB98E2A3F655500CF26C1 /* TabBar.swift in Sources */,
 				2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */,
 				0426DF3E2A2E717500BB5790 /* SignInScreen.swift in Sources */,
 				0426DF3C2A2E717500BB5790 /* loginSwiftUIDemoApp.swift in Sources */,

@@ -11,8 +11,7 @@ import SwiftUI
 struct SignUpScreen: View {
     //@Binding var currentRoute: NavigationRoute
     @EnvironmentObject private var loginVM: SignInVM
-    @Environment(\.navigationRouter) var navigationRouter: NavigationRouter
-    @EnvironmentObject private var navigarionVM: NavigationVM
+    @EnvironmentObject private var navigarionVM: NavigationRouter
        
     var body: some View {
         VStack {

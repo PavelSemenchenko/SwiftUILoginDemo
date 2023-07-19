@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct SignInScreen: View {
-    @EnvironmentObject private var navigationVM: NavigationVM
+    @EnvironmentObject private var navigationVM: NavigationRouter
     @EnvironmentObject private var loginVM : SignInVM
-    @Environment(\.navigationRouter) var navigationRouter : NavigationRouter
     
     @State private var isShowingModal = false
     
@@ -28,7 +27,6 @@ struct SignInScreen: View {
                         await loginVM.signIn()
                         // open TODOs
                         navigationVM.pushHome()
-                        //navigarionVM.pushScreen(route: .todos)
                     }
                 }
                 
@@ -37,12 +35,9 @@ struct SignInScreen: View {
                         // 2 way change screen
                         MainButton(text: "Create account", enabled: true, busy: false) {
                              navigationVM.pushScreen(route: .signUp)
-                            print("0000000")
                         }
-                        //NavigationLink("name", value: NavigationRoute.createTodo)
-                        NavigationLink("TabBar") {
-//                            TabBar()
-                        }
+                        NavigationLink("enter", value: NavigationRoute.signUp)
+                        
                     }
                     Button("Agreements") {
                         isShowingModal.toggle()

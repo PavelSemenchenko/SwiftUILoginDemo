@@ -18,7 +18,7 @@ enum NavigationRoute: Hashable {
     
 }
 
-class NavigationVM: ObservableObject {
+class NavigationRouter: ObservableObject {
     @Published var currentRoute: NavigationPath = NavigationPath()
     
     func pushScreen(route: NavigationRoute) {
@@ -31,23 +31,8 @@ class NavigationVM: ObservableObject {
     func popScreen() {
         currentRoute.removeLast()
     }
-    func popUntilRootScreen() {
+    func popUntilSignInScreen() {
         currentRoute.removeLast(currentRoute.count)
-        pushScreen(route: .splash)
-    }
-}
-
-class NavigationRouter {
-    var signInRoute: () -> some View {
-        func route() -> SignUpScreen {
-            SignUpScreen()
-        }
-        return route
-    }
-    var signUpRoute: () -> some View {
-        func route() -> some View {
-            SignUpScreen().environmentObject(SignInVM())
-        }
-        return route
+        pushScreen(route: .signIn)
     }
 }

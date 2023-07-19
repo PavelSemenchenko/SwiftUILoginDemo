@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct TodosScreen: View {
-    //@Binding var currentRoute: NavigationRoute
     @State var todosCount = 0
     @State var todos: [Todo]?
     @State var visible = true // keyboard
     @State var wellcomeText: String? = nil
     @EnvironmentObject private var loginVM: SignInVM
     @EnvironmentObject private var todosVM: TodoVM
-    @EnvironmentObject private var navigationVM: NavigationVM
+    @EnvironmentObject private var navigationVM: NavigationRouter
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -47,7 +46,7 @@ struct TodosScreen: View {
                 
                 Button(action: {
                     loginVM.logOut()
-                    navigationVM.popUntilRootScreen()
+                    navigationVM.popUntilSignInScreen()
                 }) {
                     Image(systemName: "eject.circle")
                 }
@@ -57,7 +56,7 @@ struct TodosScreen: View {
                     navigationVM.popUntilRootScreen()
                 }*/
                 .frame(alignment: .trailing)
-            }.padding(15)
+            }.padding(5)
                 
         
             HStack {

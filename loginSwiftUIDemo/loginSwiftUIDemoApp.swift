@@ -20,24 +20,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct loginSwiftUIDemoApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @ObservedObject var navigationVM = NavigationVM()
+    @ObservedObject var navigationVM = NavigationRouter()
    // @State var currentRoute = NavigationPath()
     
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $navigationVM.currentRoute) {
-                ProgressView()
+                SplashView()
                     .navigationDestination(for: NavigationRoute.self) { route in
                         switch route {
                         
                         case .splash:
                             SplashView()
-                                .environmentObject(SignInVM())
-                            /*
-                            ProgressView().onAppear {
-                                SignInVM.isAuthenticated ? NavigationRoute.todos : NavigationRoute.signIn
-                            }
-                             */
                         case .signIn:
                             SignInScreen()
                                 .environmentObject(SignInVM())
@@ -54,22 +48,7 @@ struct loginSwiftUIDemoApp: App {
                             CreateTodoScreen(todo: todo)
                         }
                     }
-            }.task {
-                SignInVM.isAuthenticated ? navigationVM.pushHome() : navigationVM.popUntilRootScreen()
-                // navigationVM.pushScreen(route: SignInVM.isAuthenticated ? .todos : .signIn)
             }.environmentObject(navigationVM)
         }
-    }
-}
-
-struct DependenciesKey: EnvironmentKey {
-    static var defaultValue: NavigationRouter = NavigationRouter()
-    typealias Value = NavigationRouter
-}
-
-extension EnvironmentValues {
-    var navigationRouter: NavigationRouter {
-        get { self[DependenciesKey.self] }
-        set { self[DependenciesKey.self] = newValue}
     }
 }

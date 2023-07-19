@@ -11,8 +11,7 @@ import SwiftUI
 struct SplashView: View {
     @State private var isActive = false
     @State private var currentColorIndex = 0
-    //@Binding var currentRoute: NavigationRoute
-    @EnvironmentObject private var navigationVM: NavigationVM
+    @EnvironmentObject private var navigationVM: NavigationRouter
     
     private let gradients: [Gradient] = [
         Gradient(colors: [.red, .orange]),
@@ -42,12 +41,13 @@ struct SplashView: View {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                 isActive = true
+                SignInVM.isAuthenticated ? navigationVM.pushHome() : navigationVM.popUntilSignInScreen()
             }
-        }
+        }/*
         .fullScreenCover(isPresented: $isActive, content: {
             SignInScreen()
             
-        })
+        })*/
     }
     
     private func startColorAnimation() {
