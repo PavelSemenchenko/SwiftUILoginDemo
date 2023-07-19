@@ -29,9 +29,9 @@ struct SignUpScreen: View {
                         
                     }
                 }.padding()
-                NavigationLink(value: NavigationRoute.signIn) {
-                    Text("Enter")
-                }.foregroundColor(.white).padding(30)
+                MainButton(text: "Sign In", enabled: true, busy: false) {
+                    navigarionVM.popScreen()
+                }
             }
         }.padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
