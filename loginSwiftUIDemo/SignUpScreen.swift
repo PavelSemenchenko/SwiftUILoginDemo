@@ -12,6 +12,7 @@ struct SignUpScreen: View {
     //@Binding var currentRoute: NavigationRoute
     @EnvironmentObject private var loginVM: SignInVM
     @Environment(\.navigationRouter) var navigationRouter: NavigationRouter
+    @EnvironmentObject private var navigarionVM: NavigationVM
        
     var body: some View {
         VStack {
@@ -28,9 +29,9 @@ struct SignUpScreen: View {
                         
                     }
                 }.padding()
-                NavigationLink("Enter account", destination: navigationRouter.signInRoute)
-                    .foregroundColor(.white).padding(30)
-//                currentRoute = .signIn
+                NavigationLink(value: NavigationRoute.signIn) {
+                    Text("Enter")
+                }.foregroundColor(.white).padding(30)
             }
         }.padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)

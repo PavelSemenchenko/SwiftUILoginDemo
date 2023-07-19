@@ -29,6 +29,7 @@ struct loginSwiftUIDemoApp: App {
                 ProgressView()
                     .navigationDestination(for: NavigationRoute.self) { route in
                         switch route {
+                        
                         case .splash:
                             ProgressView().onAppear {
                                 SignInVM.isAuthenticated ? NavigationRoute.todos : NavigationRoute.signIn

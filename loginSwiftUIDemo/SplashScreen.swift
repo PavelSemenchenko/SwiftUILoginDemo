@@ -45,6 +45,7 @@ struct SplashView: View {
         }
         .fullScreenCover(isPresented: $isActive, content: {
             SignInScreen()
+            
         })
     }
     

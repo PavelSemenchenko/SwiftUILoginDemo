@@ -33,10 +33,7 @@ struct SignInScreen: View {
                 
                 VStack {
                     HStack {
-                        NavigationLink(destination: navigationRouter.signUpRoute) {
-                            MainButton(text: "Create account", enabled: loginVM.canLogin, busy: false) {
-                            }
-                        }
+                        
                         MainButton(text: "Create account", enabled: true, busy: false) {
                             navigarionVM.pushScreen(route: .signUp)
                         }
