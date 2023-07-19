@@ -23,6 +23,9 @@ struct TodosScreen: View {
                 NavigationLink(value: NavigationRoute.createTodo) {
                     Image(systemName: "square.and.pencil")
                 }
+                NavigationLink(value: NavigationRoute.splash) {
+                    Image(systemName: "circle.hexagonpath")
+                }
                 Spacer()
                 /*
                 Button("change") {

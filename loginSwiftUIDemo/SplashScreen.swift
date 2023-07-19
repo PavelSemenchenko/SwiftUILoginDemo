@@ -11,7 +11,8 @@ import SwiftUI
 struct SplashView: View {
     @State private var isActive = false
     @State private var currentColorIndex = 0
-    @Binding var currentRoute: NavigationRoute
+    //@Binding var currentRoute: NavigationRoute
+    @EnvironmentObject private var navigationVM: NavigationVM
     
     private let gradients: [Gradient] = [
         Gradient(colors: [.red, .orange]),
