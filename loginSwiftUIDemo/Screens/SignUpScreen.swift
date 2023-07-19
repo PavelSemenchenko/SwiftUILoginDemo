@@ -25,6 +25,7 @@ struct SignUpScreen: View {
                 MainButton(text: "Sign Up", enabled: loginVM.canLogin, busy: loginVM.busy) {
                     Task {
                         await loginVM.signUp()
+                        navigarionVM.pushHome()
                         
                     }
                 }.padding()
@@ -39,9 +40,11 @@ struct SignUpScreen: View {
             .edgesIgnoringSafeArea(.all)
     }
 }
-/*
+
 struct SignUpScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpScreen().environmentObject(SignInVM())
+        SignUpScreen()
+            .environmentObject(SignInVM())
+            .environmentObject(NavigationRouter())
     }
-}*/
+}

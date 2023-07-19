@@ -89,9 +89,10 @@ final class KeyboardResponder: ObservableObject {
             .store(in: &cancellables)
     }
 }
-/*
+
 struct CreateTodoScreen_Previews: PreviewProvider {
     static var previews: some View {
         CreateTodoScreen()
+            .environmentObject(NavigationRouter())
     }
-}*/
+}

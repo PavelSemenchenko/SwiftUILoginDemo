@@ -90,10 +90,12 @@ struct AnotherView2: View {
         
     }
 }
-/*
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInScreen().environmentObject(SignInVM())
+        SignInScreen()
+            .environmentObject(SignInVM())
+            .environmentObject(NavigationRouter())
     }
 }
- */
+ 

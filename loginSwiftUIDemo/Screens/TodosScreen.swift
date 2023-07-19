@@ -120,9 +120,11 @@ struct TodosScreen: View {
             }
         }
 }
-/*
+
 struct TodosScreen_Previews: PreviewProvider {
     static var previews: some View {
         TodosScreen()
+            .environmentObject(TodoVM())
+            .environmentObject(NavigationRouter())
     }
-}*/
+}
