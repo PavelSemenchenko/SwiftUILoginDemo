@@ -11,12 +11,12 @@ struct ContactsScreen: View {
     @EnvironmentObject var contactsVM: ContactsVM
     var body: some View {
         VStack {
-            Text("Contacts")
+            Text("Contacts").padding(5)
             
             if contactsVM.status == .loaded && contactsVM.items.isEmpty {
                 Text("No people in the app. Invite your friends")
                     .multilineTextAlignment(.center)
-                    .padding()
+                    .padding(10)
             } else if contactsVM.status == .loaded && !contactsVM.items.isEmpty {
                 TextField("Type term", text: $contactsVM.search)
                 List(contactsVM.items.filter({ c in
