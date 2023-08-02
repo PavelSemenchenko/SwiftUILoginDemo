@@ -29,7 +29,7 @@ struct loginSwiftUIDemoApp: App {
                 SplashView()
                     .navigationDestination(for: NavigationRoute.self) { route in
                         switch route {
-                        
+                            
                         case .splash:
                             SplashView()
                         case .signIn:
@@ -49,6 +49,7 @@ struct loginSwiftUIDemoApp: App {
                         case .contacts:
                             ContactsScreen()
                                 .environmentObject(ContactsVM())
+                        case .tabBar: TabBar()
                         }
                     }
             }.environmentObject(navigationVM)

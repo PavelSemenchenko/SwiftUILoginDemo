@@ -33,7 +33,7 @@ struct SplashView: View {
                 endPoint: .bottomTrailing
             )
         )
-        .animation(.easeInOut(duration: 1.0))
+        //.animation(.easeInOut(duration: 1.0))
         .onAppear {
             withAnimation {
                 startColorAnimation()
@@ -41,7 +41,7 @@ struct SplashView: View {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                 isActive = true
-                SignInVM.isAuthenticated ? navigationVM.pushHome() : navigationVM.popUntilSignInScreen()
+                SignInVM.isAuthenticated ? navigationVM.pushTabBar(route: .tabBar) /*navigationVM.pushHome()*/ : navigationVM.popUntilSignInScreen()
             }
         }/*
         .fullScreenCover(isPresented: $isActive, content: {

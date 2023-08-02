@@ -16,6 +16,7 @@ enum NavigationRoute: Hashable {
     case editTodo(todo: Todo )
     case splash
     case contacts
+    case tabBar
     
 }
 
@@ -38,5 +39,8 @@ class NavigationRouter: ObservableObject {
     }
     func pushContacts(route: NavigationRoute) {
         pushScreen(route: .contacts)
+    }
+    func pushTabBar(route: NavigationRoute) {
+        pushScreen(route: .tabBar)
     }
 }
