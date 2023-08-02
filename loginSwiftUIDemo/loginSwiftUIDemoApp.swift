@@ -50,6 +50,8 @@ struct loginSwiftUIDemoApp: App {
                             ContactsScreen()
                                 .environmentObject(ContactsVM())
                         case .tabBar: TabBar()
+                                .environmentObject(SignInVM())
+                                .environmentObject(TodoVM())
                         }
                     }
             }.environmentObject(navigationVM)

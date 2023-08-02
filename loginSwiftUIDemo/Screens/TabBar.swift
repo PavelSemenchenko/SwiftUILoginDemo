@@ -19,9 +19,6 @@ struct TabBar: View {
     
     var body: some View {
         VStack {
-            Button("Change") {
-                currentTab = TabBarId.todo
-            }
             TabView(selection: $currentTab) {
                 
                 Text("Tab 1").tabItem {

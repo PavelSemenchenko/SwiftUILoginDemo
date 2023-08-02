@@ -50,11 +50,6 @@ struct TodosScreen: View {
                 }) {
                     Image(systemName: "eject.circle")
                 }
-                /*
-                Button("logout") {
-                    loginVM.logOut()
-                    navigationVM.popUntilRootScreen()
-                }*/
                 .frame(alignment: .trailing)
             }.padding(5)
                 
@@ -99,11 +94,6 @@ struct TodosScreen: View {
             } else {
                 ProgressView()
             }
-            
-            
-            
-            
-            Text("иначе таблица скрывает таббар")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         //.edgesIgnoringSafeArea(.all)
