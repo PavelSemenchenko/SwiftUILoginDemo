@@ -96,7 +96,6 @@ struct TodosScreen: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        //.edgesIgnoringSafeArea(.all)
         .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.4 ))
     }
     

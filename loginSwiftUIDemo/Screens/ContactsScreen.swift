@@ -19,6 +19,11 @@ struct ContactsScreen: View {
                     .padding(10)
             } else if contactsVM.status == .loaded && !contactsVM.items.isEmpty {
                 TextField("Type term", text: $contactsVM.search)
+                    .padding(5)
+                    .border(.indigo).buttonBorderShape(.capsule)
+                    .background (Color.white)
+                    .padding(5)
+                    
                 List(contactsVM.items.filter({ c in
                     contactsVM.search.isEmpty || c.name.contains(contactsVM.search)
                 })) { item in
@@ -35,6 +40,8 @@ struct ContactsScreen: View {
         }.task {
             contactsVM.load()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.4 ))
     }
 }
 
