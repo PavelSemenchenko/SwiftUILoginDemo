@@ -18,7 +18,10 @@ struct ContactsScreen: View {
                     .multilineTextAlignment(.center)
                     .padding()
             } else if contactsVM.status == .loaded && !contactsVM.items.isEmpty {
-                List(contactsVM.items) { item in
+                TextField("Type term", text: $contactsVM.search)
+                List(contactsVM.items.filter({ c in
+                    contactsVM.search.isEmpty || c.name.contains(contactsVM.search)
+                })) { item in
                     Text(item.name)
                 }
             } else if contactsVM.status == .failed {
@@ -26,7 +29,11 @@ struct ContactsScreen: View {
                 Button("Reload") {
                     contactsVM.load()
                 }
+            } else {
+                ProgressView()
             }
+        }.task {
+            contactsVM.load()
         }
     }
 }
@@ -34,10 +41,13 @@ struct ContactsScreen: View {
 class ContactsVM: ObservableObject {
     @Published private(set) var status: EntityStastus = .initial
     @Published private(set) var items: [Contact] = []
+    @Published fileprivate(set) var search: String = ""
     
     func load() {
         status = .loaded
-        items = [Contact(name: "Bob"), Contact(name: "Sarah"), Contact(name: "Tom")]
+        items = [Contact(id: "0", name: "Bob"),
+                 Contact(id: "1", name: "Sarah"),
+                 Contact(id: "2", name: "Tom")]
     }
 }
 
