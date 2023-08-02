@@ -23,9 +23,14 @@ struct TabBar: View {
                 currentTab = TabBarId.todo
             }
             TabView(selection: $currentTab) {
+                
                 Text("Tab 1").tabItem {
+                HStack {
                     Text("Home")
-                }.tag(TabBarId.home)
+                    Image(systemName: "house")
+                }
+                    }.tag(TabBarId.home)
+                
                 /*TodosScreen().tabItem {
                     Text("Todo")
                         .environmentObject(TodoVM())
@@ -33,7 +38,10 @@ struct TabBar: View {
                 }.tag(TabBarId.todo)
                  */
                 ContactsScreen().tabItem {
-                    Text("Contacts")
+                    VStack {
+                        Text("Contacts")
+                        Image(systemName: "person.3.sequence")
+                    }
                 }.tag(TabBarId.contacts).environmentObject(ContactsVM())
             }
         }
