@@ -30,6 +30,8 @@
 		0429BE412A37AE07002EF45F /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0429BE402A37AE07002EF45F /* SignUpScreen.swift */; };
 		048A91032A41A3D70068BC16 /* TodoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A91022A41A3D70068BC16 /* TodoVM.swift */; };
 		048A91052A41A64D0068BC16 /* TodosScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A91042A41A64D0068BC16 /* TodosScreen.swift */; };
+		04C9B59A2A7A600C00F66DFE /* ContactsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9B5992A7A600C00F66DFE /* ContactsScreen.swift */; };
+		04C9B59C2A7A60A600F66DFE /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9B59B2A7A60A600F66DFE /* Entities.swift */; };
 		2A04397F2A4CB50200881A44 /* CreateTodoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */; };
 		2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */; };
 		2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3848E62A38B9F5007FF32D /* SplashScreen.swift */; };
@@ -48,6 +50,8 @@
 		0429BE402A37AE07002EF45F /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		048A91022A41A3D70068BC16 /* TodoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoVM.swift; sourceTree = "<group>"; };
 		048A91042A41A64D0068BC16 /* TodosScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosScreen.swift; sourceTree = "<group>"; };
+		04C9B5992A7A600C00F66DFE /* ContactsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsScreen.swift; sourceTree = "<group>"; };
+		04C9B59B2A7A60A600F66DFE /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoScreen.swift; sourceTree = "<group>"; };
 		2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		2A3848E62A38B9F5007FF32D /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 				2AE5B0AB2A686E9100F8703C /* Screens */,
 				2AE5B0AA2A686E2500F8703C /* Services */,
 				0426DF3B2A2E717500BB5790 /* loginSwiftUIDemoApp.swift */,
+				04C9B59B2A7A60A600F66DFE /* Entities.swift */,
 				0419BCCB2A325BD40079BFFF /* SignInVM.swift */,
 				048A91022A41A3D70068BC16 /* TodoVM.swift */,
 				0429BE3C2A37AB12002EF45F /* EditField.swift */,
@@ -133,6 +138,7 @@
 				0429BE402A37AE07002EF45F /* SignUpScreen.swift */,
 				2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */,
 				048A91042A41A64D0068BC16 /* TodosScreen.swift */,
+				04C9B5992A7A600C00F66DFE /* ContactsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -230,7 +236,9 @@
 				048A91052A41A64D0068BC16 /* TodosScreen.swift in Sources */,
 				2A04397F2A4CB50200881A44 /* CreateTodoScreen.swift in Sources */,
 				0429BE412A37AE07002EF45F /* SignUpScreen.swift in Sources */,
+				04C9B59C2A7A60A600F66DFE /* Entities.swift in Sources */,
 				2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */,
+				04C9B59A2A7A600C00F66DFE /* ContactsScreen.swift in Sources */,
 				2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */,
 				0426DF3E2A2E717500BB5790 /* SignInScreen.swift in Sources */,
 				0426DF3C2A2E717500BB5790 /* loginSwiftUIDemoApp.swift in Sources */,
