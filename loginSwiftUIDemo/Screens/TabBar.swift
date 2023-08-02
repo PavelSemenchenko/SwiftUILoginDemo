@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum TabId: Int, Hashable {
+enum TabBarId: Int, Hashable {
     case home = 0
     case todo = 1
     case contacts = 2
@@ -15,23 +15,26 @@ enum TabId: Int, Hashable {
 
 struct TabBar: View {
     
-    @State var currentTab = TabId.home
+    @State var currentTab = TabBarId.home
     
     var body: some View {
         VStack {
             Button("Change") {
-                currentTab = TabId.todo
+                currentTab = TabBarId.todo
             }
             TabView(selection: $currentTab) {
                 Text("Tab 1").tabItem {
                     Text("Home")
-                }.tag(TabId.home)
-                Text("Tab 2").tabItem {
+                }.tag(TabBarId.home)
+                /*TodosScreen().tabItem {
                     Text("Todo")
-                }.tag(TabId.todo)
-                Text("Tab 3").tabItem {
+                        .environmentObject(TodoVM())
+                        .environmentObject(SignInVM())
+                }.tag(TabBarId.todo)
+                 */
+                ContactsScreen().tabItem {
                     Text("Contacts")
-                }.tag(TabId.contacts)
+                }.tag(TabBarId.contacts).environmentObject(ContactsVM())
             }
         }
     }
