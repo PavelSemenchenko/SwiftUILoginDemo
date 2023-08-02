@@ -21,10 +21,7 @@ struct TodosScreen: View {
             HStack(alignment: .center, spacing: 20) {
                 NavigationLink(value: NavigationRoute.createTodo) {
                     Image(systemName: "square.and.pencil")
-                }
-                NavigationLink(value: NavigationRoute.splash) {
-                    Image(systemName: "circle.hexagonpath")
-                }
+                }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
                 Spacer()
                 /*
                 Button("change") {
