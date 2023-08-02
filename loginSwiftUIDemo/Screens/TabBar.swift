@@ -15,7 +15,7 @@ enum TabBarId: Int, Hashable {
 
 struct TabBar: View {
     
-    @State var currentTab = TabBarId.home
+    @State var currentTab = TabBarId.todo
     
     var body: some View {
         VStack {
@@ -43,7 +43,7 @@ struct TabBar: View {
                     }
                 }.tag(TabBarId.contacts).environmentObject(ContactsVM())
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
