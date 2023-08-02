@@ -15,6 +15,7 @@ enum NavigationRoute: Hashable {
     case createTodo
     case editTodo(todo: Todo )
     case splash
+    case contacts
     
 }
 
@@ -34,5 +35,8 @@ class NavigationRouter: ObservableObject {
     func popUntilSignInScreen() {
         currentRoute.removeLast(currentRoute.count)
         pushScreen(route: .signIn)
+    }
+    func pushContacts(route: NavigationRoute) {
+        pushScreen(route: .contacts)
     }
 }

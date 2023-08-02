@@ -46,6 +46,9 @@ struct loginSwiftUIDemoApp: App {
                             CreateTodoScreen()
                         case .editTodo(let todo):
                             CreateTodoScreen(todo: todo)
+                        case .contacts:
+                            ContactsScreen()
+                                .environmentObject(ContactsVM())
                         }
                     }
             }.environmentObject(navigationVM)
