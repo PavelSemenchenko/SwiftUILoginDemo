@@ -48,7 +48,12 @@ struct ContactsScreen: View {
             } else {
                 ProgressView()
             }
-        }.task {
+        }
+//        .onTapGesture {
+//            отписка от клавиатуры
+//            isKeyboardVisible = false
+//        }
+        .task {
             contactsVM.load()
         }
         .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0)
