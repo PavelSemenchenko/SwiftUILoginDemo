@@ -19,6 +19,8 @@ struct EditField: View {
     var body: some View {
         TextField(placeholder, text: text)
             .border(backgroundColor)
+            .cornerRadius(5)
+            .textFieldStyle(.roundedBorder)
             //.background(backgroundColor)
             .padding(EdgeInsets(top: 8, leading: 36, bottom: 8, trailing: 36))
     }

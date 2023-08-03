@@ -30,8 +30,6 @@ struct ContactsScreen: View {
                 TextField("Type term", text: $contactsVM.search)
                     .padding(5)
                     .cornerRadius(5)
-//                    .border(.indigo)
-//                    .background (Color.white)
                     .textFieldStyle(.roundedBorder)
                     .padding(5)
                     
