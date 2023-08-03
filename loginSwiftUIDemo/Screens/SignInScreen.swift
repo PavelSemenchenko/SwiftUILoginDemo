@@ -13,23 +13,33 @@ struct SignInScreen: View {
     
     @State private var isShowingModal = false
     
+    @FocusState private var email
+    @FocusState private var password
+    
     var body: some View {
         VStack {
                 Image(systemName: "figure.wave")
                     .font(.largeTitle)
                     .imageScale(.large)
                     .padding(20)
+            
                 EditField(valid: loginVM.isEmailCorrect, placeholder: "Email", text: $loginVM.email)
-                
-                EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
                 .submitLabel(.next)
+                .onSubmit {
+                    //внимание на другое поле
+                    
+                }
+                .keyboardType(.emailAddress)
+            
+                EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
+                .submitLabel(.go)
                 .onSubmit {
                     Task {
                         await loginVM.signIn()
-                        // open TODOs
                         navigationVM.pushHome()
                     }
                 }
+                .focused($password)
                 
                 MainButton(text: "Sign In", enabled: loginVM.canLogin, busy: loginVM.busy) {
                     Task {
