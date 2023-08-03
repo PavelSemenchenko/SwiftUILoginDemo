@@ -47,7 +47,8 @@ struct CreateTodoScreen: View {
                 }
                 dismiss()
             }
-        }.padding()
+        }
+            .padding()
             .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0)
             .onAppear {
                 self.currentTitle = todo?.title ?? ""

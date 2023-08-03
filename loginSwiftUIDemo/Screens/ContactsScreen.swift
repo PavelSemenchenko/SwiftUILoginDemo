@@ -6,9 +6,18 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContactsScreen: View {
     @EnvironmentObject var contactsVM: ContactsVM
+    @State private var isKeyboardVisible = false
+    @ObservedObject private var keyboardResposder = KeyboardResponder()
+    @Environment(\.dismiss) var dismiss
+    
+    var keyboardHeight: CGFloat {
+        keyboardResposder.keyboardHeight
+    }
+    
     var body: some View {
         VStack {
             Text("Contacts").padding(5)
@@ -20,8 +29,10 @@ struct ContactsScreen: View {
             } else if contactsVM.status == .loaded && !contactsVM.items.isEmpty {
                 TextField("Type term", text: $contactsVM.search)
                     .padding(5)
-                    .border(.indigo).buttonBorderShape(.capsule)
-                    .background (Color.white)
+                    .cornerRadius(5)
+//                    .border(.indigo)
+//                    .background (Color.white)
+                    .textFieldStyle(.roundedBorder)
                     .padding(5)
                     
                 List(contactsVM.items.filter({ c in
@@ -40,10 +51,25 @@ struct ContactsScreen: View {
         }.task {
             contactsVM.load()
         }
+        .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
+                isKeyboardVisible = true
+            }
+            
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { notification in
+                isKeyboardVisible = false
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea(.keyboard)
         .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.4 ))
     }
+    
 }
+
+
 
 class ContactsVM: ObservableObject {
     @Published private(set) var status: EntityStastus = .initial
@@ -54,7 +80,18 @@ class ContactsVM: ObservableObject {
         status = .loaded
         items = [Contact(id: "0", name: "Bob"),
                  Contact(id: "1", name: "Sarah"),
-                 Contact(id: "2", name: "Tom")]
+                 Contact(id: "2", name: "Tom"),
+                 Contact(id: "3", name: "Sam"),
+                 Contact(id: "4", name: "Robert"),
+                 Contact(id: "5", name: "Natan"),
+                 Contact(id: "6", name: "Poule"),
+                 Contact(id: "7", name: "Pouile"),
+                 Contact(id: "8", name: "Juseppe"),
+                 Contact(id: "9", name: "Cassidy"),
+                 Contact(id: "10", name: "Grand"),
+                 Contact(id: "11", name: "Sarah"),
+                 Contact(id: "12", name: "Sarah"),
+                 Contact(id: "13", name: "Tom")]
     }
 }
 

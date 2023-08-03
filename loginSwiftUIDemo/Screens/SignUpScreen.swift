@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SignUpScreen: View {
-    //@Binding var currentRoute: NavigationRoute
+    
     @EnvironmentObject private var loginVM: SignInVM
     @EnvironmentObject private var navigarionVM: NavigationRouter
        
