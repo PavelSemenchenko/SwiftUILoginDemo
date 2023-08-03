@@ -49,10 +49,10 @@ struct ContactsScreen: View {
                 ProgressView()
             }
         }
-//        .onTapGesture {
+        .onTapGesture {
 //            отписка от клавиатуры
-//            isKeyboardVisible = false
-//        }
+            isKeyboardVisible = false
+        }
         .task {
             contactsVM.load()
         }
