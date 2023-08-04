@@ -37,7 +37,7 @@ struct SignInScreen: View {
                 .onSubmit {
                     Task {
                         await loginVM.signIn()
-                        navigationVM.pushHome()
+                        navigationVM.pushTabBar(route: .todos)
                     }
                 }
                 .focused($password)
