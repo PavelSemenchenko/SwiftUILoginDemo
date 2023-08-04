@@ -27,6 +27,7 @@ struct SignInScreen: View {
                 .submitLabel(.next)
                 .onSubmit {
                     //внимание на другое поле
+                    focusOnPassword()
                     
                 }
                 .keyboardType(.emailAddress)
@@ -72,6 +73,12 @@ struct SignInScreen: View {
                 .edgesIgnoringSafeArea(.all))
             .edgesIgnoringSafeArea(.all)
         }
+    
+    private func focusOnPassword() {
+        password = true
+        
+    }
+    
 }
 
 // Agreements
