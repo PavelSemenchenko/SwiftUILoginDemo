@@ -21,6 +21,8 @@ struct CreateTodoScreen: View {
     var body: some View {
         VStack {
             Text("Enter new todo :")
+                .fontWeight(.bold)
+                .padding(.bottom)
             TextEditor(text: $currentTitle)
                 .padding()
                 .overlay(

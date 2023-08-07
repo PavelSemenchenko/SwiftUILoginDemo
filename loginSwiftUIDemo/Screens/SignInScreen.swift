@@ -31,7 +31,17 @@ struct SignInScreen: View {
                     
                 }
                 .keyboardType(.emailAddress)
-            
+            /*
+            SecureField("Password", text: $loginVM.password)
+                .submitLabel(.go)
+                .onSubmit {
+                    Task {
+                        await loginVM.signIn()
+                        navigationVM.pushTabBar(route: .tabBar)
+                    }
+                }
+                .focused($password)
+            */
                 EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
                 .submitLabel(.go)
                 .onSubmit {
