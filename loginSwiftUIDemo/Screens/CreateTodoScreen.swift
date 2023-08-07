@@ -73,23 +73,40 @@ final class KeyboardResponder: ObservableObject {
     
     @Published var keyboardHeight: CGFloat = 0
     
-    init() {
-        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+    
+    // поток прослушивания когда клавиатура видима
+    lazy var keyboardHeightActive: AnyPublisher<CGFloat, Never> = {
+        return NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
             .compactMap { notification in
                 notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
             }
             .map { rect in
                 rect.height
-            }
-            .assign(to: \.keyboardHeight, on: self)
-            .store(in: &cancellables)
+            }.eraseToAnyPublisher()
+    }()
+    
+    // поток прослушивания когда клавиатура НЕ видима
+    lazy var keyboardHeightInactive: AnyPublisher<CGFloat, Never> = {
+        return NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+            .map { rect in
+                0
+            }.eraseToAnyPublisher()
+    }()
+    
+    lazy var key1boardHeight: AnyPublisher<CGFloat, Never> = {
+        keyboardHeightActive.merge(with: keyboardHeightInactive).eraseToAnyPublisher()
+    }()
+    
+    init() {
         
-        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
-            .map { _ in 0 }
-            .assign(to: \.keyboardHeight, on: self)
-            .store(in: &cancellables)
+    }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
+
+
 
 struct CreateTodoScreen_Previews: PreviewProvider {
     static var previews: some View {

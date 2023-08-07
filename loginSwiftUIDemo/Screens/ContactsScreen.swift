@@ -8,16 +8,14 @@
 import SwiftUI
 import Combine
 
+//33.11
+
 struct ContactsScreen: View {
     @EnvironmentObject var contactsVM: ContactsVM
-    @State private var isKeyboardVisible = false
+    @State private var keyboardHeight: CGFloat = 0
     @ObservedObject private var keyboardResposder = KeyboardResponder()
     @Environment(\.dismiss) var dismiss
-    
-    var keyboardHeight: CGFloat {
-        keyboardResposder.keyboardHeight
-    }
-    
+       
     var body: some View {
         VStack {
             Text("Contacts").padding(5)
@@ -48,23 +46,16 @@ struct ContactsScreen: View {
             }
         }
         .onTapGesture {
-//            отписка от клавиатуры
-            isKeyboardVisible = false
-        }
+            keyboardResposder.hideKeyboard()
+       }
         .task {
             contactsVM.load()
         }
-        .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0)
+        .padding(.bottom, keyboardHeight)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onAppear {
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
-                isKeyboardVisible = true
-            }
-            
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { notification in
-                isKeyboardVisible = false
-            }
-        }
+        .onReceive(keyboardResposder.key1boardHeight, perform: { height in
+            keyboardHeight = height
+        })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.keyboard)
         .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.4 ))
