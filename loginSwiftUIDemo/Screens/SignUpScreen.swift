@@ -12,6 +12,9 @@ struct SignUpScreen: View {
     
     @EnvironmentObject private var loginVM: SignInVM
     @EnvironmentObject private var navigarionVM: NavigationRouter
+    
+    @FocusState private var email
+    @FocusState private var password
        
     var body: some View {
         VStack {
@@ -19,8 +22,26 @@ struct SignUpScreen: View {
                 .font(.largeTitle)
                 .imageScale(.large)
                 .padding(20)
+            
             EditField(valid: loginVM.isEmailCorrect, placeholder: "Email", text: $loginVM.email)
+                .keyboardType(.emailAddress)
+                .submitLabel(.next)
+                .onSubmit {
+                    focusOnPassword()
+                }
+                .focused($email)
+            
             EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
+                .submitLabel(.join)
+                .onSubmit {
+                    Task {
+                        await loginVM.signUp()
+                        navigarionVM.pushTabBar(route: .todos)
+                    }
+                }
+                .focused($password)
+            
+            
             HStack {
                 MainButton(text: "Sign Up", enabled: loginVM.canLogin, busy: loginVM.busy) {
                     Task {
@@ -38,6 +59,10 @@ struct SignUpScreen: View {
             .background(LinearGradient(gradient: Gradient(colors: [.orange,.yellow, .red]), startPoint:.topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all))
             .edgesIgnoringSafeArea(.all)
+    }
+    
+    private func focusOnPassword() {
+        password = true
     }
 }
 

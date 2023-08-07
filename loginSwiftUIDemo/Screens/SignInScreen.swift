@@ -75,9 +75,7 @@ struct SignInScreen: View {
         }
     
     private func focusOnPassword() {
-        password = true
-        
-    }
+        password = true    }
     
 }
 
