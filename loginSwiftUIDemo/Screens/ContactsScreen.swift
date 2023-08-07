@@ -54,7 +54,7 @@ struct ContactsScreen: View {
         .padding(.bottom, keyboardHeight)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onReceive(keyboardResposder.key1boardHeight, perform: { height in
-            keyboardHeight = height
+            keyboardHeight = height - 100
         })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.keyboard)
