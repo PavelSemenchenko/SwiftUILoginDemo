@@ -16,10 +16,8 @@ struct CreateTodoScreen: View {
     @State private var isKeyboardVisible = false
     
     @ObservedObject private var keyboardResponder = KeyboardResponder()
+    @State private var keyboardHeight: CGFloat = 0
 
-    var keyboardHeight: CGFloat {
-        keyboardResponder.keyboardHeight
-    }
     var body: some View {
         VStack {
             Text("Enter new todo :")
@@ -47,19 +45,16 @@ struct CreateTodoScreen: View {
                 }
                 dismiss()
             }
+        }.onTapGesture {
+            keyboardResponder.hideKeyboard()
         }
             .padding()
-            .padding(.bottom, isKeyboardVisible ? keyboardHeight : 0)
+            .padding(.bottom, keyboardHeight)
+            .onReceive(keyboardResponder.key1boardHeight, perform: { height in
+                keyboardHeight = height - 180
+            })
             .onAppear {
                 self.currentTitle = todo?.title ?? ""
-                
-                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
-                    isKeyboardVisible = true
-                }
-                
-                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { notification in
-                    isKeyboardVisible = false
-                }
             }
         
             .frame(maxWidth: .infinity, maxHeight: .infinity)

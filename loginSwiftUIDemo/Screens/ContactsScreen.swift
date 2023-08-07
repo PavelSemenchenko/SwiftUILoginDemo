@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 
-//33.11
 
 struct ContactsScreen: View {
     @EnvironmentObject var contactsVM: ContactsVM
