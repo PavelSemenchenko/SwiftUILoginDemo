@@ -31,8 +31,8 @@ struct SignInScreen: View {
                     
                 }
                 .keyboardType(.emailAddress)
-            /*
-            SecureField("Password", text: $loginVM.password)
+            
+            PasswordField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
                 .submitLabel(.go)
                 .onSubmit {
                     Task {
@@ -41,7 +41,7 @@ struct SignInScreen: View {
                     }
                 }
                 .focused($password)
-            */
+            /*
                 EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
                 .submitLabel(.go)
                 .onSubmit {
@@ -51,6 +51,7 @@ struct SignInScreen: View {
                     }
                 }
                 .focused($password)
+             */
                 
                 MainButton(text: "Sign In", enabled: loginVM.canLogin, busy: loginVM.busy) {
                     Task {
