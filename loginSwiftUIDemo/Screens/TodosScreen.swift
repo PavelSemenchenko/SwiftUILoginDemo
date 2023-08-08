@@ -24,22 +24,22 @@ struct TodosScreen: View {
                 }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
                 Spacer()
                 /*
-                Button("change") {
-                    visible.toggle()
-                }
-                if visible {
-                    Text("U can see")
-                        .font(/*@START_MENU_TOKEN@*/.headline/*@END_MENU_TOKEN@*/)
-                } else {
-                    Text("hidden").hidden()
-                }
-                
-                Button("Hi") {
-                    wellcomeText = "Pressed hi !"
-                }
-                if let checkWellcome = wellcomeText {
-                    Text(checkWellcome)
-                }*/
+                 Button("change") {
+                 visible.toggle()
+                 }
+                 if visible {
+                 Text("U can see")
+                 .font(/*@START_MENU_TOKEN@*/.headline/*@END_MENU_TOKEN@*/)
+                 } else {
+                 Text("hidden").hidden()
+                 }
+                 
+                 Button("Hi") {
+                 wellcomeText = "Pressed hi !"
+                 }
+                 if let checkWellcome = wellcomeText {
+                 Text(checkWellcome)
+                 }*/
                 
                 Button(action: {
                     loginVM.logOut()
@@ -49,12 +49,20 @@ struct TodosScreen: View {
                 }
                 .frame(alignment: .trailing)
             }.padding(5)
-                
-        
-            HStack {
-                Text("All todo :").font(.largeTitle).bold()
-                    .padding(.leading,20)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            
+            HStack(alignment: .top) {
+                ZStack {
+                    Text("All todo :").font(.largeTitle).bold()
+                        .padding(.leading,20)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    Image(systemName: "circle.fill")
+                        .foregroundColor(.red)
+                        .frame(width: 24, height: 24)
+                    
+                    Text("\(todosCount)")
+                        .foregroundColor(.white)
+                        .font(.system(size: 14, weight: .bold))
+                }
                 Text("\(todosCount)").onReceive(todosVM.todos) { items in
                     todosCount = items.count
                     todos = items
@@ -78,14 +86,14 @@ struct TodosScreen: View {
                             }
                             .frame(maxHeight: 46)
                             .swipeActions {
-                                /*
+                                
                                 Button(action: {
-                                                // Handle edit action here
+                                    // Handle edit action here
                                 }) {
                                     Image(systemName: "pencil")
                                 }
                                 .tint(.blue)
-                                 */
+                                
                                 Button(action: {
                                     deleteTodo(currentTodo)
                                 }) {
@@ -103,16 +111,16 @@ struct TodosScreen: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.4 ))
     }
-        
+    
     func deleteTodo(_ todo: Todo) {
-            guard let id = todo.id else {
-                return
-            }
-            
-            Task {
-                await todosVM.delete(id: id)
-            }
+        guard let id = todo.id else {
+            return
         }
+        
+        Task {
+            await todosVM.delete(id: id)
+        }
+    }
 }
 
 struct TodosScreen_Previews: PreviewProvider {

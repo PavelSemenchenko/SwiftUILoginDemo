@@ -27,15 +27,14 @@ struct TabBar: View {
                     Image(systemName: "house")
                 }
                     }.tag(TabBarId.home)
-#if DEBUG
+                
                 TodosScreen().tabItem {
                     Text("Todo")
                     Image(systemName: "list.clipboard")
                 }.tag(TabBarId.todo)
                     .environmentObject(TodoVM())
                     .environmentObject(SignInVM())
-                 
-#endif
+
                 ContactsScreen().tabItem {
                     VStack {
                         Text("Contacts")
