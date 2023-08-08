@@ -31,19 +31,26 @@ struct ContactsScreen: View {
                         .cornerRadius(5)
                         .textFieldStyle(.roundedBorder)
                         .padding(5)
+                    /*
                     Button (action: {
                         contactsVM.search = ""
                     }) {
                         Image(systemName: "xmark.circle.fill")
-                                                .foregroundColor(.gray)
-                    }.padding(.trailing, 15)
-                   /*
-                    if !$contactsVM.search.isEmpty {
-                        Button(action: {
-                            $contactsVM.search = ""
-                        })
+                            .foregroundColor(.gray)
                     }
+                    .padding(.trailing, 15)
+                    //.opacity(contactsVM.search.isEmpty ? 0 : 1)
                     */
+                     if !contactsVM.search.isEmpty {
+                         Button (action: {
+                             contactsVM.search = ""
+                         }) {
+                             Image(systemName: "xmark.circle.fill")
+                                 .foregroundColor(.gray)
+                         }
+                         .padding(.trailing, 15)
+                     }
+                     
                 }
                 List(contactsVM.items.filter({ c in
                     contactsVM.search.isEmpty || c.name.contains(contactsVM.search)
@@ -61,7 +68,7 @@ struct ContactsScreen: View {
         }
         .onTapGesture {
             keyboardResposder.hideKeyboard()
-       }
+        }
         .task {
             contactsVM.load()
         }
