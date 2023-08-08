@@ -7,10 +7,14 @@
 
 import SwiftUI
 import Combine
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseFirestoreCombineSwift
 
 
 struct ContactsScreen: View {
-    @EnvironmentObject var contactsVM: ContactsVM
+    //@EnvironmentObject var contactsVM: ContactsVM
+    @StateObject var contactsVM: ContactsVM = ContactsVM()
     @State private var keyboardHeight: CGFloat = 0
     @ObservedObject private var keyboardResposder = KeyboardResponder()
     @Environment(\.dismiss) var dismiss
@@ -27,6 +31,11 @@ struct ContactsScreen: View {
             } else if contactsVM.status == .loaded && !contactsVM.items.isEmpty {
                 ZStack(alignment: .trailing) {
                     TextField("Type term", text: $contactsVM.search)
+                        .onChange(of: contactsVM.search, perform: { newValue in
+                            Task {
+                                await contactsVM.load()
+                            }
+                        })
                         .padding(5)
                         .cornerRadius(5)
                         .textFieldStyle(.roundedBorder)
@@ -60,7 +69,9 @@ struct ContactsScreen: View {
             } else if contactsVM.status == .failed {
                 Text("Something went wrong")
                 Button("Reload") {
-                    contactsVM.load()
+                    Task {
+                        await contactsVM.load()
+                    }
                 }
             } else {
                 ProgressView()
@@ -70,7 +81,7 @@ struct ContactsScreen: View {
             keyboardResposder.hideKeyboard()
         }
         .task {
-            contactsVM.load()
+            await contactsVM.load()
         }
         .padding(.bottom, keyboardHeight)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -91,6 +102,23 @@ class ContactsVM: ObservableObject {
     @Published private(set) var items: [Contact] = []
     @Published fileprivate(set) var search: String = ""
     
+    @MainActor func load() async {
+        status = search.isEmpty ? .loading : status
+        var ref = Firestore.firestore().collection("people").order(by: "name")
+        if !search.isEmpty {
+            ref = ref.start(at: [search.lowercased()])
+                .end(at: ["\(search.lowercased())"])
+        }
+        guard let snapshot = try? await ref.getDocuments() else {
+            status = .failed
+            return
+        }
+        let contacts = snapshot.documents.map { doc in
+            try! doc.data(as: Contact.self)
+        }.compactMap { $0 }
+        status = .loaded
+        items = contacts
+    /*
     func load() {
         status = .loaded
         items = [Contact(id: "0", name: "Bob"),
@@ -107,6 +135,7 @@ class ContactsVM: ObservableObject {
                  Contact(id: "11", name: "Sarah"),
                  Contact(id: "12", name: "Sarah"),
                  Contact(id: "13", name: "Tom")]
+     */
     }
 }
 

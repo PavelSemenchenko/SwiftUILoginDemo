@@ -83,6 +83,7 @@ struct SignInScreen: View {
             .background(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all))
             .edgesIgnoringSafeArea(.all)
+            .navigationBarBackButtonHidden(true)
         }
     
     private func focusOnPassword() {

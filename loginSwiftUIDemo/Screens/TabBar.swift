@@ -50,5 +50,7 @@ struct TabBar: View {
 struct TabBar_Previews: PreviewProvider {
     static var previews: some View {
         TabBar()
+            .environmentObject(TodoVM())
+            .environmentObject(NavigationRouter())
     }
 }
