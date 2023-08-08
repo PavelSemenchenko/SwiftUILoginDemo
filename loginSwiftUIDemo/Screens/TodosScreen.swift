@@ -55,13 +55,12 @@ struct TodosScreen: View {
                     Text("All todo :").font(.largeTitle).bold()
                         .padding(.leading,20)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    Image(systemName: "circle.fill")
-                        .foregroundColor(.red)
-                        .frame(width: 24, height: 24)
                     
                     Text("\(todosCount)")
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold))
+                        .background(Circle().foregroundColor(.red))
+                        .offset(x: -30, y: -8)
                 }
                 Text("\(todosCount)").onReceive(todosVM.todos) { items in
                     todosCount = items.count

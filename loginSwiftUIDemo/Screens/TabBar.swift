@@ -22,9 +22,10 @@ struct TabBar: View {
             TabView(selection: $currentTab) {
                 
                 Text("Tab 1").tabItem {
-                HStack {
+                ZStack {
                     Text("Home")
                     Image(systemName: "house")
+                    
                 }
                     }.tag(TabBarId.home)
                 
