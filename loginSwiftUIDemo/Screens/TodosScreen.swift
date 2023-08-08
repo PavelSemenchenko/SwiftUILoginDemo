@@ -56,16 +56,19 @@ struct TodosScreen: View {
                         .padding(.leading,20)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     
-                    Text("\(todosCount)")
+                    Text("\(todosCount)").onReceive(todosVM.todos) { items in
+                        todosCount = items.count
+                        todos = items
+                    }
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold))
                         .background(Circle().foregroundColor(.red))
                         .offset(x: -30, y: -8)
-                }
+                }/*
                 Text("\(todosCount)").onReceive(todosVM.todos) { items in
                     todosCount = items.count
                     todos = items
-                }.padding(.trailing, 20)
+                }.padding(.trailing, 20)*/
             }
             
             if let todos = todos {
