@@ -14,7 +14,8 @@ struct ContactsScreen: View {
     @State private var keyboardHeight: CGFloat = 0
     @ObservedObject private var keyboardResposder = KeyboardResponder()
     @Environment(\.dismiss) var dismiss
-       
+    
+    
     var body: some View {
         VStack {
             Text("Contacts").padding(5)
@@ -24,12 +25,26 @@ struct ContactsScreen: View {
                     .multilineTextAlignment(.center)
                     .padding(10)
             } else if contactsVM.status == .loaded && !contactsVM.items.isEmpty {
-                TextField("Type term", text: $contactsVM.search)
-                    .padding(5)
-                    .cornerRadius(5)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(5)
-                    
+                ZStack(alignment: .trailing) {
+                    TextField("Type term", text: $contactsVM.search)
+                        .padding(5)
+                        .cornerRadius(5)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(5)
+                    Button (action: {
+                        contactsVM.search = ""
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                                                .foregroundColor(.gray)
+                    }.padding(.trailing, 15)
+                   /*
+                    if !$contactsVM.search.isEmpty {
+                        Button(action: {
+                            $contactsVM.search = ""
+                        })
+                    }
+                    */
+                }
                 List(contactsVM.items.filter({ c in
                     contactsVM.search.isEmpty || c.name.contains(contactsVM.search)
                 })) { item in

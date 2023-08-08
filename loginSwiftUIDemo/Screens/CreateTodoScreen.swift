@@ -31,7 +31,7 @@ struct CreateTodoScreen: View {
                 )
                 .background(Color.white)
                         .cornerRadius(8)
-                        .frame(minHeight: 50, maxHeight: 150)
+                        .frame(minHeight: 80, maxHeight: 150)
                         .fixedSize(horizontal: false, vertical: true)
             
             Button("Save") {
