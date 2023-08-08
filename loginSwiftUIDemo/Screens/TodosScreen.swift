@@ -78,6 +78,14 @@ struct TodosScreen: View {
                             }
                             .frame(maxHeight: 46)
                             .swipeActions {
+                                /*
+                                Button(action: {
+                                                // Handle edit action here
+                                }) {
+                                    Image(systemName: "pencil")
+                                }
+                                .tint(.blue)
+                                 */
                                 Button(action: {
                                     deleteTodo(currentTodo)
                                 }) {
@@ -95,7 +103,7 @@ struct TodosScreen: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.4 ))
     }
-    
+        
     func deleteTodo(_ todo: Todo) {
             guard let id = todo.id else {
                 return
