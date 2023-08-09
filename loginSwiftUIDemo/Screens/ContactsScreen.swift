@@ -23,7 +23,7 @@ struct ContactsScreen: View {
     var body: some View {
         VStack {
             Text("Contacts").padding(5)
-            
+            //9.20
             if contactsVM.status == .loaded && contactsVM.items.isEmpty {
                 Text("No people in the app. Invite your friends")
                     .multilineTextAlignment(.center)
@@ -118,6 +118,9 @@ class ContactsVM: ObservableObject {
         }.compactMap { $0 }
         status = .loaded
         items = contacts
+        
+        print(status)
+        print(items)
     /*
     func load() {
         status = .loaded

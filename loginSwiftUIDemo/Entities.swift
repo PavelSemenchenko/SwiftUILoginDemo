@@ -13,11 +13,12 @@ enum EntityStastus {
     case loading
     case loaded
     case failed
+    case empty
 }
 
 struct Contact: Codable, Identifiable,Hashable {
     @DocumentID var id: String?
-    @ServerTimestamp var created: Date?
+   // @ServerTimestamp var created: Date?
     let name: String
 }
 
