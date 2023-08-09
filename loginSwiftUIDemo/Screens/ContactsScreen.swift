@@ -23,7 +23,6 @@ struct ContactsScreen: View {
     var body: some View {
         VStack {
             Text("Contacts").padding(5)
-            //9.20
             if contactsVM.status == .loaded && contactsVM.items.isEmpty {
                 Text("No people in the app. Invite your friends")
                     .multilineTextAlignment(.center)
@@ -41,29 +40,27 @@ struct ContactsScreen: View {
                         .textFieldStyle(.roundedBorder)
                         .padding(5)
                     /*
-                    Button (action: {
-                        contactsVM.search = ""
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.gray)
-                    }
-                    .padding(.trailing, 15)
-                    //.opacity(contactsVM.search.isEmpty ? 0 : 1)
-                    */
-                     if !contactsVM.search.isEmpty {
-                         Button (action: {
-                             contactsVM.search = ""
-                         }) {
-                             Image(systemName: "xmark.circle.fill")
-                                 .foregroundColor(.gray)
-                         }
-                         .padding(.trailing, 15)
+                     Button (action: {
+                     contactsVM.search = ""
+                     }) {
+                     Image(systemName: "xmark.circle.fill")
+                     .foregroundColor(.gray)
                      }
-                     
+                     .padding(.trailing, 15)
+                     //.opacity(contactsVM.search.isEmpty ? 0 : 1)
+                     */
+                    if !contactsVM.search.isEmpty {
+                        Button (action: {
+                            contactsVM.search = ""
+                        }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.trailing, 15)
+                    }
+                    
                 }
-                List(contactsVM.items.filter({ c in
-                    contactsVM.search.isEmpty || c.name.contains(contactsVM.search)
-                })) { item in
+                List(contactsVM.items) { item in
                     Text(item.name)
                 }
             } else if contactsVM.status == .failed {
@@ -76,13 +73,13 @@ struct ContactsScreen: View {
             } else {
                 ProgressView()
             }
+        }.task {
+            await contactsVM.load()
         }
         .onTapGesture {
             keyboardResposder.hideKeyboard()
         }
-        .task {
-            await contactsVM.load()
-        }
+        
         .padding(.bottom, keyboardHeight)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onReceive(keyboardResposder.key1boardHeight, perform: { height in
@@ -101,6 +98,14 @@ class ContactsVM: ObservableObject {
     @Published private(set) var status: EntityStastus = .initial
     @Published private(set) var items: [Contact] = []
     @Published fileprivate(set) var search: String = ""
+    /*
+     init() {
+     $search.sink { tern in
+     Task {
+     await self.load()
+     }
+     }
+     }*/
     
     @MainActor func load() async {
         status = search.isEmpty ? .loading : status
@@ -121,24 +126,24 @@ class ContactsVM: ObservableObject {
         
         print(status)
         print(items)
-    /*
-    func load() {
-        status = .loaded
-        items = [Contact(id: "0", name: "Bob"),
-                 Contact(id: "1", name: "Sarah"),
-                 Contact(id: "2", name: "Tom"),
-                 Contact(id: "3", name: "Sam"),
-                 Contact(id: "4", name: "Robert"),
-                 Contact(id: "5", name: "Natan"),
-                 Contact(id: "6", name: "Poule"),
-                 Contact(id: "7", name: "Pouile"),
-                 Contact(id: "8", name: "Juseppe"),
-                 Contact(id: "9", name: "Cassidy"),
-                 Contact(id: "10", name: "Grand"),
-                 Contact(id: "11", name: "Sarah"),
-                 Contact(id: "12", name: "Sarah"),
-                 Contact(id: "13", name: "Tom")]
-     */
+        /*
+         func load() {
+         status = .loaded
+         items = [Contact(id: "0", name: "Bob"),
+         Contact(id: "1", name: "Sarah"),
+         Contact(id: "2", name: "Tom"),
+         Contact(id: "3", name: "Sam"),
+         Contact(id: "4", name: "Robert"),
+         Contact(id: "5", name: "Natan"),
+         Contact(id: "6", name: "Poule"),
+         Contact(id: "7", name: "Pouile"),
+         Contact(id: "8", name: "Juseppe"),
+         Contact(id: "9", name: "Cassidy"),
+         Contact(id: "10", name: "Grand"),
+         Contact(id: "11", name: "Sarah"),
+         Contact(id: "12", name: "Sarah"),
+         Contact(id: "13", name: "Tom")]
+         */
     }
 }
 
