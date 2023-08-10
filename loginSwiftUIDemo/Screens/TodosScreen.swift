@@ -23,6 +23,8 @@ struct TodosScreen: View {
                     Image(systemName: "square.and.pencil")
                 }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
                 Spacer()
+                Text("Todos").font(.headline).padding(5)
+                Spacer()
                 /*
                  Button("change") {
                  visible.toggle()

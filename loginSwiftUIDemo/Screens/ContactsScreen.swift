@@ -22,7 +22,7 @@ struct ContactsScreen: View {
     
     var body: some View {
         VStack {
-            Text("Contacts").padding(5)
+            Text("Contacts").font(.headline).padding(5)
             if contactsVM.status == .loaded && contactsVM.items.isEmpty {
                 Text("No people in the app. Invite your friends")
                     .multilineTextAlignment(.center)
@@ -144,6 +144,27 @@ class ContactsVM: ObservableObject {
          Contact(id: "12", name: "Sarah"),
          Contact(id: "13", name: "Tom")]
          */
+    }
+
+    @MainActor func load(more: Bool = false) async  {
+        print("\(#function) \(items.count)")
+        status = more ? status : .loading
+
+        var ref = Firestore.firestore().collection("people").order(by: "name")
+                .limit(to: 20)
+        if let doc = latestDocument {
+            ref.start(afterDocument: doc)
+        }
+        guard let snapshot = try? await ref.getDocuments() else {
+            status = .failed
+            return
+        }
+        latestDocument = snapshot.documents.last
+        let contacts = snapshot.documents.map { doc in
+            try! doc.data(as: Contact.self)
+        }.compactMap {$0}
+        status = .loaded
+        items.append(contentsOf: contacts)
     }
 }
 
