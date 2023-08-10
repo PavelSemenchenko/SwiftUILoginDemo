@@ -112,6 +112,9 @@ class ContactsVM: ObservableObject {
     @Published private(set) var status: EntityStastus = .initial
     @Published private(set) var items: [Contact] = []
     @Published fileprivate(set) var search: String = ""
+    
+    private var allLoaded = false
+    private var latestDocument: DocumentSnapshot?
     /*
      init() {
      $search.sink { tern in
@@ -158,6 +161,50 @@ class ContactsVM: ObservableObject {
          Contact(id: "12", name: "Sarah"),
          Contact(id: "13", name: "Tom")]
          */
+    }
+    
+    @MainActor func search() async {
+        status = .searching
+        var ref = Firestore.firestore().collection("people").order(by: "name")
+        if !search.isEmpty {
+            ref = ref.start(at: [search.lowercased()]).end(at: ["\(search.lowercased())~"])
+        }
+        guard let snapshot = try? await ref.getDocuments() else {
+            status = .failed
+            return
+        }
+        allLoaded = snapshot.documents.last == nil
+        latestDocument = snapshot.documents.last
+        
+        let contacts = snapshot.documents.map { doc in
+            try! doc.data(as: Contact.self)
+        }.compactMap { $0 }
+        status = .loaded
+        items.append(contentsOf: contacts)
+    }
+    
+    @MainActor func loadMore() async {
+        if allLoaded || status == .moreLoading {
+            return
+        }
+        guard let doc = latestDocument else {
+            return
+        }
+        print("Load \(items.count)")
+        status = .moreLoading
+        
+        let ref = Firestore.firestore().collection("people").order(by: "name").limit(to: 15).start(afterDocument: doc)
+        guard let snapshot = try? await ref.getDocuments() else {
+            return
+        }
+        allLoaded = snapshot.documents.last == nil
+        latestDocument = snapshot.documents.last
+        
+        let contacts = snapshot.documents.map { doc in
+            try! doc.data(as: Contact.self)
+        }.compactMap { $0 }
+        status = .loaded
+        items.append(contentsOf: contacts)
     }
     
     @MainActor func load(more: Bool = false) async  {
