@@ -11,9 +11,11 @@ import FirebaseFirestoreSwift
 enum EntityStastus {
     case initial
     case loading
+    case moreLoading
     case loaded
     case failed
     case empty
+    case searching
 }
 
 struct Contact: Codable, Identifiable,Hashable {

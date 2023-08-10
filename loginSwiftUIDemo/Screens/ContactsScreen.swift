@@ -23,16 +23,21 @@ struct ContactsScreen: View {
     var body: some View {
         VStack {
             Text("Contacts").font(.headline).padding(5)
-            if contactsVM.status == .loaded && contactsVM.items.isEmpty {
-                Text("No people in the app. Invite your friends")
+            if contactsVM.status == .searching && contactsVM.items.isEmpty {
+                Text("No user found with name \(contactsVM.search)")
                     .multilineTextAlignment(.center)
                     .padding(10)
-            } else if contactsVM.status == .loaded && !contactsVM.items.isEmpty {
+            }
+            if contactsVM.status == .loaded && contactsVM.items.isEmpty {
+                Text("No people in the app. Invite some one")
+                    .multilineTextAlignment(.center)
+                    .padding()
+            } else if (contactsVM.status == .loaded || contactsVM.status == .searching || contactsVM.status == .moreLoading) && !contactsVM.items.isEmpty {
                 ZStack(alignment: .trailing) {
                     TextField("Type term", text: $contactsVM.search)
                         .onChange(of: contactsVM.search, perform: { newValue in
                             Task {
-                                await contactsVM.load()
+                                await contactsVM.search()
                             }
                         })
                         .padding(5)
@@ -61,7 +66,16 @@ struct ContactsScreen: View {
                     
                 }
                 List(contactsVM.items) { item in
-                    Text(item.name)
+                    Text(item.name).padding()
+                        .onAppear {
+                            if contactsVM.items.count
+                                - (contactsVM.items.lastIndex(of: item) ?? 0) < 5 {
+                                Task {
+                                    await contactsVM.load(more: true)
+                                }
+                            }
+                        }
+                    
                 }
             } else if contactsVM.status == .failed {
                 Text("Something went wrong")
@@ -145,13 +159,13 @@ class ContactsVM: ObservableObject {
          Contact(id: "13", name: "Tom")]
          */
     }
-
+    
     @MainActor func load(more: Bool = false) async  {
         print("\(#function) \(items.count)")
         status = more ? status : .loading
-
+        
         var ref = Firestore.firestore().collection("people").order(by: "name")
-                .limit(to: 20)
+            .limit(to: 20)
         if let doc = latestDocument {
             ref.start(afterDocument: doc)
         }
