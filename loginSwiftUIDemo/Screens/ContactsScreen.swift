@@ -112,7 +112,7 @@ class ContactsVM: ObservableObject {
         var ref = Firestore.firestore().collection("people").order(by: "name")
         if !search.isEmpty {
             ref = ref.start(at: [search.lowercased()])
-                .end(at: ["\(search.lowercased())"])
+                .end(at: ["\(search.lowercased())~"])
         }
         guard let snapshot = try? await ref.getDocuments() else {
             status = .failed
