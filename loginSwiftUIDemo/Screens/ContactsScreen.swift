@@ -63,7 +63,7 @@ struct ContactsScreen: View {
                             if contactsVM.items.count
                                 - (contactsVM.items.lastIndex(of: item) ?? 0) < 5 {
                                 Task {
-                                    await contactsVM.load(more: true)
+                                    await contactsVM.loadMore()
                                 }
                             }
                         }
@@ -77,8 +77,12 @@ struct ContactsScreen: View {
                     }
                 }
             } else {
-                ForEach(1..<5) { i in
-                    Text("Loading template ... \(i)")
+                ForEach(1..<10) { i in
+                    HStack {
+                        Image(systemName: "person.circle").padding()
+                        Text("Loading template ... \(i)")
+                    }
+
                 }
             }
         }.task {
@@ -140,14 +144,11 @@ class ContactsVM: ObservableObject {
             status = .failed
             return
         }
-        //allLoaded = snapshot.documents.last == nil
-        //latestDocument = snapshot.documents.last
         
         let contacts = snapshot.documents.map { doc in
             try! doc.data(as: Contact.self)
         }.compactMap { $0 }
         status = .loaded
-        //items.append(contentsOf: contacts)
         items = contacts
     }
     
