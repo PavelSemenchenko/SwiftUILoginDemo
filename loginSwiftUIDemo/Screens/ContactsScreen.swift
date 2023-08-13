@@ -113,6 +113,7 @@ class ContactsVM: ObservableObject {
     
     private var allLoaded = false
     private var latestDocument: DocumentSnapshot?
+    
        /*
     @MainActor func load() async {
         print("\(#function) \(items.count)")
