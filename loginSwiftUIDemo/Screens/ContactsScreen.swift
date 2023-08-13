@@ -49,6 +49,7 @@ struct ContactsScreen: View {
                     if !contactsVM.search.isEmpty {
                         Button (action: {
                             contactsVM.search = ""
+                            contactsVM.clearItems()
                         }) {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.gray)
@@ -87,7 +88,7 @@ struct ContactsScreen: View {
                     }
             }
         }.task {
-            //await contactsVM.load()
+            await contactsVM.load()
         }
         .onTapGesture {
             keyboardResposder.hideKeyboard()
@@ -105,7 +106,11 @@ struct ContactsScreen: View {
     
 }
 
-
+extension ContactsVM {
+    func clearItems() {
+        items.removeAll()
+    }
+}
 
 class ContactsVM: ObservableObject {
     @Published private(set) var status: EntityStastus = .initial
