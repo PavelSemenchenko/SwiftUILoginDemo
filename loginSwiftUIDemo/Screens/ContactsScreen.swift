@@ -109,6 +109,7 @@ struct ContactsScreen: View {
 extension ContactsVM {
     func clearItems() {
         items.removeAll()
+        //await load()
     }
 }
 
