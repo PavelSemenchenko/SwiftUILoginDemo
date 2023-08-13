@@ -77,16 +77,17 @@ struct ContactsScreen: View {
                     }
                 }
             } else {
-                ForEach(1..<10) { i in
-                    HStack {
-                        Image(systemName: "person.circle").padding()
-                        Text("Loading template ... \(i)")
+                    ForEach(1..<10) { i in
+                        HStack(alignment: .center) {
+                            Spacer()
+                            Image(systemName: "person.circle").padding()
+                            Text("Loading template ... \(i)")
+                            Spacer()
+                        }.border(Color(CGColor(red: 6, green: 0, blue: 9, alpha: 0.6)))
                     }
-
-                }
             }
         }.task {
-            await contactsVM.load()
+            //await contactsVM.load()
         }
         .onTapGesture {
             keyboardResposder.hideKeyboard()
