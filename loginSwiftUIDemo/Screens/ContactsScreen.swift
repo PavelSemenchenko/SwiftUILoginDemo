@@ -56,7 +56,7 @@ struct ContactsScreen: View {
                         .padding(.trailing, 15)
                     }
                 }
-                List(contactsVM.items) { item in
+                List(contactsVM.search.isEmpty ? contactsVM.items : searchItems) { item in
                     Text(item.name).padding()
                         .onAppear {
                             if contactsVM.items.count
