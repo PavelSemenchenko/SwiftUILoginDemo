@@ -19,6 +19,7 @@ struct ContactsScreen: View {
     @ObservedObject private var keyboardResposder = KeyboardResponder()
     @Environment(\.dismiss) var dismiss
     
+    @State var searchItems: [Contact] = []
     
     var body: some View {
         VStack {
@@ -35,11 +36,9 @@ struct ContactsScreen: View {
             } else if (contactsVM.status == .loaded || contactsVM.status == .searching || contactsVM.status == .moreLoading) && !contactsVM.items.isEmpty {
                 ZStack(alignment: .trailing) {
                     TextField("Type term", text: $contactsVM.search)
-                        .onChange(of: contactsVM.search, perform: { newValue in
-                            Task {
-                                await contactsVM.search()
-                            }
-                        })
+                        .onReceive(contactsVM.searchItems) {
+                            searchItems = $0
+                        }
                         .padding(5)
                         .cornerRadius(5)
                         .textFieldStyle(.roundedBorder)
@@ -49,14 +48,13 @@ struct ContactsScreen: View {
                     if !contactsVM.search.isEmpty {
                         Button (action: {
                             contactsVM.search = ""
-                            contactsVM.clearItems()
+                           // contactsVM.clearItems()
                         }) {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.gray)
                         }
                         .padding(.trailing, 15)
                     }
-                    
                 }
                 List(contactsVM.items) { item in
                     Text(item.name).padding()
@@ -68,7 +66,6 @@ struct ContactsScreen: View {
                                 }
                             }
                         }
-                    
                 }
             } else if contactsVM.status == .failed {
                 Text("Something went wrong")
@@ -93,7 +90,6 @@ struct ContactsScreen: View {
         .onTapGesture {
             keyboardResposder.hideKeyboard()
         }
-        
         .padding(.bottom, keyboardHeight)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onReceive(keyboardResposder.key1boardHeight, perform: { height in
@@ -103,7 +99,6 @@ struct ContactsScreen: View {
         .ignoresSafeArea(.keyboard)
         .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.4 ))
     }
-    
 }
 
 extension ContactsVM {
@@ -141,7 +136,55 @@ class ContactsVM: ObservableObject {
         items = contacts
     }
 */
+    lazy var searchItems: AnyPublisher<[Contact], Never> = {
+        $search.eraseToAnyPublisher()
+            .throttle(for: .milliseconds(100), scheduler: DispatchQueue.main, latest: true)
+            .map { $0.lowercased() }
+            .removeDuplicates()
+            .filter { !$0.isEmpty }
+            .handleEvents(receiveOutput: { _ in
+                self.status = .searching
+                })
+                .flatMap { term in
+                    self.searchPublisher(term: term)
+                }
+                .handleEvents(receiveOutput: { _ in
+                    self.status = .loaded
+                })
+                    .eraseToAnyPublisher()
+    } ()
     
+    func searchPublisher(term: String) -> AnyPublisher<[Contact], Never> {
+        return Firestore.firestore().collection("people")
+            .order(by: "name")
+            .start(at: [term])
+            .end(at: ["\(term)~"])
+            .snapshotPublisher()
+            .map { $0.documents}
+            .map { $0.map { doc in try? doc.data(as: Contact.self)} }
+            .map { $0.compactMap {c in c }}
+            .replaceError(with: [])
+            .eraseToAnyPublisher()
+    }
+                          
+
+    @MainActor func search(term:String) async {
+        status = .searching
+        var ref = Firestore.firestore().collection("people").order(by: "name")
+        if !search.isEmpty {
+            ref = ref.start(at: [term])
+                    .end(at: ["\(term)~"])
+        }
+        guard let snapshot = try? await ref.getDocuments(source: .server) else {
+            status = .failed
+            return
+        }
+        let contacts = snapshot.documents.map { doc in
+            try! doc.data(as: Contact.self)
+        }.compactMap { $0 }
+        status = .loaded
+    }
+    /*
     @MainActor func search() async {
         status = .searching
         var ref = Firestore.firestore().collection("people").order(by: "name")
@@ -158,7 +201,7 @@ class ContactsVM: ObservableObject {
         }.compactMap { $0 }
         status = .loaded
         items = contacts
-    }
+    }*/
     
     @MainActor func load(more: Bool = false) async  {
         if more && (allLoaded || status == .moreLoading) {
@@ -210,7 +253,6 @@ class ContactsVM: ObservableObject {
         status = .loaded
         items.append(contentsOf: contacts)
     }
-
 }
 
 struct ContactsScreen_Previews: PreviewProvider {
