@@ -136,6 +136,7 @@ class ContactsVM: ObservableObject {
         items = contacts
     }
 */
+    
     lazy var searchItems: AnyPublisher<[Contact], Never> = {
         $search.eraseToAnyPublisher()
             .throttle(for: .milliseconds(100), scheduler: DispatchQueue.main, latest: true)
@@ -204,6 +205,12 @@ class ContactsVM: ObservableObject {
     }*/
     
     @MainActor func load(more: Bool = false) async  {
+        /*
+        for name in names {
+            try? await Firestore.firestore().collection("people").addDocument(data: ["name": name.lowercased()])
+        }
+        */
+        
         if more && (allLoaded || status == .moreLoading) {
             return
         }
@@ -253,6 +260,81 @@ class ContactsVM: ObservableObject {
         status = .loaded
         items.append(contentsOf: contacts)
     }
+    /*
+    let names = ["James",
+                 "Robert",
+                 "John",
+                 "Michael",
+                 "David",
+                 "William",
+                 "Richard",
+                 "Joseph",
+                 "Thomas",
+                 "Christopher",
+                 "Charles",
+                 "Daniel",
+                 "Matthew",
+                 "Anthony",
+                 "Mark",
+                 "Donald",
+                 "Steven",
+                 "Andrew",
+                 "Paul",
+                 "Joshua",
+                 "Kenneth",
+                 "Kevin",
+                 "Brian",
+                 "George",
+                 "Timothy",
+                 "Ronald",
+                 "Jason",
+                 "Edward",
+                 "Jeffrey",
+                 "Ryan",
+                 "Jacob",
+                 "Gary",
+                 "Nicholas",
+                 "Eric",
+                 "Jonathan",
+                 "Stephen",
+                 "Larry",
+                 "Justin",
+                 "Scott",
+                 "Brandon",
+                 "Benjamin",
+                 "Samuel",
+                 "Gregory",
+                 "Alexander",
+                 "Patrick",
+                 "Frank",
+                 "Raymond",
+                 "Jack",
+                 "Dennis",
+                 "Jerry",
+                 "Tyler",
+                 "Aaron",
+                 "Jose",
+                 "Adam",
+                 "Nathan",
+                 "Henry",
+                 "Zachary",
+                 "Douglas",
+                 "Peter",
+                 "Kyle",
+                 "Noah",
+                 "Ethan",
+                 "Jeremy",
+                 "Walter",
+                 "Christian",
+                 "Keith",
+                 "Roger",
+                 "Terry",
+                 "Austin",
+                 "Bradley",
+                 "Philip",
+                 "Eugene"]
+    */
+    
 }
 
 struct ContactsScreen_Previews: PreviewProvider {
