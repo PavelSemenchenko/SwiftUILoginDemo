@@ -24,6 +24,7 @@ struct ContactsScreen: View {
     var body: some View {
         VStack {
             Text("Contacts").font(.headline).padding(5)
+            
             if contactsVM.status == .searching && contactsVM.items.isEmpty {
                 Text("No user found with name \(contactsVM.search)")
                     .multilineTextAlignment(.center)
@@ -57,7 +58,7 @@ struct ContactsScreen: View {
                     }
                 }
                 List(contactsVM.search.isEmpty ? contactsVM.items : searchItems) { item in
-                    Text(item.name).padding()
+                    Text(item.name).padding(10)
                         .onAppear {
                             if contactsVM.items.count
                                 - (contactsVM.items.lastIndex(of: item) ?? 0) < 5 {
@@ -75,6 +76,28 @@ struct ContactsScreen: View {
                     }
                 }
             } else {
+                ZStack(alignment: .trailing) {
+                TextField("Type term", text: $contactsVM.search)
+                    .onReceive(contactsVM.searchItems) {
+                        searchItems = $0
+                    }
+                    .padding(5)
+                    .cornerRadius(5)
+                    .textFieldStyle(.roundedBorder)
+                    .padding(5)
+                
+                // добавить очистку массива и запуск load
+                if !contactsVM.search.isEmpty {
+                    Button (action: {
+                        contactsVM.search = ""
+                       // contactsVM.clearItems()
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.trailing, 15)
+                }
+            }
                     ForEach(1..<10) { i in
                         HStack(alignment: .center) {
                             Spacer()
@@ -83,6 +106,7 @@ struct ContactsScreen: View {
                             Spacer()
                         }.border(Color(CGColor(red: 6, green: 0, blue: 9, alpha: 0.6)))
                     }
+                Spacer()
             }
         }.task {
             await contactsVM.load()
