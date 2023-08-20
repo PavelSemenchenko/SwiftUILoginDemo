@@ -23,7 +23,7 @@ struct SplashView: View {
                 .resizable()
                 .frame(width: 200, height: 200)
             
-            Text("життя бентежне")
+            Text("Like a love song")
                 //.font(.largeTitle)
                 .font(.custom("NinaCTT", size: 24))
                 .foregroundColor(.black)

@@ -84,14 +84,26 @@ struct TodosScreen: View {
                     List {
                         ForEach(todos) { currentTodo in
                             HStack {
-                                Text(currentTodo.title ?? "--")
+                                Image(systemName: "list.bullet.rectangle.fill")
+                                    .padding()
                                 
+                                VStack(alignment: .leading) {
+                                    Text(currentTodo.id!)
+                                        .font(.footnote)
+                                        .font(.system(size: 8))
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        //.multilineTextAlignment(.leading)
+                                        .lineLimit(1)
+                                        .frame(height: 10)
+                                    Text(currentTodo.title ?? "--")
+                                        .lineLimit(1)
+                                }
                                 NavigationLink(value: NavigationRoute.editTodo(todo: currentTodo)) {
                                     Image(systemName: "pencil.line")
                                 }.buttonStyle(PlainButtonStyle())
                                     .fixedSize()
                             }
-                            .frame(maxHeight: 46)
+                            .frame(minHeight: 46, maxHeight: 46)
                             .swipeActions {
                                 
                                 Button(action: {
@@ -111,6 +123,8 @@ struct TodosScreen: View {
                             }
                         }
                     }
+                    //.listStyle(PlainListStyle())
+                    //.padding(10)
                 }
             } else {
                 ProgressView()
