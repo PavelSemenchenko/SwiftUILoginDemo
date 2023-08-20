@@ -260,7 +260,7 @@ class ContactsVM: ObservableObject {
         status = .loaded
         items.append(contentsOf: contacts)
     }
-    /*
+    
     let names = ["James",
                  "Robert",
                  "John",
@@ -333,8 +333,7 @@ class ContactsVM: ObservableObject {
                  "Bradley",
                  "Philip",
                  "Eugene"]
-    */
-    
+     
 }
 
 struct ContactsScreen_Previews: PreviewProvider {
