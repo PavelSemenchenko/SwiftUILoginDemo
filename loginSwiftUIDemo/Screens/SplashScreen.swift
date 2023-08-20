@@ -15,13 +15,17 @@ struct SplashView: View {
     
     private let gradients: [Gradient] = [
         Gradient(colors: [.red, .orange]),
-        Gradient(colors: [.red, .orange, .yellow])
-    ]
+        Gradient(colors: [.orange, .red])]
     
     var body: some View {
         VStack {
-            Text("loadind world")
-                .font(.largeTitle)
+            Image("l")
+                .resizable()
+                .frame(width: 200, height: 200)
+            
+            Text("життя бентежне")
+                //.font(.largeTitle)
+                .font(.custom("NinaCTT", size: 24))
                 .foregroundColor(.white)
                 .padding()
         }
@@ -39,7 +43,7 @@ struct SplashView: View {
                 startColorAnimation()
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
                 isActive = true
                 SignInVM.isAuthenticated ? navigationVM.pushTabBar(route: .tabBar) /*navigationVM.pushHome()*/ : navigationVM.popUntilSignInScreen()
             }
@@ -51,7 +55,7 @@ struct SplashView: View {
     }
     
     private func startColorAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 0.7, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.9, repeats: true) { timer in
             currentColorIndex = (currentColorIndex + 1) % gradients.count
         }
     }
