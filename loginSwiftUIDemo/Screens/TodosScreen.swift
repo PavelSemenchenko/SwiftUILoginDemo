@@ -85,7 +85,8 @@ struct TodosScreen: View {
                         ForEach(todos) { currentTodo in
                             HStack {
                                 Image(systemName: "list.bullet.rectangle.fill")
-                                    .padding()
+                                    .frame(width: 30, height: 30, alignment: .leading)
+                                    .padding(1)
                                 
                                 VStack(alignment: .leading) {
                                     Text(currentTodo.id!)
@@ -99,7 +100,7 @@ struct TodosScreen: View {
                                         .lineLimit(1)
                                 }
                                 NavigationLink(value: NavigationRoute.editTodo(todo: currentTodo)) {
-                                    Image(systemName: "pencil.line")
+                                    //Image(systemName: "pencil.line")
                                 }.buttonStyle(PlainButtonStyle())
                                     .fixedSize()
                             }
