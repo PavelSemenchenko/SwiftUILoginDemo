@@ -26,7 +26,7 @@ struct SplashView: View {
             Text("життя бентежне")
                 //.font(.largeTitle)
                 .font(.custom("NinaCTT", size: 24))
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
