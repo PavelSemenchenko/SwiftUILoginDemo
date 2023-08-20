@@ -54,7 +54,7 @@ struct TodosScreen: View {
             
             HStack(alignment: .top) {
                 ZStack {
-                    Text("All todo :").font(.largeTitle).bold()
+                    Text("All todo :").font(.title2).bold()
                         .padding(.leading,20)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     
@@ -64,8 +64,8 @@ struct TodosScreen: View {
                     }
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold))
-                        .background(Circle().foregroundColor(.red))
-                        .offset(x: -30, y: -8)
+                        .background(Circle().foregroundColor(.green))
+                        .offset(x: -80, y: -8)
                 }/*
                 Text("\(todosCount)").onReceive(todosVM.todos) { items in
                     todosCount = items.count
@@ -93,6 +93,7 @@ struct TodosScreen: View {
                                 
                                 Button(action: {
                                     // Handle edit action here
+                                    navigationVM.pushScreen(route: .editTodo(todo: currentTodo))
                                 }) {
                                     Image(systemName: "pencil")
                                 }
@@ -113,8 +114,12 @@ struct TodosScreen: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(red: 0.2, green: 0.0, blue: 0.2,  opacity: 0.4 ))
+        .background(Color(UIColor(red: 187/255, green: 38/255, blue: 73/255, alpha: 1.0)))
     }
+    /*
+    func editTodo(_ todo: Todo) {
+        guard let currentTodo =
+    }*/
     
     func deleteTodo(_ todo: Todo) {
         guard let id = todo.id else {
