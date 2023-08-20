@@ -77,6 +77,9 @@ struct TodosScreen: View {
                 if todos.isEmpty {
                     Text("There is no todos,create one ..")
                         .padding()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .multilineTextAlignment(.center)
+                    Spacer()
                 } else {
                     List {
                         ForEach(todos) { currentTodo in

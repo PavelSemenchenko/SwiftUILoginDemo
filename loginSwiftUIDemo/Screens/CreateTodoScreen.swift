@@ -24,7 +24,7 @@ struct CreateTodoScreen: View {
                 .fontWeight(.bold)
                 .padding(.bottom)
             TextEditor(text: $currentTitle)
-                .padding()
+                .padding(1)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.indigo, lineWidth: 2)
