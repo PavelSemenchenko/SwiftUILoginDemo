@@ -37,7 +37,7 @@
 		2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */; };
 		2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3848E62A38B9F5007FF32D /* SplashScreen.swift */; };
 		2ACDAE632A817791002F34AB /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACDAE622A817791002F34AB /* PasswordField.swift */; };
-		2AE239382A9283BF00094099 /* NinaCTT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AE239372A9283BF00094099 /* NinaCTT.ttf */; };
+		2AE2393A2A9284FE00094099 /* NinaCTT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AE239392A9284FE00094099 /* NinaCTT.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +60,8 @@
 		2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		2A3848E62A38B9F5007FF32D /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		2ACDAE622A817791002F34AB /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
-		2AE239372A9283BF00094099 /* NinaCTT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NinaCTT.ttf; sourceTree = "<group>"; };
+		2AE239392A9284FE00094099 /* NinaCTT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NinaCTT.ttf; sourceTree = "<group>"; };
+		2AE2393B2A9285BA00094099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +90,6 @@
 		0426DF2F2A2E717500BB5790 = {
 			isa = PBXGroup;
 			children = (
-				2AE239372A9283BF00094099 /* NinaCTT.ttf */,
 				0426DF3A2A2E717500BB5790 /* loginSwiftUIDemo */,
 				0426DF392A2E717500BB5790 /* Products */,
 			);
@@ -106,6 +106,7 @@
 		0426DF3A2A2E717500BB5790 /* loginSwiftUIDemo */ = {
 			isa = PBXGroup;
 			children = (
+				2AE2393B2A9285BA00094099 /* Info.plist */,
 				2AE5B0AB2A686E9100F8703C /* Screens */,
 				2AE5B0AA2A686E2500F8703C /* Services */,
 				0426DF3B2A2E717500BB5790 /* loginSwiftUIDemoApp.swift */,
@@ -117,6 +118,7 @@
 				0429BE3E2A37ACBF002EF45F /* MainButton.swift */,
 				0419BCCD2A325D050079BFFF /* GoogleService-Info.plist */,
 				0426DF3F2A2E717700BB5790 /* Assets.xcassets */,
+				2AE239392A9284FE00094099 /* NinaCTT.ttf */,
 				0426DF412A2E717700BB5790 /* Preview Content */,
 			);
 			path = loginSwiftUIDemo;
@@ -227,7 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AE239382A9283BF00094099 /* NinaCTT.ttf in Resources */,
+				2AE2393A2A9284FE00094099 /* NinaCTT.ttf in Resources */,
 				0426DF432A2E717700BB5790 /* Preview Assets.xcassets in Resources */,
 				0426DF402A2E717700BB5790 /* Assets.xcassets in Resources */,
 				0419BCCE2A325D050079BFFF /* GoogleService-Info.plist in Resources */,
@@ -387,6 +389,7 @@
 				DEVELOPMENT_TEAM = 7328NRHXBW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = loginSwiftUIDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -417,6 +420,7 @@
 				DEVELOPMENT_TEAM = 7328NRHXBW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = loginSwiftUIDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
