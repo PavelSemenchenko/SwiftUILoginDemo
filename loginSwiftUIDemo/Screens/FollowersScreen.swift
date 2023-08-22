@@ -41,16 +41,18 @@ class FollowersVM: ObservableObject {
         }
         
         let snapshot = try? await
-        Firestore.firestore().collection("followers").whereField("userId2", isEqualTo: userId).getDocuments()
+        Firestore.firestore().collection("followers")
+            .whereField("userId1", isEqualTo: userId).getDocuments()
         
         let followers = snapshot?.documents.map { $0.data()["userId2"] as? String}.compactMap { $0 }
         
         guard let followers = followers, !followers.isEmpty else {
             return
         }
+        print(followers)
         
         let snapshot2 = try? await
-        Firestore.firestore().collection("people").whereField("userId2", in: followers).getDocuments()
+        Firestore.firestore().collection("people").whereField("userId", in: followers).getDocuments()
         
         let contacts = snapshot2?.documents.map { doc in
             try! doc.data(as: Contact.self)
