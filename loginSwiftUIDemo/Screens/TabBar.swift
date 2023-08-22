@@ -11,6 +11,7 @@ enum TabBarId: Int, Hashable {
     case home = 0
     case todo = 1
     case contacts = 2
+    case followers = 3
 }
 
 struct TabBar: View {
@@ -42,6 +43,13 @@ struct TabBar: View {
                         Image(systemName: "person.3.sequence")
                     }
                 }.tag(TabBarId.contacts).environmentObject(ContactsVM())
+                
+                FollowersScreen().tabItem {
+                    VStack{
+                        Text("Followers")
+                        Image(systemName: "person.line.dotted.person.fill")
+                    }
+                }.tag(TabBarId.followers).environmentObject(FollowersVM())
             }
         }.navigationBarBackButtonHidden(true)
     }

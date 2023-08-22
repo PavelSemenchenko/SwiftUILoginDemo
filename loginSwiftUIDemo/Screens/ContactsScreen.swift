@@ -34,7 +34,10 @@ struct ContactsScreen: View {
                 Text("No people in the app. Invite some one")
                     .multilineTextAlignment(.center)
                     .padding()
-            } else if (contactsVM.status == .loaded || contactsVM.status == .searching || contactsVM.status == .moreLoading) && !contactsVM.items.isEmpty {
+            } else if (contactsVM.status == .loaded ||
+                       contactsVM.status == .searching ||
+                       contactsVM.status == .moreLoading) &&
+                        !contactsVM.items.isEmpty {
                 ZStack(alignment: .trailing) {
                     TextField("Type term", text: $contactsVM.search)
                         .onReceive(contactsVM.searchItems) {
@@ -229,6 +232,9 @@ class ContactsVM: ObservableObject {
     }*/
     
     @MainActor func load(more: Bool = false) async  {
+        
+        // load followers
+        await FollowersVM().load()
         /*
         for name in names {
             try? await Firestore.firestore().collection("people").addDocument(data: ["name": name.lowercased()])
