@@ -234,7 +234,8 @@ class ContactsVM: ObservableObject {
     @MainActor func load(more: Bool = false) async  {
         
         // load followers
-        await FollowersVM().load()
+        //await FollowersVM().load()
+        
         /*
         for name in names {
             try? await Firestore.firestore().collection("people").addDocument(data: ["name": name.lowercased()])

@@ -30,7 +30,8 @@ class SignInVM: ObservableObject {
     }
     
     class var isAuthenticated: Bool {
-        Auth.auth().currentUser != nil
+        print(Auth.auth().currentUser?.uid)
+        return Auth.auth().currentUser != nil
     }
     
     @MainActor func logOut() {
