@@ -18,9 +18,26 @@ enum EntityStastus {
     case searching
 }
 
-struct Contact: Codable, Identifiable,Hashable {
+enum FollowStatus {
+    case followed
+    case pending
+    case none
+}
+
+struct Contact: Codable, Identifiable, Hashable {
     @DocumentID var id: String?
    // @ServerTimestamp var created: Date?
     let name: String
+}
+
+struct SocialContact: Codable, Identifiable, Hashable {
+    @DocumentID var id: String?
+    let name: String
+    var status: FollowStatus = .none
+    
+    enum CodingKeys: CodingKey {
+        case id
+        case name
+    }
 }
 

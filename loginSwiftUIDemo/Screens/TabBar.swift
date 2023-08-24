@@ -32,6 +32,10 @@ struct TabBar: View {
                 
                 TodosScreen().tabItem {
                     Text("Todo")
+                    //Text(totalCount)
+                        //.onReceive(todosVM.todos) { todos in
+                        //todosCount = todos.count
+                    //}
                     Image(systemName: "list.clipboard")
                 }.tag(TabBarId.todo)
                     .environmentObject(TodoVM())

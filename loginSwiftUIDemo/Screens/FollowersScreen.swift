@@ -17,24 +17,37 @@ struct FollowersScreen: View {
     
     var body: some View {
         VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            Button("load followers", action: {
-                Task {
-                    await FollowersVM().load()
+            Text("Contacts").font(.headline).padding(5)
+            
+            List(followersVM.items ) { item in
+                HStack {
+                    Text(item.name).padding()
+                    Spacer()
+                    Button(item.status == .followed ? "Unfollow" : "Follow") {
+                        followersVM.pendContact(userId: item.id!)
+                        Task {
+                            if item.status == .followed {
+                                await followersVM.unFollow(userId: item.id!)
+                            } else {
+                                await followersVM.follow(userId: item.id!)
+                            }
+                        }
+                    }.disabled(item.status == .pending)
                 }
-            })
-            List( followersVM.followers ) { contacts in
-                Text(contacts.name)
             }
+            Spacer()
+        }.task {
+            await followersVM.load()
         }
     }
 }
 
 
 class FollowersVM: ObservableObject {
-    @Published private(set) var followers: [Contact] = []
+    @Published var items: [SocialContact] = []
+   // @Published private(set) var followers: [SocialContact] = []
     
-    func load() async {
+    @MainActor func load() async {
         
         guard let userId = Auth.auth().currentUser?.uid else {
             fatalError("You need to be authenticated")
@@ -60,7 +73,7 @@ class FollowersVM: ObservableObject {
         // доступ к people у которых id = id2 нашего списка
         
         let contacts = snapshot2?.documents.map { doc in
-            try! doc.data(as: Contact.self)
+            try! doc.data(as: SocialContact.self)
         }.compactMap { $0 }
         // разобрали список отфильтрованных пользователей по формату контактов
         
@@ -68,6 +81,60 @@ class FollowersVM: ObservableObject {
             return
         }
         print(contacts)
+    }
+    
+    func pendContact(userId: String) {
+        items = items.map {
+            if $0.id == userId {
+                var contact = $0
+                contact.status = .pending
+                return contact
+            }
+            return $0
+        }
+    }
+    
+    @MainActor func follow(userId: String) async {
+        guard let currentUserId = Auth.auth().currentUser?.uid else {
+            fatalError("not authenticated")
+        }
+        try? await Firestore.firestore().collection("followings")
+            .addDocument(data: ["userId1" : currentUserId, "userId2" : userId])
+        
+        items = items.map {
+            if $0.id == userId {
+                var contact = $0
+                contact.status = .followed
+                return contact
+            }
+            return $0
+        }
+    }
+    
+    @MainActor func unFollow(userId: String) async {
+        guard let currentUserId = Auth.auth().currentUser?.uid else {
+            fatalError("not authenticated")
+        }
+        let snapshot = try? await Firestore.firestore().collection("followings")
+            .whereField("userId1", isEqualTo: currentUserId)
+            .whereField("userId2", isEqualTo: userId).getDocuments()
+        let documents = snapshot?.documents.map { $0.documentID }
+        
+        guard let documents = documents, !documents.isEmpty else {
+            return
+        }
+        for doc in documents {
+            try? await Firestore.firestore().collection("followings").document(doc).delete()
+        }
+        
+        items = items.map {
+            if $0.id == userId {
+                var contact = $0
+                contact.status = .none
+                return contact
+            }
+            return $0
+        }
     }
     
 }
