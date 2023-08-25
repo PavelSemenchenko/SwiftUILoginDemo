@@ -66,11 +66,7 @@ struct TodosScreen: View {
                         .font(.system(size: 14, weight: .bold))
                         .background(Circle().foregroundColor(.green))
                         .offset(x: -80, y: -8)
-                }/*
-                Text("\(todosCount)").onReceive(todosVM.todos) { items in
-                    todosCount = items.count
-                    todos = items
-                }.padding(.trailing, 20)*/
+                }
             }
             
             if let todos = todos {
@@ -108,7 +104,6 @@ struct TodosScreen: View {
                             .swipeActions {
                                 
                                 Button(action: {
-                                    // Handle edit action here
                                     navigationVM.pushScreen(route: .editTodo(todo: currentTodo))
                                 }) {
                                     Image(systemName: "pencil")
@@ -134,10 +129,6 @@ struct TodosScreen: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(UIColor(red: 187/255, green: 38/255, blue: 73/255, alpha: 1.0)))
     }
-    /*
-    func editTodo(_ todo: Todo) {
-        guard let currentTodo =
-    }*/
     
     func deleteTodo(_ todo: Todo) {
         guard let id = todo.id else {

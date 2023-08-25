@@ -18,8 +18,11 @@ struct TabBar: View {
     
     @State var todosCount = 0
     @EnvironmentObject private var todosVM: TodoVM
+    @State var todos: [Todo]?
+    @EnvironmentObject private var loginVM: SignInVM
+    @EnvironmentObject private var navigationVM: NavigationRouter
     
-    @State var currentTab = TabBarId.todo
+    @State var currentTab = TabBarId.home
     
     var body: some View {
         VStack {
@@ -34,8 +37,10 @@ struct TabBar: View {
                     }.tag(TabBarId.home)
                 
                 
-                TodosScreen().tabItem {
-                    HStack {
+                TodosScreen()
+                    //.padding(.bottom)
+                    .tabItem {
+                    ZStack {
                        // Text("Todos ")
                         Text("Todos \(todosCount)")
                             .onReceive(todosVM.todos) { todos in
@@ -79,5 +84,6 @@ struct TabBar_Previews: PreviewProvider {
         TabBar()
             .environmentObject(TodoVM())
             .environmentObject(NavigationRouter())
+            .environmentObject(SignInVM())
     }
 }
