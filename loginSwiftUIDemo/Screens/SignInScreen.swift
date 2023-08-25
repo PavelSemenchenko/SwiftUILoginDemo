@@ -57,7 +57,7 @@ struct SignInScreen: View {
                     Task {
                         await loginVM.signIn()
                         // open TODOs
-                        navigationVM.pushHome()
+                        navigationVM.pushTabBar(route: .tabBar)
                     }
                 }
                 
