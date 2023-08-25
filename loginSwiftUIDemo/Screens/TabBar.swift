@@ -16,6 +16,9 @@ enum TabBarId: Int, Hashable {
 
 struct TabBar: View {
     
+    @State var todosCount = 0
+    @EnvironmentObject private var todosVM: TodoVM
+    
     @State var currentTab = TabBarId.todo
     
     var body: some View {
@@ -30,23 +33,35 @@ struct TabBar: View {
                 }
                     }.tag(TabBarId.home)
                 
+                
                 TodosScreen().tabItem {
-                    Text("Todo")
-                    //Text(totalCount)
-                        //.onReceive(todosVM.todos) { todos in
-                        //todosCount = todos.count
-                    //}
+                    HStack {
+                       // Text("Todos ")
+                        Text("Todos \(todosCount)")
+                            .onReceive(todosVM.todos) { todos in
+                            todosCount = todos.count
+                                print("------ Todos count \(todos.count)")
+                            }
+                    }
                     Image(systemName: "list.clipboard")
                 }.tag(TabBarId.todo)
                     .environmentObject(TodoVM())
                     .environmentObject(SignInVM())
-
+                    .toolbarBackground(
+                            Color.yellow,
+                            for: .tabBar)
+                
+                
                 ContactsScreen().tabItem {
                     VStack {
                         Text("Contacts")
                         Image(systemName: "person.3.sequence")
                     }
-                }.tag(TabBarId.contacts).environmentObject(ContactsVM())
+                }.tag(TabBarId.contacts)
+                    .environmentObject(ContactsVM())
+                    .toolbarBackground(
+                            Color.green,
+                            for: .tabBar)
                 
                 FollowersScreen().tabItem {
                     VStack{

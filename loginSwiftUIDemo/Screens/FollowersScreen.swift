@@ -35,10 +35,12 @@ struct FollowersScreen: View {
                     }.disabled(item.status == .pending)
                 }
             }
-            Spacer()
+           // Spacer()
         }.task {
             await followersVM.load()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(UIColor(red: 187/255, green: 38/255, blue: 73/255, alpha: 1.0)))
     }
 }
 
@@ -81,6 +83,7 @@ class FollowersVM: ObservableObject {
             return
         }
         print(contacts)
+        items = contacts
     }
     
     func pendContact(userId: String) {
