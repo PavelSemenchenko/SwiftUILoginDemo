@@ -46,12 +46,15 @@ struct TabBar: View {
                             .onReceive(todosVM.todos) { todos in
                             todosCount = todos.count
                                 print("------ Todos count \(todos.count)")
+                                print(todos)
+                                
                             }
                     }
                     Image(systemName: "list.clipboard")
                 }.tag(TabBarId.todo)
                     .environmentObject(TodoVM())
                     .environmentObject(SignInVM())
+                    .environmentObject(NavigationRouter())
                     .toolbarBackground(
                             Color.yellow,
                             for: .tabBar)
@@ -64,9 +67,6 @@ struct TabBar: View {
                     }
                 }.tag(TabBarId.contacts)
                     .environmentObject(ContactsVM())
-                    .toolbarBackground(
-                            Color.green,
-                            for: .tabBar)
                 
                 FollowersScreen().tabItem {
                     VStack{
@@ -74,6 +74,7 @@ struct TabBar: View {
                         Image(systemName: "person.line.dotted.person.fill")
                     }
                 }.tag(TabBarId.followers).environmentObject(FollowersVM())
+                
             }
         }.navigationBarBackButtonHidden(true)
     }

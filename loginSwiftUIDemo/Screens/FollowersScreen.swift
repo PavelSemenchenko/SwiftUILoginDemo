@@ -17,7 +17,7 @@ struct FollowersScreen: View {
     
     var body: some View {
         VStack {
-            Text("Contacts").font(.headline).padding(5)
+            Text("Followers").font(.headline).padding(5)
             
             List(followersVM.items ) { item in
                 HStack {

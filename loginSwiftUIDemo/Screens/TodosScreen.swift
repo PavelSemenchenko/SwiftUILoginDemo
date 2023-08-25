@@ -64,8 +64,11 @@ struct TodosScreen: View {
                     }
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: .bold))
-                        .background(Circle().foregroundColor(.green))
+                        .background(
+                            Circle().foregroundColor(.green)
+                            .frame(width: 20, height: 20))
                         .offset(x: -80, y: -8)
+                    
                 }
             }
             
@@ -123,7 +126,16 @@ struct TodosScreen: View {
                     //.padding(10)
                 }
             } else {
-                ProgressView()
+                VStack{
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                        Text("absent data")
+                        Spacer()
+                    }
+                    Spacer()
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
