@@ -28,7 +28,9 @@ struct TabBar: View {
         VStack {
             TabView(selection: $currentTab) {
                 
-                Text("Tab 1").tabItem {
+                Button("logout"){
+                    navigationVM.pushScreen(route: .signIn)
+                }.tabItem {
                 ZStack {
                     Text("Home")
                     Image(systemName: "house")
@@ -37,9 +39,7 @@ struct TabBar: View {
                     }.tag(TabBarId.home)
                 
                 
-                TodosScreen()
-                    //.padding(.bottom)
-                    .tabItem {
+                TodosScreen().tabItem {
                     ZStack {
                        // Text("Todos ")
                         Text("Todos \(todosCount)")

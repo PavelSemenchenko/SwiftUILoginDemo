@@ -45,7 +45,7 @@ struct TodosScreen: View {
                 
                 Button(action: {
                     loginVM.logOut()
-                    navigationVM.popUntilSignInScreen()
+                    navigationVM.pushScreen(route: .signIn)
                 }) {
                     Image(systemName: "eject.circle")
                 }
@@ -67,7 +67,7 @@ struct TodosScreen: View {
                         .background(
                             Circle().foregroundColor(.green)
                             .frame(width: 20, height: 20))
-                        .offset(x: -80, y: -8)
+                        .offset(x: -75, y: -8)
                     
                 }
             }
@@ -107,18 +107,18 @@ struct TodosScreen: View {
                             .swipeActions {
                                 
                                 Button(action: {
-                                    navigationVM.pushScreen(route: .editTodo(todo: currentTodo))
-                                }) {
-                                    Image(systemName: "pencil")
-                                }
-                                .tint(.blue)
-                                
-                                Button(action: {
                                     deleteTodo(currentTodo)
                                 }) {
                                     Image(systemName: "trash")
                                 }
                                 .tint(.red)
+                                
+                                Button(action: {
+                                    navigationVM.pushScreen(route: .editTodo(todo: currentTodo))
+                                }) {
+                                    Image(systemName: "pencil")
+                                }
+                                .tint(.blue)
                             }
                         }
                     }
