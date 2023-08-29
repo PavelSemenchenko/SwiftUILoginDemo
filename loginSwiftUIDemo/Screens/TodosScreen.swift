@@ -56,25 +56,15 @@ struct TodosScreen: View {
                     todosCount = items.count
                     todos = items
                 }
-            /*
+            
             HStack(alignment: .top) {
-                ZStack {
-                    Text("All todo :").font(.title2).bold()
-                        .padding(.leading,20)
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    
-                    Text("\(todosCount)").onReceive(todosVM.todos) { items in
-                        todosCount = items.count
-                        todos = items
-                    }
-                    .foregroundColor(.white)
-                    .font(.system(size: 14, weight: .bold))
-                    .background(
-                        Circle().foregroundColor(.green)
-                            .frame(width: 20, height: 20))
-                    .offset(x: -75, y: -8)
-                }
-            }*/
+                Text("All todo :")
+                    //.font(.title2)
+                    .bold()
+                    .padding(.leading,20)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                
+            }
             
             if let todos = todos {
                 if todos.isEmpty {
