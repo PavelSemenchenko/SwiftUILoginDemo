@@ -82,8 +82,21 @@ class FollowersVM: ObservableObject {
         guard let contacts = contacts, !contacts.isEmpty else {
             return
         }
-        print(contacts)
-        items = contacts
+        
+        // получаем значение подписан или нет
+        let snapshot3 = try? await
+        Firestore.firestore().collection("followings")
+            .whereField("userId1", isEqualTo: userId)
+            .whereField("userId2", in: followers).getDocuments()
+        
+        let following = snapshot3?.documents.map { $0.data()["userId2"]
+            as? String}.compactMap { $0 } ?? []
+        
+        items = contacts.map {
+            var contact = $0
+            contact.status = following.contains(contact.id!) ? .followed : .none
+            return contact
+        }
     }
     
     func pendContact(userId: String) {
