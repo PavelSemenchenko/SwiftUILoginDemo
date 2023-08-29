@@ -14,7 +14,7 @@ struct SplashView: View {
     @EnvironmentObject private var navigationVM: NavigationRouter
     
     private let gradients: [Gradient] = [
-        Gradient(colors: [.red, .orange]),
+        Gradient(colors: [.yellow, .orange]),
         Gradient(colors: [.orange, .red])]
     
     var body: some View {

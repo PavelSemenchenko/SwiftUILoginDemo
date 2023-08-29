@@ -40,7 +40,7 @@ struct FollowersScreen: View {
             await followersVM.load()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(UIColor(red: 187/255, green: 38/255, blue: 73/255, alpha: 1.0)))
+        .background(Color(UIColor(red: 0.97, green: 0.33, blue: 0.5, alpha: 1.0)))
     }
 }
 

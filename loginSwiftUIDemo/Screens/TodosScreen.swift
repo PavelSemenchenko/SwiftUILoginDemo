@@ -25,6 +25,7 @@ struct TodosScreen: View {
                 Spacer()
                 Text("Todos").font(.headline).padding(5)
                 Spacer()
+               
                 /*
                  Button("change") {
                  visible.toggle()
@@ -139,7 +140,7 @@ struct TodosScreen: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(UIColor(red: 187/255, green: 38/255, blue: 73/255, alpha: 1.0)))
+        .background(Color(UIColor(red: 0.9, green: 0.48, blue: 0.33, alpha: 1.0)))
     }
     
     func deleteTodo(_ todo: Todo) {

@@ -60,7 +60,7 @@ struct CreateTodoScreen: View {
             }
         
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(UIColor(red: 187/255, green: 38/255, blue: 73/255, alpha: 1.0)))
+            .background(Color(UIColor(red: 0.97, green: 0.8, blue: 0.33, alpha: 1.0)))
             .ignoresSafeArea(.keyboard)
     }
 }

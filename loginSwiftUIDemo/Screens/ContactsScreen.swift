@@ -124,7 +124,7 @@ struct ContactsScreen: View {
         })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.keyboard)
-        .background(Color(UIColor(red: 187/255, green: 38/255, blue: 73/255, alpha: 1.0)))
+        .background(Color(UIColor(red: 0.33, green: 0.82, blue: 0.97, alpha: 1.0)))
     }
 }
 

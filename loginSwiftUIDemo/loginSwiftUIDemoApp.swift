@@ -52,6 +52,8 @@ struct loginSwiftUIDemoApp: App {
                         case .tabBar: TabBar()
                                 .environmentObject(SignInVM())
                                 .environmentObject(TodoVM())
+                        case .followers: FollowersScreen()
+                                .environmentObject(FollowersVM())
                         }
                     }
             }.environmentObject(navigationVM)

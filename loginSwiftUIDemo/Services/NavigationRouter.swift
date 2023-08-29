@@ -17,6 +17,7 @@ enum NavigationRoute: Hashable {
     case splash
     case contacts
     case tabBar
+    case followers
     
 }
 
