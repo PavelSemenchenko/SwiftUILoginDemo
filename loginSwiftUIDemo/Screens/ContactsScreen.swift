@@ -61,7 +61,8 @@ struct ContactsScreen: View {
                     }
                 }
                 List(contactsVM.search.isEmpty ? contactsVM.items : searchItems) { item in
-                    Text(item.name).padding(10)
+                    Text(item.name)
+                        .padding(10)
                         .onAppear {
                             if contactsVM.items.count
                                 - (contactsVM.items.lastIndex(of: item) ?? 0) < 5 {

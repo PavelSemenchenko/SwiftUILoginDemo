@@ -25,13 +25,11 @@ struct TabBar: View {
     @State var currentTab = TabBarId.home
     
     var body: some View {
-        VStack {
+        //HStack {
             TabView(selection: $currentTab) {
                 
-                Button("logout"){
-                    navigationVM.pushScreen(route: .signIn)
-                }.tabItem {
-                    ZStack {
+                TemplateScreen().tabItem {
+                    VStack {
                         Text("Home")
                         Image(systemName: "house")
                         
@@ -46,15 +44,11 @@ struct TabBar: View {
                     }
                 }.badge(todosCount)
                     .tag(TabBarId.todo)
-                    //.environmentObject(TodoVM())
-                    .environmentObject(SignInVM())
+                    //.environmentObject(SignInVM())
                     .onReceive(todosVM.todos) { todos in
                         todosCount = todos.count
                     }
-                    //.environmentObject(NavigationRouter())
-                    .toolbarBackground(
-                        Color.yellow,
-                        for: .tabBar)
+                    //.toolbarBackground(Color.yellow, for: .tabBar)
                 
                 
                 ContactsScreen().tabItem {
@@ -63,17 +57,18 @@ struct TabBar: View {
                         Image(systemName: "person.3.sequence")
                     }
                 }.tag(TabBarId.contacts)
-                    .environmentObject(ContactsVM())
+                    //.environmentObject(ContactsVM())
                 
                 FollowersScreen().tabItem {
                     VStack{
                         Text("Followers")
                         Image(systemName: "person.line.dotted.person.fill")
                     }
-                }.tag(TabBarId.followers).environmentObject(FollowersVM())
+                }.tag(TabBarId.followers)
+                    //.environmentObject(FollowersVM())
                 
-            }
-        }.navigationBarBackButtonHidden(true)
+            }.navigationBarBackButtonHidden(true)
+       // }.navigationBarBackButtonHidden(true)
     }
 }
 

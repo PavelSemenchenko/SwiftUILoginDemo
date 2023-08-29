@@ -25,7 +25,7 @@ struct TodosScreen: View {
                 Spacer()
                 Text("Todos").font(.headline).padding(5)
                 Spacer()
-               
+                
                 /*
                  Button("change") {
                  visible.toggle()
@@ -52,7 +52,11 @@ struct TodosScreen: View {
                 }
                 .frame(alignment: .trailing)
             }.padding(5)
-            
+                .onReceive(todosVM.todos) { items in
+                    todosCount = items.count
+                    todos = items
+                }
+            /*
             HStack(alignment: .top) {
                 ZStack {
                     Text("All todo :").font(.title2).bold()
@@ -63,15 +67,14 @@ struct TodosScreen: View {
                         todosCount = items.count
                         todos = items
                     }
-                        .foregroundColor(.white)
-                        .font(.system(size: 14, weight: .bold))
-                        .background(
-                            Circle().foregroundColor(.green)
+                    .foregroundColor(.white)
+                    .font(.system(size: 14, weight: .bold))
+                    .background(
+                        Circle().foregroundColor(.green)
                             .frame(width: 20, height: 20))
-                        .offset(x: -75, y: -8)
-                    
+                    .offset(x: -75, y: -8)
                 }
-            }
+            }*/
             
             if let todos = todos {
                 if todos.isEmpty {
@@ -82,48 +85,49 @@ struct TodosScreen: View {
                     Spacer()
                 } else {
                     List(todos) { currentTodo in
-                            HStack {
-                                Image(systemName: "list.bullet.rectangle.fill")
-                                    .frame(width: 30, height: 30, alignment: .leading)
-                                    .padding(1)
-                                
-                                VStack(alignment: .leading) {
-                                    Text(currentTodo.id!)
-                                        .font(.footnote)
-                                        .font(.system(size: 8))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        //.multilineTextAlignment(.leading)
-                                        .lineLimit(1)
-                                        .frame(height: 10)
-                                    Text(currentTodo.title)
-                                        .lineLimit(1)
-                                }
-                                NavigationLink(value: NavigationRoute.editTodo(todo: currentTodo)) {
-                                    //Image(systemName: "pencil.line")
-                                }.buttonStyle(PlainButtonStyle())
-                                    .fixedSize()
+                        HStack {
+                            Image(systemName: "list.bullet.rectangle.fill")
+                                .frame(width: 30, height: 30, alignment: .leading)
+                                .padding(1)
+                            
+                            VStack(alignment: .leading) {
+                                Text(currentTodo.id!)
+                                    .font(.footnote)
+                                    .font(.system(size: 8))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                //.multilineTextAlignment(.leading)
+                                    .lineLimit(1)
+                                    .frame(height: 10)
+                                Text(currentTodo.title)
+                                    .lineLimit(1)
                             }
-                            .frame(minHeight: 46, maxHeight: 46)
-                            .swipeActions {
-                                
-                                Button(action: {
-                                    deleteTodo(currentTodo)
-                                }) {
-                                    Image(systemName: "trash")
-                                }
-                                .tint(.red)
-                                
-                                Button(action: {
-                                    navigationVM.pushScreen(route: .editTodo(todo: currentTodo))
-                                }) {
-                                    Image(systemName: "pencil")
-                                }
-                                .tint(.blue)
-                            }
+                            NavigationLink(value: NavigationRoute.editTodo(todo: currentTodo)) {
+                                //Image(systemName: "pencil.line")
+                            }.buttonStyle(PlainButtonStyle())
+                                .fixedSize()
                         }
-                    }
+                        .frame(minHeight: 46, maxHeight: 46)
+                        .swipeActions {
+                            
+                            Button(action: {
+                                deleteTodo(currentTodo)
+                            }) {
+                                Image(systemName: "trash")
+                            }
+                            .tint(.red)
+                            
+                            Button(action: {
+                                navigationVM.pushScreen(route: .editTodo(todo: currentTodo))
+                            }) {
+                                Image(systemName: "pencil")
+                            }
+                            .tint(.blue)
+                        }
+                    }//.padding(.bottom, 1)
                     //.listStyle(PlainListStyle())
-                    //.padding(10)
+                }
+                
+                
                 
             } else {
                 VStack{
