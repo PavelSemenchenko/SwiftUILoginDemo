@@ -81,8 +81,7 @@ struct TodosScreen: View {
                         .multilineTextAlignment(.center)
                     Spacer()
                 } else {
-                    List {
-                        ForEach(todos) { currentTodo in
+                    List(todos) { currentTodo in
                             HStack {
                                 Image(systemName: "list.bullet.rectangle.fill")
                                     .frame(width: 30, height: 30, alignment: .leading)
@@ -96,7 +95,7 @@ struct TodosScreen: View {
                                         //.multilineTextAlignment(.leading)
                                         .lineLimit(1)
                                         .frame(height: 10)
-                                    Text(currentTodo.title ?? "--")
+                                    Text(currentTodo.title)
                                         .lineLimit(1)
                                 }
                                 NavigationLink(value: NavigationRoute.editTodo(todo: currentTodo)) {
@@ -125,7 +124,7 @@ struct TodosScreen: View {
                     }
                     //.listStyle(PlainListStyle())
                     //.padding(10)
-                }
+                
             } else {
                 VStack{
                     Spacer()

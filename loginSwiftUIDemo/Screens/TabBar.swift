@@ -31,33 +31,30 @@ struct TabBar: View {
                 Button("logout"){
                     navigationVM.pushScreen(route: .signIn)
                 }.tabItem {
-                ZStack {
-                    Text("Home")
-                    Image(systemName: "house")
-                    
-                }
-                    }.tag(TabBarId.home)
+                    ZStack {
+                        Text("Home")
+                        Image(systemName: "house")
+                        
+                    }
+                }.tag(TabBarId.home)
                 
                 
                 TodosScreen().tabItem {
-                    ZStack {
-                       // Text("Todos ")
-                        Text("Todos \(todosCount)")
-                            .onReceive(todosVM.todos) { todos in
-                            todosCount = todos.count
-                                print("------ Todos count \(todos.count)")
-                                print(todos)
-                                
-                            }
+                    VStack {
+                        Text("Todos ")
+                        Image(systemName: "list.clipboard")
                     }
-                    Image(systemName: "list.clipboard")
-                }.tag(TabBarId.todo)
-                    .environmentObject(TodoVM())
+                }.badge(todosCount)
+                    .tag(TabBarId.todo)
+                    //.environmentObject(TodoVM())
                     .environmentObject(SignInVM())
-                    .environmentObject(NavigationRouter())
+                    .onReceive(todosVM.todos) { todos in
+                        todosCount = todos.count
+                    }
+                    //.environmentObject(NavigationRouter())
                     .toolbarBackground(
-                            Color.yellow,
-                            for: .tabBar)
+                        Color.yellow,
+                        for: .tabBar)
                 
                 
                 ContactsScreen().tabItem {

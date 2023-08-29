@@ -21,21 +21,25 @@ class TodoVM: ObservableObject {
     @Published var editingTitle: String = ""
     
     //    subscribe to recive updates
-    let todos: AnyPublisher<[Todo], Never> = Firestore.firestore().collection("todos")
-        .order(by: "created")
-        .snapshotPublisher(includeMetadataChanges: true)
-        .filter { snapshot in
-            !snapshot.metadata.isFromCache
+    var todos: AnyPublisher<[Todo], Never> {
+        get {
+            Firestore.firestore().collection("todos")
+                .order(by: "created")
+                .snapshotPublisher(includeMetadataChanges: true)
+                .filter { snapshot in
+                    !snapshot.metadata.isFromCache
+                }
+                .map {snapshot in
+                    print("is from cache \(snapshot.metadata.isFromCache)")
+                    // need return тк больше одной строки
+                    return snapshot.documents.map { doc in
+                        try? doc.data(as: Todo.self)
+                    }.compactMap { $0 }
+                }
+                .replaceError(with: [])
+                .eraseToAnyPublisher()
         }
-        .map {snapshot in
-            print("is from cache \(snapshot.metadata.isFromCache)")
-            // need return тк больше одной строки
-            return snapshot.documents.map { doc in
-                try? doc.data(as: Todo.self)
-            }.compactMap { $0 }
-        }
-        .replaceError(with: [])
-        .eraseToAnyPublisher()
+    }
     
     @MainActor func delete(id: String) async {
         try? await Firestore.firestore().collection("todos")
