@@ -31,6 +31,7 @@ struct FollowingScreen: View {
         }.task {
             await followingsVM.load()
         }
+        .background(Color(UIColor(red: 0.3, green: 0.8, blue: 0.5, alpha: 1.0)))
     }
 }
 
