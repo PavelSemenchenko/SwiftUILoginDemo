@@ -76,7 +76,7 @@ struct TodosScreen: View {
                 } else {
                     List(todos) { currentTodo in
                         HStack {
-                            Image(systemName: "list.bullet.rectangle.fill")
+                            Image(systemName: "person.circle")
                                 .frame(width: 30, height: 30, alignment: .leading)
                                 .padding(1)
                             

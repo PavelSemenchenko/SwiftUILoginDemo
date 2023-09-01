@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -65,6 +64,7 @@ class FollowersVM: ObservableObject {
         // получили список id2
         
         guard let followers = followers, !followers.isEmpty else {
+            items = []
             return
         }
         // проверили на пустоту
@@ -80,6 +80,7 @@ class FollowersVM: ObservableObject {
         // разобрали список отфильтрованных пользователей по формату контактов
         
         guard let contacts = contacts, !contacts.isEmpty else {
+            items = []
             return
         }
         

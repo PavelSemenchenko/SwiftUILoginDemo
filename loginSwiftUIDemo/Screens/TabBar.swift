@@ -12,6 +12,7 @@ enum TabBarId: Int, Hashable {
     case todo = 1
     case contacts = 2
     case followers = 3
+    case followings = 4
 }
 
 struct TabBar: View {
@@ -66,6 +67,13 @@ struct TabBar: View {
                     }
                 }.tag(TabBarId.followers)
                     //.environmentObject(FollowersVM())
+                
+                FollowingScreen().tabItem {
+                    VStack{
+                        Text("Followings")
+                        Image(systemName: "person.crop.circle.badge.checkmark")
+                    }
+                }.tag(TabBarId.followings)
                 
             }.navigationBarBackButtonHidden(true)
        // }.navigationBarBackButtonHidden(true)

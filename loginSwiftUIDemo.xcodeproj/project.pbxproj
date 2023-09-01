@@ -37,6 +37,7 @@
 		2A300DC32A9E79B000EC3EAF /* TemplateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A300DC22A9E79B000EC3EAF /* TemplateScreen.swift */; };
 		2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */; };
 		2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3848E62A38B9F5007FF32D /* SplashScreen.swift */; };
+		2A805B702AA11A0300CCBC50 /* FollowingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */; };
 		2ACDAE632A817791002F34AB /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACDAE622A817791002F34AB /* PasswordField.swift */; };
 		2ADE44F62A9538170007FC79 /* FollowersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE44F52A9538170007FC79 /* FollowersScreen.swift */; };
 		2AE2393A2A9284FE00094099 /* NinaCTT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AE239392A9284FE00094099 /* NinaCTT.ttf */; };
@@ -62,6 +63,7 @@
 		2A300DC22A9E79B000EC3EAF /* TemplateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateScreen.swift; sourceTree = "<group>"; };
 		2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		2A3848E62A38B9F5007FF32D /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingScreen.swift; sourceTree = "<group>"; };
 		2ACDAE622A817791002F34AB /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
 		2ADE44F52A9538170007FC79 /* FollowersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersScreen.swift; sourceTree = "<group>"; };
 		2AE239392A9284FE00094099 /* NinaCTT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NinaCTT.ttf; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				048A91042A41A64D0068BC16 /* TodosScreen.swift */,
 				04C9B5992A7A600C00F66DFE /* ContactsScreen.swift */,
 				2ADE44F52A9538170007FC79 /* FollowersScreen.swift */,
+				2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */,
 				04C9B59D2A7A967600F66DFE /* TabBar.swift */,
 				2A300DC22A9E79B000EC3EAF /* TemplateScreen.swift */,
 			);
@@ -258,6 +261,7 @@
 				04C9B59C2A7A60A600F66DFE /* Entities.swift in Sources */,
 				2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */,
 				04C9B59A2A7A600C00F66DFE /* ContactsScreen.swift in Sources */,
+				2A805B702AA11A0300CCBC50 /* FollowingScreen.swift in Sources */,
 				2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */,
 				0426DF3E2A2E717500BB5790 /* SignInScreen.swift in Sources */,
 				0426DF3C2A2E717500BB5790 /* loginSwiftUIDemoApp.swift in Sources */,
