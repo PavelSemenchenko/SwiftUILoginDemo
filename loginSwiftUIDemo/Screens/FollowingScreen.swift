@@ -26,12 +26,19 @@ struct FollowingScreen: View {
                             await followingsVM.unfollow(userId:item.id!)
                         }
                     }.disabled(item.status != .followed)
+                        .foregroundColor(.blue)
+                        .padding(10)
+                        .frame(width: 100, height: 30)
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.blue, lineWidth: 2))
+                        
                 }
             }
         }.task {
             await followingsVM.load()
         }
         .background(Color(UIColor(red: 0.3, green: 0.8, blue: 0.5, alpha: 1.0)))
+        
     }
 }
 
