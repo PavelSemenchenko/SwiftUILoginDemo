@@ -12,7 +12,17 @@ struct TemplateScreen: View {
     
     var body: some View {
         VStack{
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            Text("Hello, User!")
+            
+            Image("empty_user")
+                .resizable()
+                .frame(width: 100, height: 100)
+                .clipShape(Circle())
+                .overlay {
+                    Circle().stroke(.gray, lineWidth: 4)
+                }.shadow(radius: 7)
+                .padding(.bottom, 15)
+            
             Button("logout"){
                 navigationVM.pushScreen(route: .signIn)
             }
