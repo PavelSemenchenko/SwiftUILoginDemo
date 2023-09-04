@@ -12,21 +12,39 @@ struct TemplateScreen: View {
     
     var body: some View {
         VStack{
-            Text("Hello, User!")
-            
-            Image("empty_user")
-                .resizable()
-                .frame(width: 100, height: 100)
-                .clipShape(Circle())
-                .overlay {
-                    Circle().stroke(.gray, lineWidth: 4)
-                }.shadow(radius: 7)
-                .padding(.bottom, 15)
-            
-            Button("logout"){
-                navigationVM.pushScreen(route: .signIn)
+            HStack{
+                Image("lb")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 48, height: 48)
+                    .padding(1)
+                
+                Spacer()
+                
+                Button("logout"){
+                    navigationVM.pushScreen(route: .signIn)
+                }.padding()
             }
+            
+            Spacer()
+            
+            VStack{
+                Text("Hello, User!").padding()
+                
+                Image("empty_user")
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                    .overlay {
+                        Circle().stroke(.gray, lineWidth: 4)
+                    }.shadow(radius: 7)
+                    .padding(.bottom, 15)
+                
+                
+            }
+            Spacer()
         }
+        
     }
 }
 
