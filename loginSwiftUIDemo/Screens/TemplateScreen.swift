@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TemplateScreen: View {
     @EnvironmentObject private var navigationVM: NavigationRouter
+    @EnvironmentObject private var loginVM: SignInVM
     
     var body: some View {
         VStack{
@@ -20,10 +21,19 @@ struct TemplateScreen: View {
                     .padding(1)
                 
                 Spacer()
-                
+                /*
                 Button("logout"){
                     navigationVM.pushScreen(route: .signIn)
-                }.padding()
+                }.padding()*/
+                
+                Button(action: {
+                    loginVM.logOut()
+                    navigationVM.pushScreen(route: .signIn)
+                }) {
+                    Image(systemName: "eject.circle")
+                }
+                .frame(alignment: .trailing)
+                .padding()
             }
             
             Spacer()

@@ -19,12 +19,18 @@ struct TodosScreen: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .center, spacing: 20) {
-                NavigationLink(value: NavigationRoute.createTodo) {
-                    Image(systemName: "square.and.pencil")
-                }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
+                Image("lb")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 48, height: 48)
+                    .padding(1)
+                
                 Spacer()
                 Text("Todos").font(.headline).padding(5)
                 Spacer()
+                NavigationLink(value: NavigationRoute.createTodo) {
+                    Image(systemName: "square.and.pencil")
+                }.padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0))
                 
                 /*
                  Button("change") {
@@ -44,19 +50,20 @@ struct TodosScreen: View {
                  Text(checkWellcome)
                  }*/
                 
+                /*
                 Button(action: {
                     loginVM.logOut()
                     navigationVM.pushScreen(route: .signIn)
                 }) {
                     Image(systemName: "eject.circle")
                 }
-                .frame(alignment: .trailing)
+                .frame(alignment: .trailing)*/
             }.padding(5)
                 .onReceive(todosVM.todos) { items in
                     todosCount = items.count
                     todos = items
                 }
-            
+            /*
             HStack(alignment: .top) {
                 Text("All todo :")
                     //.font(.title2)
@@ -65,6 +72,7 @@ struct TodosScreen: View {
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 
             }
+             */
             
             if let todos = todos {
                 if todos.isEmpty {
