@@ -9,54 +9,35 @@ import Foundation
 import SwiftUI
 
 struct SplashView: View {
-    @State private var isActive = false
-    @State private var currentColorIndex = 0
+    @State private var logoOpacity: Double = 0.0
     @EnvironmentObject private var navigationVM: NavigationRouter
-    
-    private let gradients: [Gradient] = [
-        Gradient(colors: [.yellow, .orange]),
-        Gradient(colors: [.orange, .red])]
     
     var body: some View {
         VStack {
-            Image("l")
+            Image("lw")
                 .resizable()
+                .scaledToFit()
                 .frame(width: 200, height: 200)
-            
-            Text("Meditate")
-                //.font(.largeTitle)
-                .font(.custom("NinaCTT", size: 24))
-                .foregroundColor(.black)
-                .padding()
+                .opacity(logoOpacity)
+                        
+            Text("Lirium")
+                //.font(.custom("NinaCTT", size: 24))
+                .font(.title)
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .opacity(logoOpacity)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(
-            LinearGradient(
-                gradient: gradients[currentColorIndex],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
-        //.animation(.easeInOut(duration: 1.0))
+        .background(Color.red)
+        .edgesIgnoringSafeArea(.all)
         .onAppear {
-            withAnimation {
-                startColorAnimation()
+            withAnimation(.easeInOut(duration: 1.5)) {
+                            logoOpacity = 1.0
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
-                isActive = true
-                SignInVM.isAuthenticated ? navigationVM.pushTabBar(route: .tabBar) /*navigationVM.pushHome()*/ : navigationVM.popUntilSignInScreen()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                SignInVM.isAuthenticated ? navigationVM.pushTabBar(route: .tabBar)  : navigationVM.popUntilSignInScreen()
             }
-        }/*
-        .fullScreenCover(isPresented: $isActive, content: {
-            SignInScreen()
-            
-        })*/
-    }
-    
-    private func startColorAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 0.9, repeats: true) { timer in
-            currentColorIndex = (currentColorIndex + 1) % gradients.count
         }
     }
 }
