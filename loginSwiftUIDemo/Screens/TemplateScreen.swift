@@ -10,11 +10,12 @@ import SwiftUI
 struct TemplateScreen: View {
     @EnvironmentObject private var navigationVM: NavigationRouter
     @EnvironmentObject private var loginVM: SignInVM
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack{
             HStack{
-                Image("lb")
+                Image(colorScheme == .light ? "lb" : "lw")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 48, height: 48)
