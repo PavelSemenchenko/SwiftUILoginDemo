@@ -19,7 +19,7 @@ struct FollowingScreen: View {
             List(followingsVM.items) { item in
                 HStack {
                     Text(item.name).padding()
-                    Spacer()
+                    Spacer()/*
                     Button(item.status == .followed ? "Unfollow" : "Wait ..") {
                         followingsVM.pendContact(userId: item.id!)
                         Task {
@@ -30,8 +30,10 @@ struct FollowingScreen: View {
                         .padding(10)
                         .frame(width: 100, height: 30)
                         .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.blue, lineWidth: 2))
-                        
+                            .stroke(Color.blue, lineWidth: 2))*/
+                    FollowButton(userId: item.id!, status: .followed, loading: false) {
+                        followingsVM.unfollow(userId: item.id!)
+                    }
                 }
             }
         }.task {
@@ -43,14 +45,14 @@ struct FollowingScreen: View {
 }
 
 class FollowingsVM : ObservableObject {
-    @Published var items: [SocialContact] = []
+    @Published var items: [Contact] = []
     
     @MainActor func load() async {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
             fatalError("need authentication")
         }
         
-        let snapshot = try? await Firestore.firestore().collection("followings")
+        let snapshot = try? await Firestore.firestore().collection("following")
             .whereField("userId1", isEqualTo: currentUserId).getDocuments()
         
         let followings = snapshot?.documents.map {
@@ -66,47 +68,14 @@ class FollowingsVM : ObservableObject {
             .whereField("userId", in: followings).getDocuments()
         
         let contacts = snapshot2?.documents.map {
-            try? $0.data(as: SocialContact.self)
+            try? $0.data(as: Contact.self)
         }.compactMap { $0 } ?? []
         
-        items = contacts.map {
-            var contact = $0
-            contact.status = .followed
-            return contact
-        }
-        print("founded this \(items)")
+        items = contacts
     }
     
-    func pendContact(userId: String) {
-        items = items.map {
-            if $0.id == userId {
-                var contact = $0
-                contact.status = .pending
-                return contact
-            }
-            return $0
-        }
-    }
     
-    @MainActor func unfollow(userId: String) async {
-        guard let currentUserId = Auth.auth().currentUser?.uid else {
-            fatalError("need authentication")
-        }
-        let snapshot = try? await Firestore.firestore().collection("followings")
-            .whereField("userId1", isEqualTo: currentUserId)
-            .whereField("userId2", isEqualTo: userId).getDocuments()
-        
-        //находим идентификатор документа который нужно удалить
-        let documencts = snapshot?.documents.map { $0.documentID }
-        
-        guard let documencts = documencts, !documencts.isEmpty else {
-            return
-        }
-        
-        for doc in documencts {
-            try? await Firestore.firestore().collection("followings").document(doc).delete()
-        }
-        
+    func unfollow(userId: String) {
         items = items.filter { $0.id != userId }
         
     }

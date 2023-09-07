@@ -23,14 +23,15 @@ enum FollowStatus {
     case pending
     case none
 }
-
+/*
 struct Contact: Codable, Identifiable, Hashable {
     @DocumentID var id: String?
    // @ServerTimestamp var created: Date?
     let name: String
 }
+ */
 
-struct SocialContact: Codable, Identifiable, Hashable {
+struct Contact: Codable, Identifiable, Hashable {
     @DocumentID var id: String?
     let name: String
     var status: FollowStatus = .none

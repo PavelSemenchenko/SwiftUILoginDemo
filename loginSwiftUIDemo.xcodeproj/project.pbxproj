@@ -37,6 +37,7 @@
 		2A300DC32A9E79B000EC3EAF /* TemplateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A300DC22A9E79B000EC3EAF /* TemplateScreen.swift */; };
 		2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */; };
 		2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3848E62A38B9F5007FF32D /* SplashScreen.swift */; };
+		2A7F406E2AA7B773005C7309 /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7F406D2AA7B773005C7309 /* FollowButton.swift */; };
 		2A805B702AA11A0300CCBC50 /* FollowingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */; };
 		2ACDAE632A817791002F34AB /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACDAE622A817791002F34AB /* PasswordField.swift */; };
 		2ADE44F62A9538170007FC79 /* FollowersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE44F52A9538170007FC79 /* FollowersScreen.swift */; };
@@ -63,6 +64,7 @@
 		2A300DC22A9E79B000EC3EAF /* TemplateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateScreen.swift; sourceTree = "<group>"; };
 		2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		2A3848E62A38B9F5007FF32D /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		2A7F406D2AA7B773005C7309 /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingScreen.swift; sourceTree = "<group>"; };
 		2ACDAE622A817791002F34AB /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
 		2ADE44F52A9538170007FC79 /* FollowersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersScreen.swift; sourceTree = "<group>"; };
@@ -113,15 +115,14 @@
 			isa = PBXGroup;
 			children = (
 				2AE2393B2A9285BA00094099 /* Info.plist */,
+				2A7F406C2AA7B741005C7309 /* CustomElements */,
 				2AE5B0AB2A686E9100F8703C /* Screens */,
 				2AE5B0AA2A686E2500F8703C /* Services */,
 				0426DF3B2A2E717500BB5790 /* loginSwiftUIDemoApp.swift */,
 				04C9B59B2A7A60A600F66DFE /* Entities.swift */,
 				0419BCCB2A325BD40079BFFF /* SignInVM.swift */,
 				048A91022A41A3D70068BC16 /* TodoVM.swift */,
-				0429BE3C2A37AB12002EF45F /* EditField.swift */,
 				2ACDAE622A817791002F34AB /* PasswordField.swift */,
-				0429BE3E2A37ACBF002EF45F /* MainButton.swift */,
 				0419BCCD2A325D050079BFFF /* GoogleService-Info.plist */,
 				0426DF3F2A2E717700BB5790 /* Assets.xcassets */,
 				2AE239392A9284FE00094099 /* NinaCTT.ttf */,
@@ -136,6 +137,16 @@
 				0426DF422A2E717700BB5790 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2A7F406C2AA7B741005C7309 /* CustomElements */ = {
+			isa = PBXGroup;
+			children = (
+				0429BE3C2A37AB12002EF45F /* EditField.swift */,
+				0429BE3E2A37ACBF002EF45F /* MainButton.swift */,
+				2A7F406D2AA7B773005C7309 /* FollowButton.swift */,
+			);
+			path = CustomElements;
 			sourceTree = "<group>";
 		};
 		2AE5B0AA2A686E2500F8703C /* Services */ = {
@@ -264,6 +275,7 @@
 				2A805B702AA11A0300CCBC50 /* FollowingScreen.swift in Sources */,
 				2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */,
 				0426DF3E2A2E717500BB5790 /* SignInScreen.swift in Sources */,
+				2A7F406E2AA7B773005C7309 /* FollowButton.swift in Sources */,
 				0426DF3C2A2E717500BB5790 /* loginSwiftUIDemoApp.swift in Sources */,
 				0419BCCC2A325BD40079BFFF /* SignInVM.swift in Sources */,
 				0429BE3F2A37ACBF002EF45F /* MainButton.swift in Sources */,

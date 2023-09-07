@@ -22,6 +22,8 @@ struct FollowersScreen: View {
                 HStack {
                     Text(item.name).padding()
                     Spacer()
+                    FollowButton(userId: item.id!)
+                    /*
                     Button(item.status == .followed ? "Unfollow" : "Follow") {
                         followersVM.pendContact(userId: item.id!)
                         Task {
@@ -31,7 +33,8 @@ struct FollowersScreen: View {
                                 await followersVM.follow(userId: item.id!)
                             }
                         }
-                    }.disabled(item.status == .pending)
+                    }
+                    .disabled(item.status == .pending)
                         .padding(10)
                         .frame(width: 100, height: 30)
                         .background(
@@ -45,8 +48,7 @@ struct FollowersScreen: View {
                             RoundedRectangle(cornerRadius: item.status == .followed ? 10 : 10) // Скругленные края (если нужно)
                                 .stroke(item.status == .followed ? Color.blue : Color.blue, lineWidth: 2) // Граница (если нужно)
                         )
-                    
-                        
+                    */
                         
                 }
             }
@@ -61,7 +63,7 @@ struct FollowersScreen: View {
 
 
 class FollowersVM: ObservableObject {
-    @Published var items: [SocialContact] = []
+    @Published var items: [Contact] = []
    // @Published private(set) var followers: [SocialContact] = []
     
     @MainActor func load() async {
@@ -83,15 +85,14 @@ class FollowersVM: ObservableObject {
             items = []
             return
         }
-        // проверили на пустоту
-        print(followers)
         
         let snapshot2 = try? await
-        Firestore.firestore().collection("people").whereField("userId", in: followers).getDocuments()
+        Firestore.firestore().collection("people")
+            .whereField("userId", in: followers).getDocuments()
         // доступ к people у которых id = id2 нашего списка
         
         let contacts = snapshot2?.documents.map { doc in
-            try! doc.data(as: SocialContact.self)
+            try! doc.data(as: Contact.self)
         }.compactMap { $0 }
         // разобрали список отфильтрованных пользователей по формату контактов
         
@@ -99,7 +100,8 @@ class FollowersVM: ObservableObject {
             items = []
             return
         }
-        
+        items = contacts
+        /*
         // получаем значение подписан или нет
         let snapshot3 = try? await
         Firestore.firestore().collection("followings")
@@ -113,9 +115,9 @@ class FollowersVM: ObservableObject {
             var contact = $0
             contact.status = following.contains(contact.id!) ? .followed : .none
             return contact
-        }
+        }*/
     }
-    
+    /*
     func pendContact(userId: String) {
         items = items.map {
             if $0.id == userId {
@@ -125,8 +127,8 @@ class FollowersVM: ObservableObject {
             }
             return $0
         }
-    }
-    
+    }*/
+    /*
     @MainActor func follow(userId: String) async {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
             fatalError("not authenticated")
@@ -168,7 +170,7 @@ class FollowersVM: ObservableObject {
             }
             return $0
         }
-    }
+    }*/
     
 }
 

@@ -61,16 +61,24 @@ struct ContactsScreen: View {
                     }
                 }
                 List(contactsVM.search.isEmpty ? contactsVM.items : searchItems) { item in
-                    Text(item.name)
-                        .padding(10)
-                        .onAppear {
-                            if contactsVM.items.count
-                                - (contactsVM.items.lastIndex(of: item) ?? 0) < 5 {
-                                Task {
-                                    await contactsVM.loadMore()
+                    HStack {
+                        Text(item.name)
+                            .padding(10)
+                            .onAppear {
+                                if contactsVM.items.count
+                                    - (contactsVM.items.lastIndex(of: item) ?? 0) < 5 {
+                                    Task {
+                                        await contactsVM.loadMore()
+                                    }
                                 }
                             }
-                        }
+                        Spacer()
+                        FollowButton(userId: item.id!)
+                        /*
+                        Button(item.status == .pending ? "Wait" : item.status == .followed ? "unfollow" : "follow") {
+                            
+                        }.disabled(item.status == .pending)*/
+                    }
                 }
             } else if contactsVM.status == .failed {
                 Text("Something went wrong")
@@ -234,9 +242,6 @@ class ContactsVM: ObservableObject {
     
     @MainActor func load(more: Bool = false) async  {
         
-        // load followers
-        //await FollowersVM().load()
-        
         /*
         for name in names {
             try? await Firestore.firestore().collection("people").addDocument(data: ["name": name.lowercased()])
@@ -293,79 +298,6 @@ class ContactsVM: ObservableObject {
         items.append(contentsOf: contacts)
     }
     
-    let names = ["James",
-                 "Robert",
-                 "John",
-                 "Michael",
-                 "David",
-                 "William",
-                 "Richard",
-                 "Joseph",
-                 "Thomas",
-                 "Christopher",
-                 "Charles",
-                 "Daniel",
-                 "Matthew",
-                 "Anthony",
-                 "Mark",
-                 "Donald",
-                 "Steven",
-                 "Andrew",
-                 "Paul",
-                 "Joshua",
-                 "Kenneth",
-                 "Kevin",
-                 "Brian",
-                 "George",
-                 "Timothy",
-                 "Ronald",
-                 "Jason",
-                 "Edward",
-                 "Jeffrey",
-                 "Ryan",
-                 "Jacob",
-                 "Gary",
-                 "Nicholas",
-                 "Eric",
-                 "Jonathan",
-                 "Stephen",
-                 "Larry",
-                 "Justin",
-                 "Scott",
-                 "Brandon",
-                 "Benjamin",
-                 "Samuel",
-                 "Gregory",
-                 "Alexander",
-                 "Patrick",
-                 "Frank",
-                 "Raymond",
-                 "Jack",
-                 "Dennis",
-                 "Jerry",
-                 "Tyler",
-                 "Aaron",
-                 "Jose",
-                 "Adam",
-                 "Nathan",
-                 "Henry",
-                 "Zachary",
-                 "Douglas",
-                 "Peter",
-                 "Kyle",
-                 "Noah",
-                 "Ethan",
-                 "Jeremy",
-                 "Walter",
-                 "Christian",
-                 "Keith",
-                 "Roger",
-                 "Terry",
-                 "Austin",
-                 "Bradley",
-                 "Philip",
-                 "Eugene"]
-     
 }
 
 struct ContactsScreen_Previews: PreviewProvider {
