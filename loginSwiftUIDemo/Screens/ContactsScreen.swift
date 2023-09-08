@@ -74,10 +74,6 @@ struct ContactsScreen: View {
                             }
                         Spacer()
                         FollowButton(userId: item.id!)
-                        /*
-                        Button(item.status == .pending ? "Wait" : item.status == .followed ? "unfollow" : "follow") {
-                            
-                        }.disabled(item.status == .pending)*/
                     }
                 }
             } else if contactsVM.status == .failed {
@@ -146,7 +142,7 @@ extension ContactsVM {
 
 class ContactsVM: ObservableObject {
     @Published private(set) var status: EntityStastus = .initial
-    @Published private(set) var items: [Contact] = []
+    @Published var items: [Contact] = []
     @Published fileprivate(set) var search: String = ""
     
     private var allLoaded = false
@@ -247,6 +243,7 @@ class ContactsVM: ObservableObject {
             try? await Firestore.firestore().collection("people").addDocument(data: ["name": name.lowercased()])
         }
         */
+        await FollowersVM().load()
         
         if more && (allLoaded || status == .moreLoading) {
             return
@@ -272,6 +269,7 @@ class ContactsVM: ObservableObject {
                 }.compactMap {$0}
         status = .loaded
         items.append(contentsOf: contacts)
+        
     }
     
     @MainActor func loadMore() async {
@@ -296,6 +294,7 @@ class ContactsVM: ObservableObject {
         }.compactMap { $0 }
         status = .loaded
         items.append(contentsOf: contacts)
+        //items  = contacts
     }
     
 }

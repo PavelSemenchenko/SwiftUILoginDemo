@@ -23,7 +23,7 @@ struct TabBar: View {
     @EnvironmentObject private var loginVM: SignInVM
     @EnvironmentObject private var navigationVM: NavigationRouter
     
-    @State var currentTab = TabBarId.home
+    @State var currentTab = TabBarId.contacts
     
     var body: some View {
         //HStack {
@@ -58,7 +58,7 @@ struct TabBar: View {
                         Image(systemName: "person.3.sequence")
                     }
                 }.tag(TabBarId.contacts)
-                    //.environmentObject(ContactsVM())
+                    .environmentObject(ContactsVM())
                 
                 FollowersScreen().tabItem {
                     VStack{
@@ -66,7 +66,7 @@ struct TabBar: View {
                         Image(systemName: "person.line.dotted.person.fill")
                     }
                 }.tag(TabBarId.followers)
-                    //.environmentObject(FollowersVM())
+                    .environmentObject(FollowersVM())
                 
                 FollowingScreen().tabItem {
                     VStack{

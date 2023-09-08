@@ -19,7 +19,7 @@ struct FollowButton: View {
     var action: (() -> Void)? = nil
     
     var body: some View {
-        ZStack{
+        ZStack {
             if loading {
                 ProgressView()
             } else {
@@ -47,21 +47,21 @@ struct FollowButton: View {
                                     .document(doc).delete()
                             }
                             status = .none
+                            
                         } else if currentStatus == .none {
+                            
                             try? await Firestore.firestore().collection("following")
                                 .addDocument(data: ["userId1" : currentUserId, "userId2" : userId])
                             
                             status = .followed
                             
-                            try? await Firestore.firestore().collection("people")
-                                .document(userId).updateData(["userId" : userId])
-                             
                         }
                         action?()
                     }
                 }.disabled(status == .pending)
             }
         }.task {
+            // по загрузке кноки - считали состояние контакта и отрисовали эту кнопку
             guard let currentUserId = Auth.auth().currentUser?.uid else {
                 fatalError("You need to be authenticated")
             }
@@ -73,13 +73,17 @@ struct FollowButton: View {
             let following = (snapshot?.documents.count ?? 0) > 0
             status = following ? .followed : .none
             loading = false
+            /*
+            try? await Firestore.firestore().collection("people")
+                .document(userId).updateData(["userId" : userId])
+             */
         }
     }
 }
 
 struct FollowButton_Previews: PreviewProvider {
     static var previews: some View {
-        FollowButton(userId: "")
+        FollowButton(userId: "0R37KZz8PLp1Nd4MWqEJ")
     }
 }
 
