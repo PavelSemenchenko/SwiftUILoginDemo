@@ -59,6 +59,18 @@ struct FollowButton: View {
                         action?()
                     }
                 }.disabled(status == .pending)
+                    .frame(width: 80, height: 24)
+                    .background(
+                        RoundedRectangle(cornerRadius: status == .followed ? 10 : 10) // Скругленные края и фон
+                            .fill(status == .followed ? Color.blue : Color.white) // Фон
+                    )
+                    .foregroundColor(
+                        status == .followed ? Color.white : Color.blue // Цвет текста
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: status == .followed ? 10 : 10) // Скругленные края (если нужно)
+                            .stroke(status == .followed ? Color.blue : Color.blue, lineWidth: 2) // Граница (если нужно)
+                    )
             }
         }.task {
             // по загрузке кноки - считали состояние контакта и отрисовали эту кнопку

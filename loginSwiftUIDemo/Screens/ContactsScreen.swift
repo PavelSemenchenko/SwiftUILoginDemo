@@ -74,6 +74,7 @@ struct ContactsScreen: View {
                             }
                         Spacer()
                         FollowButton(userId: item.id!)
+                        
                     }
                 }
             } else if contactsVM.status == .failed {
