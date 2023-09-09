@@ -22,10 +22,6 @@ struct TemplateScreen: View {
                     .padding(1)
                 
                 Spacer()
-                /*
-                Button("logout"){
-                    navigationVM.pushScreen(route: .signIn)
-                }.padding()*/
                 
                 Button(action: {
                     loginVM.logOut()
@@ -54,8 +50,40 @@ struct TemplateScreen: View {
                 
             }
             Spacer()
+            ScrollView(.horizontal) {
+                HStack{
+                    Spacer()
+                    MentorView(name: "Doc first", imageName: "psy1")
+                    Spacer()
+                    MentorView(name: "Doc second", imageName: "psy2")
+                    Spacer()
+                    MentorView(name: "Doc third", imageName: "psy3")
+                    Spacer()
+                    MentorView(name: "Doc forth", imageName: "psy4")
+                }
+            }
+            .scrollIndicators(.hidden)
+            Spacer()
         }
-        
+    }
+}
+
+struct MentorView: View {
+    let name: String
+    let imageName: String
+    
+    var body: some View {
+        VStack {
+            Text(name)
+                .padding(5)
+            Image(imageName)
+                .resizable()
+                .frame(width: 128, height: 128)
+            Button("Talk") {
+                
+            }.padding(5)
+        }.background(RoundedRectangle(cornerRadius: 16)
+            .stroke(Color.blue, lineWidth: 2))
     }
 }
 
