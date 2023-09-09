@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseFirestoreCombineSwift
 
 struct TemplateScreen: View {
     @EnvironmentObject private var navigationVM: NavigationRouter
     @EnvironmentObject private var loginVM: SignInVM
     @Environment(\.colorScheme) var colorScheme
+    @State private var name: String = "Loading ..."
     
     var body: some View {
         VStack{
@@ -36,7 +41,10 @@ struct TemplateScreen: View {
             Spacer()
             
             VStack{
-                Text("Hello, User!").padding()
+                Text("Hello,\(name)")
+                    .padding()
+                    .font(.title)
+                
                 
                 Image("empty_user")
                     .resizable()
@@ -49,6 +57,7 @@ struct TemplateScreen: View {
                 
                 
             }
+            
             Spacer()
             ScrollView(.horizontal) {
                 HStack{
@@ -72,7 +81,7 @@ struct TemplateScreen: View {
                 Spacer()
                 PlaceView(name: "Earth", image: "place3")
                 Spacer()
-            }.padding()
+            }//.padding()
         }
     }
 }
@@ -102,11 +111,20 @@ struct PlaceView: View {
     
     var body: some View {
         VStack {
-            Text(name)
-                .padding(1)
+            
             Image(image)
                 .resizable()
-                .frame( height: 128)
+                //.aspectRatio(contentMode: .fit)
+                .frame(width: 380, height: 128)
+                .overlay(
+                    Text(name)
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .padding(1)
+                        .background(Color.black.opacity(0.5))
+                        .cornerRadius(10)
+                        .padding(10),alignment: .bottom
+                )
             Button("Request") {
                 
             }.padding(5)
