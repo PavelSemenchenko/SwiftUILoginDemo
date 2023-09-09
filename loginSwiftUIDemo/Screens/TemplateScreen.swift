@@ -63,7 +63,16 @@ struct TemplateScreen: View {
                 }
             }
             .scrollIndicators(.hidden)
-            Spacer()
+            Spacer(minLength: 24)
+            ScrollView(.vertical) {
+                Spacer()
+                PlaceView(name: "Heaven", image: "place1")
+                Spacer()
+                PlaceView(name: "Hell", image: "place2")
+                Spacer()
+                PlaceView(name: "Earth", image: "place3")
+                Spacer()
+            }.padding()
         }
     }
 }
@@ -78,8 +87,27 @@ struct MentorView: View {
                 .padding(5)
             Image(imageName)
                 .resizable()
-                .frame(width: 128, height: 128)
+                .frame(width: 96, height: 86)
             Button("Talk") {
+                
+            }.padding(5)
+        }.background(RoundedRectangle(cornerRadius: 16)
+            .stroke(Color.blue, lineWidth: 2))
+    }
+}
+
+struct PlaceView: View {
+    let name: String
+    let image: String
+    
+    var body: some View {
+        VStack {
+            Text(name)
+                .padding(1)
+            Image(image)
+                .resizable()
+                .frame( height: 128)
+            Button("Request") {
                 
             }.padding(5)
         }.background(RoundedRectangle(cornerRadius: 16)
