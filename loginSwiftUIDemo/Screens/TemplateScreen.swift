@@ -14,7 +14,7 @@ import FirebaseFirestoreCombineSwift
 struct TemplateScreen: View {
     @EnvironmentObject private var navigationVM: NavigationRouter
     @EnvironmentObject private var loginVM: SignInVM
-    @StateObject private var templateVM = TemplateVM()
+    @ObservedObject private var templateVM = TemplateVM()
     @Environment(\.colorScheme) var colorScheme
     @State private var name: String?
     
@@ -41,9 +41,9 @@ struct TemplateScreen: View {
             
             VStack{
                 if let name = name {
-                    Text("Hello,\(name)")
+                    Text("Hello,\(templateVM.name)")
                         .padding()
-                        .font(.title)
+                        .font(.system(size: 24,weight: .bold))
                         
                 } else {
                     Text("Loading ...")
@@ -51,7 +51,7 @@ struct TemplateScreen: View {
             }.onAppear {
                 Task {
                     await templateVM.getName()
-                    print(name)
+                    print(templateVM.name)
                 }
             }
             
