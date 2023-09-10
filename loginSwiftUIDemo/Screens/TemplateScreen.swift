@@ -51,7 +51,7 @@ struct TemplateScreen: View {
             }.onAppear {
                 Task {
                     await templateVM.getName()
-                    print(templateVM.name)
+                    print("получено \(templateVM.name)")
                 }
             }
             
@@ -114,7 +114,7 @@ class TemplateVM: ObservableObject {
         if let contact = contact?.first {
         }
         let name = contact?.first?.name
-        print("found name is \(name!)")
+        //print("found name is \(name!)")
         
     }
 }
