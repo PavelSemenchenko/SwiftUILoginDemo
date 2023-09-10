@@ -51,16 +51,33 @@ struct TemplateScreen: View {
                         await templateVM.getName()
                     }
                 }
-                
-                Image("empty_user")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-                    .overlay {
-                        Circle().stroke(.gray, lineWidth: 4)
-                    }.shadow(radius: 7)
-                    .padding(.bottom, 15)
-                
+                HStack{
+                    Spacer()
+                    Image("empty_user")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .overlay {
+                            Circle().stroke(.gray, lineWidth: 4)
+                        }.shadow(radius: 7)
+                        .padding(.bottom, 15)
+                    Spacer()
+                    VStack{
+                        Button(action: {
+                            navigationVM.pushScreen(route: .followers)
+                        }) {
+                            Image(systemName: "person.line.dotted.person.fill")
+                            Text("Followers")
+                        }
+                        Button(action: {
+                            FollowersScreen()
+                        }) {
+                            Image(systemName: "person.crop.circle.badge.checkmark")
+                            Text("Followings")
+                        }
+                    }
+                    Spacer()
+                }
                 Spacer()
                 ScrollView(.horizontal) {
                     HStack{
@@ -112,7 +129,7 @@ class TemplateVM: ObservableObject {
         // берем данные первого (единственного) элемента и читаем его свойство
         if let contact = contact?.first {
                 // Обновляем значение @Published var name
-                self.name = contact.name ?? "Default Name"
+                self.name = contact.name ?? "John Doe"
             }
     }
 }

@@ -19,6 +19,7 @@ enum NavigationRoute: Hashable {
     case tabBar
     case followers
     
+    
 }
 
 class NavigationRouter: ObservableObject {
