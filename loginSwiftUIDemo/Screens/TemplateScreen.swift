@@ -38,56 +38,57 @@ struct TemplateScreen: View {
             }
             
             Spacer()
-            
-            VStack{
-                if let name = name {
-                    Text("Hello,\(templateVM.name)")
-                        .padding()
-                        .font(.system(size: 24,weight: .bold))
-                        
-                } else {
-                    Text("Loading ...")
-                }
-            }.onAppear {
-                Task {
-                    await templateVM.getName()
-                    print("получено \(templateVM.name)")
-                }
-            }
-            
-            Image("empty_user")
-                .resizable()
-                .frame(width: 100, height: 100)
-                .clipShape(Circle())
-                .overlay {
-                    Circle().stroke(.gray, lineWidth: 4)
-                }.shadow(radius: 7)
-                .padding(.bottom, 15)
-            
-            Spacer()
-            ScrollView(.horizontal) {
-                HStack{
-                    Spacer()
-                    MentorView(name: "Doc first", imageName: "psy1")
-                    Spacer()
-                    MentorView(name: "Doc second", imageName: "psy2")
-                    Spacer()
-                    MentorView(name: "Doc third", imageName: "psy3")
-                    Spacer()
-                    MentorView(name: "Doc forth", imageName: "psy4")
-                }
-            }
-            .scrollIndicators(.hidden)
-            Spacer(minLength: 24)
             ScrollView(.vertical) {
+                VStack{
+                    if let name = name {
+                        Text("Hello,\(templateVM.name)")
+                            .padding()
+                            .font(.system(size: 24,weight: .bold))
+                        
+                    } else {
+                        Text("Loading ...")
+                    }
+                }.onAppear {
+                    Task {
+                        await templateVM.getName()
+                        print("получено \(templateVM.name)")
+                    }
+                }
+                
+                Image("empty_user")
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                    .overlay {
+                        Circle().stroke(.gray, lineWidth: 4)
+                    }.shadow(radius: 7)
+                    .padding(.bottom, 15)
+                
                 Spacer()
-                PlaceView(name: "Heaven", image: "place1")
-                Spacer()
-                PlaceView(name: "Hell", image: "place2")
-                Spacer()
-                PlaceView(name: "Earth", image: "place3")
-                Spacer()
-            }//.padding()
+                ScrollView(.horizontal) {
+                    HStack{
+                        Spacer()
+                        MentorView(name: "Doc first", imageName: "psy1")
+                        Spacer()
+                        MentorView(name: "Doc second", imageName: "psy2")
+                        Spacer()
+                        MentorView(name: "Doc third", imageName: "psy3")
+                        Spacer()
+                        MentorView(name: "Doc forth", imageName: "psy4")
+                    }
+                }
+                .scrollIndicators(.hidden)
+                Spacer(minLength: 24)
+                ScrollView(.vertical) {
+                    Spacer()
+                    PlaceView(name: "Heaven", image: "place1")
+                    Spacer()
+                    PlaceView(name: "Hell", image: "place2")
+                    Spacer()
+                    PlaceView(name: "Earth", image: "place3")
+                    Spacer()
+                }//.padding()
+            }
         }
     }
 }
