@@ -14,20 +14,19 @@ import FirebaseFirestoreCombineSwift
 struct TemplateScreen: View {
     @EnvironmentObject private var navigationVM: NavigationRouter
     @EnvironmentObject private var loginVM: SignInVM
+    @StateObject private var templateVM = TemplateVM()
     @Environment(\.colorScheme) var colorScheme
-    @State private var name: String = "Loading ..."
+    @State private var name: String?
     
     var body: some View {
-        VStack{
+        VStack(){
             HStack{
                 Image(colorScheme == .light ? "lb" : "lw")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 48, height: 48)
                     .padding(1)
-                
                 Spacer()
-                
                 Button(action: {
                     loginVM.logOut()
                     navigationVM.pushScreen(route: .signIn)
@@ -41,22 +40,29 @@ struct TemplateScreen: View {
             Spacer()
             
             VStack{
-                Text("Hello,\(name)")
-                    .padding()
-                    .font(.title)
-                
-                
-                Image("empty_user")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-                    .overlay {
-                        Circle().stroke(.gray, lineWidth: 4)
-                    }.shadow(radius: 7)
-                    .padding(.bottom, 15)
-                
-                
+                if let name = name {
+                    Text("Hello,\(name)")
+                        .padding()
+                        .font(.title)
+                        
+                } else {
+                    Text("Loading ...")
+                }
+            }.onAppear {
+                Task {
+                    await templateVM.getName()
+                    print(name)
+                }
             }
+            
+            Image("empty_user")
+                .resizable()
+                .frame(width: 100, height: 100)
+                .clipShape(Circle())
+                .overlay {
+                    Circle().stroke(.gray, lineWidth: 4)
+                }.shadow(radius: 7)
+                .padding(.bottom, 15)
             
             Spacer()
             ScrollView(.horizontal) {
@@ -86,6 +92,34 @@ struct TemplateScreen: View {
     }
 }
 
+
+class TemplateVM: ObservableObject {
+    @Published var name = ""
+    @MainActor func getName() async {
+        
+        guard let userId = Auth.auth().currentUser?.uid else {
+            fatalError("You need to be authenticated")
+        }
+        let snapshot = try? await
+        Firestore.firestore().collection("people")
+            .whereField("userId", isEqualTo: userId).getDocuments()
+        
+        let profile = snapshot?.documents.compactMap { $0 }
+        
+        let contact = snapshot?.documents.map { doc in
+            try! doc.data(as: Contact.self)
+        }.compactMap { $0 }
+        //print(contact)
+        
+        
+        if let contact = contact?.first {
+            //print(contact.name)
+        }
+        var name = contact?.first?.name
+        print(name!)
+        
+    }
+}
 struct MentorView: View {
     let name: String
     let imageName: String
@@ -110,11 +144,11 @@ struct PlaceView: View {
     let image: String
     
     var body: some View {
-        VStack {
+        ZStack {
             
             Image(image)
                 .resizable()
-                //.aspectRatio(contentMode: .fit)
+            //.aspectRatio(contentMode: .fit)
                 .frame(width: 380, height: 128)
                 .overlay(
                     Text(name)
@@ -122,14 +156,18 @@ struct PlaceView: View {
                         .font(.title)
                         .padding(1)
                         .background(Color.black.opacity(0.5))
-                        .cornerRadius(10)
-                        .padding(10),alignment: .bottom
+                        .cornerRadius(8)
+                        .padding(10),alignment: .top
                 )
+            // Spacer()
             Button("Request") {
                 
-            }.padding(5)
-        }.background(RoundedRectangle(cornerRadius: 16)
-            .stroke(Color.blue, lineWidth: 2))
+            }.padding(8)
+                .background(Color.white.opacity(0.5))
+                .cornerRadius(8)
+            
+        }/*.background(RoundedRectangle(cornerRadius: 16)
+          .stroke(Color.blue, lineWidth: 2))*/
     }
 }
 
