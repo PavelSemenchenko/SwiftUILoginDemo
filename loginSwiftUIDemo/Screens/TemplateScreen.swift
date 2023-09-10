@@ -109,14 +109,12 @@ class TemplateVM: ObservableObject {
         let contact = snapshot?.documents.map { doc in
             try! doc.data(as: Contact.self)
         }.compactMap { $0 }
-        //print(contact)
         
         
         if let contact = contact?.first {
-            //print(contact.name)
         }
-        var name = contact?.first?.name
-        print(name!)
+        let name = contact?.first?.name
+        print("found name is \(name!)")
         
     }
 }
