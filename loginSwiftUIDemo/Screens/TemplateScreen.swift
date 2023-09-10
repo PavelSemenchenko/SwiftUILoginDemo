@@ -40,18 +40,17 @@ struct TemplateScreen: View {
             Spacer()
             ScrollView(.vertical) {
                 VStack{
-                    if let name = name {
-                        Text("Hello,\(templateVM.name)")
+                    
+                    Text("Hello,\(templateVM.name)")
                             .padding()
                             .font(.system(size: 24,weight: .bold))
                         
-                    } else {
-                        Text("Loading ...")
-                    }
+                    
                 }.onAppear {
                     Task {
                         await templateVM.getName()
                         print("получено \(templateVM.name)")
+                        print("получено  бин \(name)")
                     }
                 }
                 
@@ -95,7 +94,7 @@ struct TemplateScreen: View {
 
 
 class TemplateVM: ObservableObject {
-    @Published var name = ""
+    @Published var name = "xx"
     @MainActor func getName() async {
         
         guard let userId = Auth.auth().currentUser?.uid else {
@@ -104,18 +103,21 @@ class TemplateVM: ObservableObject {
         let snapshot = try? await
         Firestore.firestore().collection("people")
             .whereField("userId", isEqualTo: userId).getDocuments()
-        
-        let profile = snapshot?.documents.compactMap { $0 }
-        
+                
         let contact = snapshot?.documents.map { doc in
             try! doc.data(as: Contact.self)
         }.compactMap { $0 }
-        
-        
+         
+        if let contact = contact?.first {
+                // Обновляем значение @Published var name
+                self.name = contact.name ?? "Default Name"
+                print("отправлено \(self.name)") // Печатаем обновленное значение
+            }
+        /*
         if let contact = contact?.first {
         }
         let name = contact?.first?.name
-        //print("found name is \(name!)")
+        print("отправлено \(name!)")*/
         
     }
 }
