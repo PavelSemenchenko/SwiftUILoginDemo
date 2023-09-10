@@ -41,7 +41,7 @@ struct TemplateScreen: View {
             ScrollView(.vertical) {
                 VStack{
                     
-                    Text("Hello,\(templateVM.name)")
+                    Text("Hello, \(templateVM.name)")
                             .padding()
                             .font(.system(size: 24,weight: .bold))
                         
@@ -49,8 +49,6 @@ struct TemplateScreen: View {
                 }.onAppear {
                     Task {
                         await templateVM.getName()
-                        print("получено \(templateVM.name)")
-                        print("получено  бин \(name)")
                     }
                 }
                 
@@ -96,29 +94,26 @@ struct TemplateScreen: View {
 class TemplateVM: ObservableObject {
     @Published var name = "xx"
     @MainActor func getName() async {
-        
+        // получили идентификатор текущего
         guard let userId = Auth.auth().currentUser?.uid else {
             fatalError("You need to be authenticated")
         }
+        
+        // взяли снимок из коллекции с текущим ид - получили документ
         let snapshot = try? await
         Firestore.firestore().collection("people")
             .whereField("userId", isEqualTo: userId).getDocuments()
-                
+        
+        // разобрали по шаблону и проверили на пустоту
         let contact = snapshot?.documents.map { doc in
             try! doc.data(as: Contact.self)
         }.compactMap { $0 }
-         
+        
+        // берем данные первого (единственного) элемента и читаем его свойство
         if let contact = contact?.first {
                 // Обновляем значение @Published var name
                 self.name = contact.name ?? "Default Name"
-                print("отправлено \(self.name)") // Печатаем обновленное значение
             }
-        /*
-        if let contact = contact?.first {
-        }
-        let name = contact?.first?.name
-        print("отправлено \(name!)")*/
-        
     }
 }
 struct MentorView: View {
