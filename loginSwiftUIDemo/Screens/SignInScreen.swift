@@ -80,7 +80,7 @@ struct SignInScreen: View {
             }
             .padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            .background(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            .background(LinearGradient(gradient: Gradient(colors: [.red, .cyan, .blue]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all))
             .edgesIgnoringSafeArea(.all)
             .navigationBarBackButtonHidden(true)
