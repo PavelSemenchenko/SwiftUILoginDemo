@@ -71,6 +71,7 @@ struct FollowButton: View {
                         RoundedRectangle(cornerRadius: status == .followed ? 10 : 10) // Скругленные края (если нужно)
                             .stroke(status == .followed ? Color.blue : Color.blue, lineWidth: 2) // Граница (если нужно)
                     )
+                    .buttonStyle(BorderedButtonStyle())
             }
         }.task {
             // по загрузке кноки - считали состояние контакта и отрисовали эту кнопку

@@ -52,7 +52,7 @@ struct ContactsScreen: View {
                     if !contactsVM.search.isEmpty {
                         Button (action: {
                             contactsVM.search = ""
-                           // contactsVM.clearItems()
+                            // contactsVM.clearItems()
                         }) {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.gray)
@@ -85,35 +85,35 @@ struct ContactsScreen: View {
                 }
             } else {
                 ZStack(alignment: .trailing) {
-                TextField("Type term", text: $contactsVM.search)
-                    .onReceive(contactsVM.searchItems) {
-                        searchItems = $0
+                    TextField("Type term", text: $contactsVM.search)
+                        .onReceive(contactsVM.searchItems) {
+                            searchItems = $0
+                        }
+                        .padding(5)
+                        .cornerRadius(5)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(5)
+                    
+                    // добавить очистку массива и запуск load
+                    if !contactsVM.search.isEmpty {
+                        Button (action: {
+                            contactsVM.search = ""
+                            // contactsVM.clearItems()
+                        }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.trailing, 15)
                     }
-                    .padding(5)
-                    .cornerRadius(5)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(5)
-                
-                // добавить очистку массива и запуск load
-                if !contactsVM.search.isEmpty {
-                    Button (action: {
-                        contactsVM.search = ""
-                       // contactsVM.clearItems()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.gray)
-                    }
-                    .padding(.trailing, 15)
                 }
-            }
-                    ForEach(1..<10) { i in
-                        HStack(alignment: .center) {
-                            Spacer()
-                            Image(systemName: "person.circle").padding()
-                            Text("Loading template ... \(i)")
-                            Spacer()
-                        }.border(Color(CGColor(red: 6, green: 0, blue: 9, alpha: 0.6)))
-                    }
+                ForEach(1..<10) { i in
+                    HStack(alignment: .center) {
+                        Spacer()
+                        Image(systemName: "person.circle").padding()
+                        Text("Loading template ... \(i)")
+                        Spacer()
+                    }.border(Color(CGColor(red: 6, green: 0, blue: 9, alpha: 0.6)))
+                }
                 Spacer()
             }
         }.task {
@@ -148,26 +148,26 @@ class ContactsVM: ObservableObject {
     private var allLoaded = false
     private var latestDocument: DocumentSnapshot?
     
-       /*
-    @MainActor func load() async {
-        print("\(#function) \(items.count)")
-        status = search.isEmpty ? .loading : status
-        var ref = Firestore.firestore().collection("people").order(by: "name")
-        if !search.isEmpty {
-            ref = ref.start(at: [search.lowercased()])
-                .end(at: ["\(search.lowercased())~"])
-        }
-        guard let snapshot = try? await ref.getDocuments() else {
-            status = .failed
-            return
-        }
-        let contacts = snapshot.documents.map { doc in
-            try! doc.data(as: Contact.self)
-        }.compactMap { $0 }
-        status = .loaded
-        items = contacts
-    }
-*/
+    /*
+     @MainActor func load() async {
+     print("\(#function) \(items.count)")
+     status = search.isEmpty ? .loading : status
+     var ref = Firestore.firestore().collection("people").order(by: "name")
+     if !search.isEmpty {
+     ref = ref.start(at: [search.lowercased()])
+     .end(at: ["\(search.lowercased())~"])
+     }
+     guard let snapshot = try? await ref.getDocuments() else {
+     status = .failed
+     return
+     }
+     let contacts = snapshot.documents.map { doc in
+     try! doc.data(as: Contact.self)
+     }.compactMap { $0 }
+     status = .loaded
+     items = contacts
+     }
+     */
     
     lazy var searchItems: AnyPublisher<[Contact], Never> = {
         $search.eraseToAnyPublisher()
@@ -177,14 +177,14 @@ class ContactsVM: ObservableObject {
             .filter { !$0.isEmpty }
             .handleEvents(receiveOutput: { _ in
                 self.status = .searching
-                })
-                .flatMap { term in
-                    self.searchPublisher(term: term)
-                }
-                .handleEvents(receiveOutput: { _ in
-                    self.status = .loaded
-                })
-                    .eraseToAnyPublisher()
+            })
+            .flatMap { term in
+                self.searchPublisher(term: term)
+            }
+            .handleEvents(receiveOutput: { _ in
+                self.status = .loaded
+            })
+            .eraseToAnyPublisher()
     } ()
     
     func searchPublisher(term: String) -> AnyPublisher<[Contact], Never> {
@@ -199,14 +199,14 @@ class ContactsVM: ObservableObject {
             .replaceError(with: [])
             .eraseToAnyPublisher()
     }
-                          
-
+    
+    
     @MainActor func search(term:String) async {
         status = .searching
         var ref = Firestore.firestore().collection("people").order(by: "name")
         if !search.isEmpty {
             ref = ref.start(at: [term])
-                    .end(at: ["\(term)~"])
+                .end(at: ["\(term)~"])
         }
         guard let snapshot = try? await ref.getDocuments(source: .server) else {
             status = .failed
@@ -218,31 +218,31 @@ class ContactsVM: ObservableObject {
         status = .loaded
     }
     /*
-    @MainActor func search() async {
-        status = .searching
-        var ref = Firestore.firestore().collection("people").order(by: "name")
-        if !search.isEmpty {
-            ref = ref.start(at: [search.lowercased()]).end(at: ["\(search.lowercased())~"])
-        }
-        guard let snapshot = try? await ref.getDocuments() else {
-            status = .failed
-            return
-        }
-        
-        let contacts = snapshot.documents.map { doc in
-            try! doc.data(as: Contact.self)
-        }.compactMap { $0 }
-        status = .loaded
-        items = contacts
-    }*/
+     @MainActor func search() async {
+     status = .searching
+     var ref = Firestore.firestore().collection("people").order(by: "name")
+     if !search.isEmpty {
+     ref = ref.start(at: [search.lowercased()]).end(at: ["\(search.lowercased())~"])
+     }
+     guard let snapshot = try? await ref.getDocuments() else {
+     status = .failed
+     return
+     }
+     
+     let contacts = snapshot.documents.map { doc in
+     try! doc.data(as: Contact.self)
+     }.compactMap { $0 }
+     status = .loaded
+     items = contacts
+     }*/
     
     @MainActor func load(more: Bool = false) async  {
         
         /*
-        for name in names {
-            try? await Firestore.firestore().collection("people").addDocument(data: ["name": name.lowercased()])
-        }
-        */
+         for name in names {
+         try? await Firestore.firestore().collection("people").addDocument(data: ["name": name.lowercased()])
+         }
+         */
         await FollowersVM().load()
         
         if more && (allLoaded || status == .moreLoading) {
@@ -250,9 +250,9 @@ class ContactsVM: ObservableObject {
         }
         print("\(#function) \(items.count)")
         status = more ? .moreLoading : .loading
-
+        
         var ref = Firestore.firestore().collection("people").order(by: "name")
-                .limit(to: 20)
+            .limit(to: 20)
         if let doc = latestDocument, more {
             ref.start(afterDocument: doc)
         }
@@ -265,8 +265,8 @@ class ContactsVM: ObservableObject {
         latestDocument = snapshot.documents.last
         
         let contacts = snapshot.documents.map { doc in
-                    try! doc.data(as: Contact.self)
-                }.compactMap {$0}
+            try! doc.data(as: Contact.self)
+        }.compactMap {$0}
         status = .loaded
         items.append(contentsOf: contacts)
         

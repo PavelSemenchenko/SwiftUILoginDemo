@@ -29,7 +29,7 @@ struct TabBar: View {
         //HStack {
             TabView(selection: $currentTab) {
                 
-                TemplateScreen().tabItem {
+                TemplateScreen(tab: $currentTab).tabItem {
                     VStack {
                         Text("Home")
                         Image(systemName: "house")
@@ -76,7 +76,6 @@ struct TabBar: View {
                 }.tag(TabBarId.followings)
                 
             }.navigationBarBackButtonHidden(true)
-       // }.navigationBarBackButtonHidden(true)
     }
 }
 

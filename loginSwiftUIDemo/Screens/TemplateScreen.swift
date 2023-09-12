@@ -18,6 +18,9 @@ struct TemplateScreen: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var name: String?
     
+    // принимаем значение которое заменим
+    @Binding var tab: TabBarId
+    
     var body: some View {
         VStack(){
             HStack{
@@ -42,9 +45,9 @@ struct TemplateScreen: View {
                 VStack{
                     
                     Text("Hello, \(templateVM.name)")
-                            .padding()
-                            .font(.system(size: 24,weight: .bold))
-                        
+                        .padding()
+                        .font(.system(size: 24,weight: .bold))
+                    
                     
                 }.onAppear {
                     Task {
@@ -64,13 +67,13 @@ struct TemplateScreen: View {
                     Spacer()
                     VStack{
                         Button(action: {
-                            navigationVM.pushScreen(route: .followers)
+                            tab = .followers
                         }) {
                             Image(systemName: "person.line.dotted.person.fill")
                             Text("Followers")
                         }
                         Button(action: {
-                            FollowersScreen()
+                            tab = .followings
                         }) {
                             Image(systemName: "person.crop.circle.badge.checkmark")
                             Text("Followings")
@@ -128,9 +131,9 @@ class TemplateVM: ObservableObject {
         
         // берем данные первого (единственного) элемента и читаем его свойство
         if let contact = contact?.first {
-                // Обновляем значение @Published var name
-                self.name = contact.name ?? "John Doe"
-            }
+            // Обновляем значение @Published var name
+            self.name = contact.name ?? "John Doe"
+        }
     }
 }
 struct MentorView: View {
@@ -183,9 +186,9 @@ struct PlaceView: View {
           .stroke(Color.blue, lineWidth: 2))*/
     }
 }
-
-struct TemplateScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        TemplateScreen()
-    }
-}
+/*
+ struct TemplateScreen_Previews: PreviewProvider {
+ static var previews: some View {
+ TemplateScreen()
+ }
+ }*/
