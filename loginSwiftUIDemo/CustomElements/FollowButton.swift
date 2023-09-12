@@ -59,7 +59,7 @@ struct FollowButton: View {
                         action?()
                     }
                 }.disabled(status == .pending)
-                    .frame(width: 80, height: 24)
+                    .frame(width: 100, height: 24)
                     .background(
                         RoundedRectangle(cornerRadius: status == .followed ? 10 : 10) // Скругленные края и фон
                             .fill(status == .followed ? Color.blue : Color.white) // Фон
