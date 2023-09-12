@@ -58,20 +58,22 @@ struct FollowButton: View {
                         }
                         action?()
                     }
-                }.disabled(status == .pending)
-                    .frame(width: 100, height: 24)
-                    .background(
-                        RoundedRectangle(cornerRadius: status == .followed ? 10 : 10) // Скругленные края и фон
-                            .fill(status == .followed ? Color.blue : Color.white) // Фон
-                    )
-                    .foregroundColor(
-                        status == .followed ? Color.white : Color.blue // Цвет текста
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: status == .followed ? 10 : 10) // Скругленные края (если нужно)
-                            .stroke(status == .followed ? Color.blue : Color.blue, lineWidth: 2) // Граница (если нужно)
-                    )
-                    .buttonStyle(BorderedButtonStyle())
+                }
+                        .disabled(status == .pending)
+                        
+                        .background(
+                            RoundedRectangle(cornerRadius: status == .followed ? 10 : 10) // Скругленные края и фон
+                                .fill(status == .followed ? Color.blue : Color.white) // Фон
+                        )
+                        .foregroundColor(
+                            status == .followed ? Color.white : Color.blue // Цвет текста
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: status == .followed ? 10 : 10) // Скругленные края (если нужно)
+                                .stroke(status == .followed ? Color.blue : Color.blue, lineWidth: 2) // Граница (если нужно)
+                        )
+                        .frame(width: 100, height: 16)
+                        .buttonStyle(BorderedButtonStyle())
             }
         }.task {
             // по загрузке кноки - считали состояние контакта и отрисовали эту кнопку
@@ -87,8 +89,8 @@ struct FollowButton: View {
             status = following ? .followed : .none
             loading = false
             /*
-            try? await Firestore.firestore().collection("people")
-                .document(userId).updateData(["userId" : userId])
+             try? await Firestore.firestore().collection("people")
+             .document(userId).updateData(["userId" : userId])
              */
         }
     }
