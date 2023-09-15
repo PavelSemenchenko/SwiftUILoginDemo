@@ -43,9 +43,14 @@ struct TemplateScreen: View {
                             .foregroundColor(.blue) // Цвет изображения
                     }
                 }
-                .sheet(isPresented: $isShowingSettings) {
+                /*.sheet(isPresented: $isShowingSettings) {
                     SettingsView()
-                }.padding(8)
+                    
+                }*/
+                .fullScreenCover(isPresented: $isShowingSettings) {
+                                SettingsView()
+                            }
+                .padding(8)
                 //.navigationBarTitle("Entering")
                    // .foregroundColor(.red)
                 
