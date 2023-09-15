@@ -65,7 +65,7 @@ struct TemplateScreen: View {
                         }.shadow(radius: 7)
                         .padding(.bottom, 15)
                     Spacer()
-                    VStack{
+                    VStack(alignment: .leading){
                         Button(action: {
                             tab = .followers
                         }) {

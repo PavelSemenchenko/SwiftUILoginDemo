@@ -13,9 +13,26 @@ import FirebaseFirestoreCombineSwift
 
 struct FollowingScreen: View {
     @StateObject var followingsVM: FollowingsVM = FollowingsVM()
+    @State var items: [Contact]? = []
+    @State var emptyText: String? = "No folloeings"
+    @State var errorText: String? = nil
     var body: some View {
         VStack {
             Text("Followings").font(.headline).padding(5)
+            
+            EndlessList(items: $items,
+                        empty: $emptyText,
+                        error: $errorText,
+            loadMore: {
+                
+            }, refresh: {
+                
+            }, content: { item in
+                CommonUserItem(item: item) {
+                    followingsVM.unfollow(userId: item.id!)
+                }
+            })
+            /*
             List(followingsVM.items) { item in
                 HStack {
                     Text(item.name).padding()
@@ -35,7 +52,7 @@ struct FollowingScreen: View {
                         followingsVM.unfollow(userId: item.id!)
                     }
                 }
-            }
+            } */
         }.task {
             await followingsVM.load()
         }
