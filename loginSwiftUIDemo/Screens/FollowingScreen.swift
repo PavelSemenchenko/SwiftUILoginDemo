@@ -14,7 +14,7 @@ import FirebaseFirestoreCombineSwift
 struct FollowingScreen: View {
     @StateObject var followingsVM: FollowingsVM = FollowingsVM()
     @State var items: [Contact]? = []
-    @State var emptyText: String? = "No folloeings"
+    @State var emptyText: String? = "No followings"
     @State var errorText: String? = nil
     var body: some View {
         VStack {

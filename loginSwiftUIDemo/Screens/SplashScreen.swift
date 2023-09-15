@@ -26,6 +26,8 @@ struct SplashView: View {
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
                 .opacity(logoOpacity)
+                .padding(10)
+            Text("Знайди свій СПОКІЙ")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.red)

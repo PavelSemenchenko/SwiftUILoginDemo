@@ -40,7 +40,7 @@ struct EndlessList<Items, ItemBody>: View where Items : RandomAccessCollection, 
         } else if items?.isEmpty == true {
             ZStack(alignment: .center) {
                 Text(empty ?? "No items")
-            }
+            }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
         } else if let items = items, !items.isEmpty {
             List {
@@ -55,6 +55,7 @@ struct EndlessList<Items, ItemBody>: View where Items : RandomAccessCollection, 
             }
         } else {
             ProgressView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             
         }
     }

@@ -18,6 +18,8 @@ struct TemplateScreen: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var name: String?
     
+    @State private var isShowingSettings = false
+    
     // принимаем значение которое заменим
     @Binding var tab: TabBarId
     
@@ -29,7 +31,26 @@ struct TemplateScreen: View {
                     .scaledToFit()
                     .frame(width: 48, height: 48)
                     .padding(1)
+                
                 Spacer()
+                
+                Button(action: {
+                    isShowingSettings.toggle()
+                }) {
+                    HStack {
+                        Image(systemName: "gearshape.fill") // Изображение настроек
+                            .imageScale(.large)
+                            .foregroundColor(.blue) // Цвет изображения
+                    }
+                }
+                .sheet(isPresented: $isShowingSettings) {
+                    SettingsView()
+                }.padding(8)
+                //.navigationBarTitle("Entering")
+                   // .foregroundColor(.red)
+                
+                
+                
                 Button(action: {
                     loginVM.logOut()
                     navigationVM.pushScreen(route: .signIn)
@@ -72,6 +93,7 @@ struct TemplateScreen: View {
                             Image(systemName: "person.line.dotted.person.fill")
                             Text("Followers")
                         }
+                        
                         Button(action: {
                             tab = .followings
                         }) {
@@ -136,6 +158,7 @@ class TemplateVM: ObservableObject {
         }
     }
 }
+
 struct MentorView: View {
     let name: String
     let imageName: String
@@ -147,11 +170,12 @@ struct MentorView: View {
             Image(imageName)
                 .resizable()
                 .frame(width: 96, height: 86)
-            Button("Talk") {
+            Button("Chat") {
                 
             }.padding(5)
         }.background(RoundedRectangle(cornerRadius: 16)
-            .stroke(Color.blue, lineWidth: 2))
+            .stroke(Color.white, lineWidth: 2))
+        .padding(8)
     }
 }
 
@@ -169,21 +193,76 @@ struct PlaceView: View {
                 .overlay(
                     Text(name)
                         .foregroundColor(.white)
+                        .padding(6)
                         .font(.title)
                         .padding(1)
-                        .background(Color.black.opacity(0.5))
-                        .cornerRadius(8)
-                        .padding(10),alignment: .top
+                        .background(Color.black.opacity(0.2))
+                        .cornerRadius(16)
+                        .padding(10)
+                    ,alignment: .top
                 )
-            // Spacer()
-            Button("Request") {
+            Spacer()
+            Button("Meditate") {
                 
-            }.padding(8)
-                .background(Color.white.opacity(0.5))
-                .cornerRadius(8)
+            }
+            .padding(8)
+            .background(Color.white.opacity(0.2))
+            .cornerRadius(16)
+            .foregroundColor(.white)
             
-        }/*.background(RoundedRectangle(cornerRadius: 16)
+        }
+        .padding(8)
+        /*.background(RoundedRectangle(cornerRadius: 16)
           .stroke(Color.blue, lineWidth: 2))*/
+    }
+}
+
+struct SettingsView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text("Настройки")
+                    .font(.title)
+                    .frame(height: 24.0)
+                Spacer()
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "xmark")
+                }
+            }.padding(16)
+            
+            ScrollView() {
+                VStack(alignment: .leading) {
+                    /*
+                    Button {
+                        print("ok")
+                    } label: {
+                        VStack {
+                            Image(systemName: "key")
+                                .font(.largeTitle)
+                                .imageScale(.large)
+                                .padding(20)
+                            Text("get license")
+                        }.background(Color.black)
+                    }.padding(8)
+                    */
+                    HStack {
+                        Text("Змінити мову")
+                        Spacer()
+                        Text("UA")
+                    }
+                    Spacer()
+                    //.padding(EdgeInsets(top: 36, leading: 16, bottom: 36, trailing: 16))
+                    //.frame(maxWidth: .infinity)
+                    //.padding(10)
+                    Text("Використати промокод")
+                }.padding(16)
+            }
+            
+        }
     }
 }
 /*

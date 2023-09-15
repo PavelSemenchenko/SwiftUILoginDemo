@@ -24,7 +24,7 @@ struct FollowButton: View {
                 ProgressView()
             } else {
                 Button(status == .pending ? "Wait" :
-                        status == .followed ? "Unfollow" : "Follow") {
+                        status == .followed ? "Unfollow" : "  Follow  ") {
                     let currentStatus = status
                     status = .pending
                     Task {
@@ -63,16 +63,17 @@ struct FollowButton: View {
                         
                         .background(
                             RoundedRectangle(cornerRadius: status == .followed ? 10 : 10) // Скругленные края и фон
-                                .fill(status == .followed ? Color.blue : Color.white) // Фон
+                                .fill(status == .followed ? Color.white : Color.blue) // Фон
                         )
                         .foregroundColor(
-                            status == .followed ? Color.white : Color.blue // Цвет текста
+                            status == .followed ? Color.blue : Color.white // Цвет текста
                         )
                         .overlay(
                             RoundedRectangle(cornerRadius: status == .followed ? 10 : 10) // Скругленные края (если нужно)
                                 .stroke(status == .followed ? Color.blue : Color.blue, lineWidth: 2) // Граница (если нужно)
                         )
-                        .frame(width: 100, height: 16)
+                        //.frame(height: 12.0)
+                        //.frame(minWidth: 200, minHeight: 16)
                         .buttonStyle(BorderedButtonStyle())
             }
         }.task {
