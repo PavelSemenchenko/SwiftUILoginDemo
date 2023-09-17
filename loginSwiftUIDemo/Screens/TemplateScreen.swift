@@ -134,7 +134,7 @@ struct TemplateScreen: View {
                     Spacer()
                 }
             }
-        }.id(UUID())
+        }
     }
 }
 
