@@ -54,6 +54,7 @@ struct SettingsView: View {
         } else if setting.name == "Выйти"{
             Button(action: {
                 loginVM.logOut()
+                presentationMode.wrappedValue.dismiss()
                 navigationVM.pushScreen(route: .signIn)
             }) {
                 Text("Уверены, что желаете выйти ? \n \n Выйти")
