@@ -44,15 +44,15 @@ struct TemplateScreen: View {
                     }
                 }
                 /*.sheet(isPresented: $isShowingSettings) {
-                    SettingsView()
-                    
-                }*/
+                 SettingsView()
+                 
+                 }*/
                 .fullScreenCover(isPresented: $isShowingSettings) {
-                                SettingsView()
-                            }
+                    SettingsView()
+                }
                 .padding(8)
                 //.navigationBarTitle("Entering")
-                   // .foregroundColor(.red)
+                // .foregroundColor(.red)
                 
                 
                 
@@ -178,8 +178,8 @@ struct MentorView: View {
             Button("Chat") {
                 
             }.padding(5)
-        }.background(RoundedRectangle(cornerRadius: 16)
-            .stroke(Color.white, lineWidth: 2))
+        }.background(RoundedRectangle(cornerRadius: 10)
+            .stroke(Color.gray, lineWidth: 2))
         .padding(8)
     }
 }
@@ -218,19 +218,25 @@ struct PlaceView: View {
         }
         .padding(8)
         /*.background(RoundedRectangle(cornerRadius: 16)
-          .stroke(Color.blue, lineWidth: 2))*/
+         .stroke(Color.blue, lineWidth: 2))*/
     }
 }
 
 struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode
     
+    let settings: [Setting] = [
+        Setting(name: "Сменить язык"),
+        Setting(name: "Использовать промокод")
+    ]
+    
     var body: some View {
         VStack {
             HStack {
                 Text("Настройки")
                     .font(.title)
-                    .frame(height: 24.0)
+                    .fontWeight(.bold)
+                    //.frame(height: 24.0)
                 Spacer()
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
@@ -239,40 +245,30 @@ struct SettingsView: View {
                 }
             }.padding(16)
             
-            ScrollView() {
-                VStack(alignment: .leading) {
-                    /*
-                    Button {
-                        print("ok")
-                    } label: {
-                        VStack {
-                            Image(systemName: "key")
-                                .font(.largeTitle)
-                                .imageScale(.large)
-                                .padding(20)
-                            Text("get license")
-                        }.background(Color.black)
-                    }.padding(8)
-                    */
-                    HStack {
-                        Text("Змінити мову")
-                        Spacer()
-                        Text("UA")
+            
+                NavigationView {
+                    List(settings) { item in
+                        NavigationLink(destination: destinationView(for: item)) {
+                            SettingsRow(settings: item)
+                        }
                     }
-                    Spacer()
-                    //.padding(EdgeInsets(top: 36, leading: 16, bottom: 36, trailing: 16))
-                    //.frame(maxWidth: .infinity)
-                    //.padding(10)
-                    Text("Використати промокод")
-                }.padding(16)
+                
             }
             
         }
     }
+    @ViewBuilder
+    private func destinationView(for setting: Setting) -> some View {
+        if setting.name == "Сменить язык" {
+            LanguageSelectionView()
+        } else {
+            TodosScreen() // Замените на ваше представление для других элементов
+        }
+    }
 }
-/*
- struct TemplateScreen_Previews: PreviewProvider {
- static var previews: some View {
- TemplateScreen()
- }
- }*/
+
+struct TemplateScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        TemplateScreen(tab: .constant(.home))
+    }
+}
