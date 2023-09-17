@@ -23,7 +23,7 @@ struct TabBar: View {
     @EnvironmentObject private var loginVM: SignInVM
     @EnvironmentObject private var navigationVM: NavigationRouter
     
-    @State var currentTab = TabBarId.contacts
+    @State var currentTab = TabBarId.home
     
     var body: some View {
         //HStack {

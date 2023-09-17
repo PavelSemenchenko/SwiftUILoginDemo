@@ -23,7 +23,9 @@ struct SignUpScreen: View {
                 .imageScale(.large)
                 .padding(20)
             
-            EditField(valid: loginVM.isEmailCorrect, placeholder: "Email", text: $loginVM.email)
+            EditField(valid: loginVM.isEmailCorrect,
+                      placeholder: "Email",
+                      text: $loginVM.email)
                 .keyboardType(.emailAddress)
                 .submitLabel(.next)
                 .onSubmit {
@@ -31,7 +33,9 @@ struct SignUpScreen: View {
                 }
                 .focused($email)
             
-            EditField(valid: loginVM.isPaswordCorrect, placeholder: "Password", text: $loginVM.password)
+            EditField(valid: loginVM.isPaswordCorrect,
+                      placeholder: "Password",
+                      text: $loginVM.password)
                 .submitLabel(.join)
                 .onSubmit {
                     Task {
@@ -43,20 +47,25 @@ struct SignUpScreen: View {
             
             
             HStack {
-                MainButton(text: "Sign Up", enabled: loginVM.canLogin, busy: loginVM.busy) {
+                MainButton(text: "Sign Up",
+                           enabled: loginVM.canLogin,
+                           busy: loginVM.busy) {
                     Task {
                         await loginVM.signUp()
                         navigarionVM.pushHome()
                         
                     }
                 }.padding()
-                MainButton(text: "Sign In", enabled: true, busy: false) {
+                MainButton(text: "Sign In",
+                           enabled: true, busy: false) {
                     navigarionVM.popScreen()
                 }
             }
         }.padding(EdgeInsets(top: 50, leading: 32, bottom: 50 , trailing: 32))
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            .background(LinearGradient(gradient: Gradient(colors: [.orange,.yellow, .red]), startPoint:.topLeading, endPoint: .bottomTrailing)
+            .frame(width: UIScreen.main.bounds.width,
+                   height: UIScreen.main.bounds.height)
+            .background(LinearGradient(gradient: Gradient(colors: [.orange,.yellow, .red]),
+                                       startPoint:.topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all))
             .edgesIgnoringSafeArea(.all)
     }

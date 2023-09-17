@@ -39,6 +39,8 @@
 		2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3848E62A38B9F5007FF32D /* SplashScreen.swift */; };
 		2A7F406E2AA7B773005C7309 /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7F406D2AA7B773005C7309 /* FollowButton.swift */; };
 		2A805B702AA11A0300CCBC50 /* FollowingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */; };
+		2A8A84972AB499020005101E /* EndlessList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A84962AB499020005101E /* EndlessList.swift */; };
+		2A8A84992AB4A22E0005101E /* CommonUserItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A84982AB4A22E0005101E /* CommonUserItem.swift */; };
 		2ACDAE632A817791002F34AB /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACDAE622A817791002F34AB /* PasswordField.swift */; };
 		2ADE44F62A9538170007FC79 /* FollowersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE44F52A9538170007FC79 /* FollowersScreen.swift */; };
 		2AE2393A2A9284FE00094099 /* NinaCTT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AE239392A9284FE00094099 /* NinaCTT.ttf */; };
@@ -66,6 +68,8 @@
 		2A3848E62A38B9F5007FF32D /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		2A7F406D2AA7B773005C7309 /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingScreen.swift; sourceTree = "<group>"; };
+		2A8A84962AB499020005101E /* EndlessList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndlessList.swift; sourceTree = "<group>"; };
+		2A8A84982AB4A22E0005101E /* CommonUserItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUserItem.swift; sourceTree = "<group>"; };
 		2ACDAE622A817791002F34AB /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
 		2ADE44F52A9538170007FC79 /* FollowersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersScreen.swift; sourceTree = "<group>"; };
 		2AE239392A9284FE00094099 /* NinaCTT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NinaCTT.ttf; sourceTree = "<group>"; };
@@ -145,6 +149,8 @@
 				0429BE3C2A37AB12002EF45F /* EditField.swift */,
 				0429BE3E2A37ACBF002EF45F /* MainButton.swift */,
 				2A7F406D2AA7B773005C7309 /* FollowButton.swift */,
+				2A8A84962AB499020005101E /* EndlessList.swift */,
+				2A8A84982AB4A22E0005101E /* CommonUserItem.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -263,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A8A84992AB4A22E0005101E /* CommonUserItem.swift in Sources */,
 				2A300DC32A9E79B000EC3EAF /* TemplateScreen.swift in Sources */,
 				048A91032A41A3D70068BC16 /* TodoVM.swift in Sources */,
 				0429BE3D2A37AB12002EF45F /* EditField.swift in Sources */,
@@ -277,6 +284,7 @@
 				0426DF3E2A2E717500BB5790 /* SignInScreen.swift in Sources */,
 				2A7F406E2AA7B773005C7309 /* FollowButton.swift in Sources */,
 				0426DF3C2A2E717500BB5790 /* loginSwiftUIDemoApp.swift in Sources */,
+				2A8A84972AB499020005101E /* EndlessList.swift in Sources */,
 				0419BCCC2A325BD40079BFFF /* SignInVM.swift in Sources */,
 				0429BE3F2A37ACBF002EF45F /* MainButton.swift in Sources */,
 				2ADE44F62A9538170007FC79 /* FollowersScreen.swift in Sources */,
