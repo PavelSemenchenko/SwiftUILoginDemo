@@ -16,5 +16,3 @@ struct Setting: Identifiable{
         Image(imageName)
     }*/
 }
-
-

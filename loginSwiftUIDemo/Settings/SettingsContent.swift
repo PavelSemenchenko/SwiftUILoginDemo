@@ -37,8 +37,22 @@ struct SettingsContent: View {
 
 struct LanguageSelectionView: View {
     var body: some View {
-        Text("Выбор языка")
-            .navigationBarTitle("Сменить язык")
+        
+        VStack {
+            Button {
+                
+            } label: {
+                Text("🇺🇸 EN")
+            }.padding()
+            
+            Button {
+                
+            } label: {
+                Text("🇺🇦 UA")
+            }
+
+            Spacer()
+        }.navigationTitle("Выбор языка")
     }
 }
 
