@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject private var navigationVM: NavigationRouter
+    @EnvironmentObject private var loginVM: SignInVM
     @Environment(\.presentationMode) var presentationMode
+    @Binding var tab: TabBarId
+    
     let settings: [Setting] = [
         Setting(name: "Сменить язык"),
         Setting(name: "Использовать промокод"),
@@ -25,6 +29,11 @@ struct SettingsView: View {
                 }
             }
             .navigationBarTitle("Настройки")
+            .navigationBarItems(trailing: Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "xmark")
+            })
         }
     }
     
@@ -42,12 +51,20 @@ struct SettingsView: View {
                     .foregroundColor(.blue)
             }
             .buttonStyle(PlainButtonStyle())
+        } else if setting.name == "Выйти"{
+            Button(action: {
+                loginVM.logOut()
+                navigationVM.pushScreen(route: .signIn)
+            }) {
+                Text("Уверены, что желаете выйти ? \n \n Выйти")
+                    .foregroundColor(.red)
+            }
         }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(tab: .constant(.home))
     }
 }

@@ -43,9 +43,15 @@ struct TemplateScreen: View {
                             .foregroundColor(.blue) // Цвет изображения
                     }
                 }
+                
                 .fullScreenCover(isPresented: $isShowingSettings) {
-                    SettingsView()
+                    SettingsView(tab: .constant(.home))
                 }
+                /*
+                .sheet(isPresented: $isShowingSettings) {
+                    SettingsView()
+                }*/
+                
                 .padding(8)
                 
                 Button(action: {
@@ -59,6 +65,7 @@ struct TemplateScreen: View {
             }
             
             Spacer()
+            
             ScrollView(.vertical) {
                 VStack{
                     
@@ -123,7 +130,7 @@ struct TemplateScreen: View {
                     Spacer()
                     PlaceView(name: "Earth", image: "place3")
                     Spacer()
-                }//.padding()
+                }
             }
         }
     }
