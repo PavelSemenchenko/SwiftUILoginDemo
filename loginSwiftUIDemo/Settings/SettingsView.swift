@@ -1,5 +1,5 @@
 //
-//  SettingsContent.swift
+//  SettingsView.swift
 //  loginSwiftUIDemo
 //
 //  Created by Pavel Semenchenko on 17.09.2023.
@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-/// not actual !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-///
-struct SettingsContent: View {
-    
+struct SettingsView: View {
+    @Environment(\.presentationMode) var presentationMode
     let settings: [Setting] = [
         Setting(name: "Сменить язык"),
         Setting(name: "Использовать промокод"),
@@ -48,10 +46,8 @@ struct SettingsContent: View {
     }
 }
 
-
-
-struct SettingsContent_Previews: PreviewProvider {
+struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsContent()
+        SettingsView()
     }
 }
