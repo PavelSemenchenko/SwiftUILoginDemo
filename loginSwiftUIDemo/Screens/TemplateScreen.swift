@@ -48,9 +48,9 @@ struct TemplateScreen: View {
                     SettingsView(tab: .constant(.home))
                 }
                 /*
-                .sheet(isPresented: $isShowingSettings) {
-                    SettingsView()
-                }*/
+                 .sheet(isPresented: $isShowingSettings) {
+                 SettingsView()
+                 }*/
                 
                 .padding(8)
                 
@@ -72,12 +72,13 @@ struct TemplateScreen: View {
                     Text("Hello, \(templateVM.name)")
                         .padding()
                         .font(.system(size: 24,weight: .bold))
-                    
-                    
-                }.onAppear {
-                    Task {
-                        await templateVM.getName()
-                    }
+                        .onAppear {
+                            Task {
+                                await templateVM.getName()
+                                print("Current User ID: \(templateVM.name)")
+                            }
+                            
+                        }
                 }
                 HStack{
                     Spacer()
