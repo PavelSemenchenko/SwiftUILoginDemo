@@ -47,13 +47,14 @@ struct TemplateScreen: View {
                 .fullScreenCover(isPresented: $isShowingSettings) {
                     SettingsView(tab: .constant(.home))
                 }
+                 .padding(8)
                 /*
                  .sheet(isPresented: $isShowingSettings) {
                  SettingsView()
                  }*/
                 
-                .padding(8)
                 
+                /*
                 Button(action: {
                     loginVM.logOut()
                     navigationVM.pushScreen(route: .signIn)
@@ -61,7 +62,7 @@ struct TemplateScreen: View {
                     Image(systemName: "eject.circle")
                 }
                 .frame(alignment: .trailing)
-                .padding()
+                .padding()*/
             }
             
             Spacer()
@@ -133,14 +134,14 @@ struct TemplateScreen: View {
                     Spacer()
                 }
             }
-        }
+        }.id(UUID())
     }
 }
 
 
 class TemplateVM: ObservableObject {
     
-    @Published var name = "xx"
+    @Published var name = "..."
     
     @MainActor func getName() async {
         // получили идентификатор текущего
