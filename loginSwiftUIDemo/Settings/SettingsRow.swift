@@ -19,9 +19,10 @@ struct SettingsRow: View {
         }
     }
 }
-/*
+
 struct SettingsRow_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsRow()
+        SettingsRow(settings: Setting(name: "Пример настройки"))
     }
-}*/
+}
+

@@ -43,19 +43,18 @@ struct TemplateScreen: View {
                             .foregroundColor(.blue) // Цвет изображения
                     }
                 }
-                /*.sheet(isPresented: $isShowingSettings) {
-                 SettingsView()
-                 
-                 }*/
+                
                 .fullScreenCover(isPresented: $isShowingSettings) {
-                    SettingsView()
+                    SettingsView(tab: .constant(.home))
                 }
-                .padding(8)
-                //.navigationBarTitle("Entering")
-                // .foregroundColor(.red)
+                 .padding(8)
+                /*
+                 .sheet(isPresented: $isShowingSettings) {
+                 SettingsView()
+                 }*/
                 
                 
-                
+                /*
                 Button(action: {
                     loginVM.logOut()
                     navigationVM.pushScreen(route: .signIn)
@@ -63,22 +62,24 @@ struct TemplateScreen: View {
                     Image(systemName: "eject.circle")
                 }
                 .frame(alignment: .trailing)
-                .padding()
+                .padding()*/
             }
             
             Spacer()
+            
             ScrollView(.vertical) {
                 VStack{
                     
                     Text("Hello, \(templateVM.name)")
                         .padding()
                         .font(.system(size: 24,weight: .bold))
-                    
-                    
-                }.onAppear {
-                    Task {
-                        await templateVM.getName()
-                    }
+                        .onAppear {
+                            Task {
+                                await templateVM.getName()
+                                print("Current User ID: \(templateVM.name)")
+                            }
+                            
+                        }
                 }
                 HStack{
                     Spacer()
@@ -131,7 +132,7 @@ struct TemplateScreen: View {
                     Spacer()
                     PlaceView(name: "Earth", image: "place3")
                     Spacer()
-                }//.padding()
+                }
             }
         }
     }
@@ -139,7 +140,9 @@ struct TemplateScreen: View {
 
 
 class TemplateVM: ObservableObject {
-    @Published var name = "xx"
+    
+    @Published var name = "..."
+    
     @MainActor func getName() async {
         // получили идентификатор текущего
         guard let userId = Auth.auth().currentUser?.uid else {
@@ -222,50 +225,7 @@ struct PlaceView: View {
     }
 }
 
-struct SettingsView: View {
-    @Environment(\.presentationMode) var presentationMode
-    
-    let settings: [Setting] = [
-        Setting(name: "Сменить язык"),
-        Setting(name: "Использовать промокод")
-    ]
-    
-    var body: some View {
-        VStack {
-            HStack {
-                Text("Настройки")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    //.frame(height: 24.0)
-                Spacer()
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image(systemName: "xmark")
-                }
-            }.padding(16)
-            
-            
-                NavigationView {
-                    List(settings) { item in
-                        NavigationLink(destination: destinationView(for: item)) {
-                            SettingsRow(settings: item)
-                        }
-                    }
-                
-            }
-            
-        }
-    }
-    @ViewBuilder
-    private func destinationView(for setting: Setting) -> some View {
-        if setting.name == "Сменить язык" {
-            LanguageSelectionView()
-        } else {
-            TodosScreen() // Замените на ваше представление для других элементов
-        }
-    }
-}
+
 
 struct TemplateScreen_Previews: PreviewProvider {
     static var previews: some View {

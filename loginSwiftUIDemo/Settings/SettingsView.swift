@@ -1,5 +1,5 @@
 //
-//  SettingsContent.swift
+//  SettingsView.swift
 //  loginSwiftUIDemo
 //
 //  Created by Pavel Semenchenko on 17.09.2023.
@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-/// not actual !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-///
-struct SettingsContent: View {
+struct SettingsView: View {
+    @EnvironmentObject private var navigationVM: NavigationRouter
+    @EnvironmentObject private var loginVM: SignInVM
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var tab: TabBarId
     
     let settings: [Setting] = [
         Setting(name: "Сменить язык"),
@@ -27,6 +29,11 @@ struct SettingsContent: View {
                 }
             }
             .navigationBarTitle("Настройки")
+            .navigationBarItems(trailing: Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "xmark")
+            })
         }
     }
     
@@ -44,14 +51,21 @@ struct SettingsContent: View {
                     .foregroundColor(.blue)
             }
             .buttonStyle(PlainButtonStyle())
+        } else if setting.name == "Выйти"{
+            Button(action: {
+                loginVM.logOut()
+                presentationMode.wrappedValue.dismiss()
+                navigationVM.pushScreen(route: .signIn)
+            }) {
+                Text("Уверены, что желаете выйти ? \n \n Выйти")
+                    .foregroundColor(.red)
+            }
         }
     }
 }
 
-
-
-struct SettingsContent_Previews: PreviewProvider {
+struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsContent()
+        SettingsView(tab: .constant(.home))
     }
 }

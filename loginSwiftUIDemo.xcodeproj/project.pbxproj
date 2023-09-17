@@ -40,6 +40,8 @@
 		2A300DC32A9E79B000EC3EAF /* TemplateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A300DC22A9E79B000EC3EAF /* TemplateScreen.swift */; };
 		2A3757732A3ADFB1007D11C4 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */; };
 		2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3848E62A38B9F5007FF32D /* SplashScreen.swift */; };
+		2A639FA52AB7658A00EC9EBE /* LanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A639FA42AB7658A00EC9EBE /* LanguageSelectionView.swift */; };
+		2A639FA92AB76C8A00EC9EBE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A639FA82AB76C8A00EC9EBE /* SettingsView.swift */; };
 		2A7F406E2AA7B773005C7309 /* FollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7F406D2AA7B773005C7309 /* FollowButton.swift */; };
 		2A805B702AA11A0300CCBC50 /* FollowingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */; };
 		2A8A84972AB499020005101E /* EndlessList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A84962AB499020005101E /* EndlessList.swift */; };
@@ -72,6 +74,8 @@
 		2A300DC22A9E79B000EC3EAF /* TemplateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateScreen.swift; sourceTree = "<group>"; };
 		2A3757722A3ADFB1007D11C4 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		2A3848E62A38B9F5007FF32D /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		2A639FA42AB7658A00EC9EBE /* LanguageSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
+		2A639FA82AB76C8A00EC9EBE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2A7F406D2AA7B773005C7309 /* FollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowButton.swift; sourceTree = "<group>"; };
 		2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingScreen.swift; sourceTree = "<group>"; };
 		2A8A84962AB499020005101E /* EndlessList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndlessList.swift; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 				2A2D62A22AB74E22005D0EAE /* Setting.swift */,
 				2A2D62A42AB74E48005D0EAE /* SettingsContent.swift */,
 				2A2D62A62AB74E62005D0EAE /* SettingsRow.swift */,
+				2A639FA42AB7658A00EC9EBE /* LanguageSelectionView.swift */,
+				2A639FA82AB76C8A00EC9EBE /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -304,12 +310,14 @@
 				2A7F406E2AA7B773005C7309 /* FollowButton.swift in Sources */,
 				0426DF3C2A2E717500BB5790 /* loginSwiftUIDemoApp.swift in Sources */,
 				2A8A84972AB499020005101E /* EndlessList.swift in Sources */,
+				2A639FA52AB7658A00EC9EBE /* LanguageSelectionView.swift in Sources */,
 				0419BCCC2A325BD40079BFFF /* SignInVM.swift in Sources */,
 				0429BE3F2A37ACBF002EF45F /* MainButton.swift in Sources */,
 				2ADE44F62A9538170007FC79 /* FollowersScreen.swift in Sources */,
 				2ACDAE632A817791002F34AB /* PasswordField.swift in Sources */,
 				2A2D62A52AB74E48005D0EAE /* SettingsContent.swift in Sources */,
 				04C9B59E2A7A967600F66DFE /* TabBar.swift in Sources */,
+				2A639FA92AB76C8A00EC9EBE /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
