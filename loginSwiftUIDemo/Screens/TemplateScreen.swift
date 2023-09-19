@@ -48,21 +48,6 @@ struct TemplateScreen: View {
                     SettingsView(tab: .constant(.home))
                 }
                  .padding(8)
-                /*
-                 .sheet(isPresented: $isShowingSettings) {
-                 SettingsView()
-                 }*/
-                
-                
-                /*
-                Button(action: {
-                    loginVM.logOut()
-                    navigationVM.pushScreen(route: .signIn)
-                }) {
-                    Image(systemName: "eject.circle")
-                }
-                .frame(alignment: .trailing)
-                .padding()*/
             }
             
             Spacer()
@@ -132,8 +117,8 @@ struct TemplateScreen: View {
                     Spacer()
                     PlaceView(name: "Earth", image: "place3")
                     Spacer()
-                }
-            }
+                }.scrollIndicators(.hidden)
+            }.scrollIndicators(.hidden)
         }
     }
 }

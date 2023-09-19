@@ -18,40 +18,6 @@ struct FollowersScreen: View {
         VStack {
             Text("Followers").font(.headline).padding(5)
             
-            List(followersVM.items ) { item in
-                HStack {
-                    Text(item.name).padding()
-                    Spacer()
-                    FollowButton(userId: item.id!)
-                    /*
-                    Button(item.status == .followed ? "Unfollow" : "Follow") {
-                        followersVM.pendContact(userId: item.id!)
-                        Task {
-                            if item.status == .followed {
-                                await followersVM.unFollow(userId: item.id!)
-                            } else {
-                                await followersVM.follow(userId: item.id!)
-                            }
-                        }
-                    }
-                    .disabled(item.status == .pending)
-                        .padding(10)
-                        .frame(width: 100, height: 30)
-                        .background(
-                            RoundedRectangle(cornerRadius: item.status == .followed ? 10 : 10) // Скругленные края и фон
-                                .fill(item.status == .followed ? Color.blue : Color.white) // Фон
-                        )
-                        .foregroundColor(
-                            item.status == .followed ? Color.white : Color.blue // Цвет текста
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: item.status == .followed ? 10 : 10) // Скругленные края (если нужно)
-                                .stroke(item.status == .followed ? Color.blue : Color.blue, lineWidth: 2) // Граница (если нужно)
-                        )
-                    */
-                        
-                }
-            }
            // Spacer()
         }.task {
             await followersVM.load()
