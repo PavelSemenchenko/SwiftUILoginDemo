@@ -7,7 +7,7 @@
 
 import Foundation
 import FirebaseAuth
-
+/*
 class BaseListVM<E> : ObservableObject where E: Hashable {
     @Published var items: [E] = nil
     @Published var emptyText: String? = nil
@@ -42,3 +42,4 @@ class BaseListVM<E> : ObservableObject where E: Hashable {
         fatalError("Must be ovverriden in subclass")
     }
 }
+*/

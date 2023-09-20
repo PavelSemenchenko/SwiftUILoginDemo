@@ -14,7 +14,7 @@ import FirebaseFirestoreCombineSwift
 struct TemplateScreen: View {
     @EnvironmentObject private var navigationVM: NavigationRouter
     @EnvironmentObject private var loginVM: SignInVM
-    @ObservedObject private var templateVM = TemplateVM()
+    @StateObject private var templateVM = TemplateVM()
     @Environment(\.colorScheme) var colorScheme
     @State private var name: String?
     
@@ -47,7 +47,7 @@ struct TemplateScreen: View {
                 .fullScreenCover(isPresented: $isShowingSettings) {
                     SettingsView(tab: .constant(.home))
                 }
-                 .padding(8)
+                .padding(8)
             }
             
             Spacer()
@@ -59,11 +59,12 @@ struct TemplateScreen: View {
                         .padding()
                         .font(.system(size: 24,weight: .bold))
                         .onAppear {
-                            Task {
-                                await templateVM.getName()
-                                print("Current User ID: \(templateVM.name)")
+                            if templateVM.name == "..." {
+                                Task {
+                                    await templateVM.getName()
+                                    print("Current User ID: \(templateVM.name)")
+                                }
                             }
-                            
                         }
                 }
                 HStack{
@@ -129,28 +130,43 @@ class TemplateVM: ObservableObject {
     @Published var name = "..."
     
     @MainActor func getName() async {
-        // получили идентификатор текущего
+        // получили идентификатор текущего пользователя
         guard let userId = Auth.auth().currentUser?.uid else {
             fatalError("You need to be authenticated")
         }
         
-        // взяли снимок из коллекции с текущим ид - получили документ
-        let snapshot = try? await
-        Firestore.firestore().collection("people")
-            .whereField("userId", isEqualTo: userId).getDocuments()
-        
-        // разобрали по шаблону и проверили на пустоту
-        let contact = snapshot?.documents.map { doc in
-            try! doc.data(as: Contact.self)
-        }.compactMap { $0 }
-        
-        // берем данные первого (единственного) элемента и читаем его свойство
-        if let contact = contact?.first {
-            // Обновляем значение @Published var name
-            self.name = contact.name ?? "John Doe"
+        do {
+            // взяли снимок из коллекции с текущим идентификатором пользователя
+            let querySnapshot = try await Firestore.firestore()
+                .collection("people")
+                .whereField("userId", isEqualTo: userId)
+                .getDocuments()
+            
+            // Проверяем, есть ли документы
+            guard !querySnapshot.isEmpty else {
+                print("No documents found for user with ID: \(userId)")
+                return
+            }
+            
+            // Получаем данные первого документа
+            if let document = querySnapshot.documents.first {
+                // Преобразуем данные документа в объект Contact
+                if let contact = try? document.data(as: Contact.self) {
+                    // Обновляем значение @Published var name
+                    self.name = contact.name ?? "John Doe"
+                    self.objectWillChange.send()
+                } else {
+                    print("Failed to decode Contact from document data")
+                }
+            } else {
+                print("No documents found for user with ID: \(userId)")
+            }
+        } catch {
+            print("Error fetching user data: \(error.localizedDescription)")
         }
     }
 }
+
 
 struct MentorView: View {
     let name: String
