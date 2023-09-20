@@ -22,7 +22,7 @@ struct TemplateScreen: View {
     
     // принимаем значение которое заменим
     @Binding var tab: TabBarId
-    
+     
     var body: some View {
         VStack(){
             HStack{
