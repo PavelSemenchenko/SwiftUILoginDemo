@@ -42,3 +42,22 @@ struct Contact: Codable, Identifiable, Hashable {
     }
 }
 
+struct Attachment: Codable,Hashable {
+    let type: String
+    let contentURL: String
+}
+
+struct Message: Codable, Identifiable,Hashable {
+    @DocumentID var id: String?
+    
+    let sender: String
+    let recipient: String
+    
+    let read: Bool
+    let text: String?
+    let attachments: [Attachment]?
+    
+    let created: Date
+    @ServerTimestamp var delivered: Date?
+}
+

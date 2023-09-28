@@ -13,6 +13,7 @@ enum TabBarId: Int, Hashable {
     case contacts = 2
     case followers = 3
     case followings = 4
+    case messages = 5
 }
 
 struct TabBar: View {
@@ -23,11 +24,18 @@ struct TabBar: View {
     @EnvironmentObject private var loginVM: SignInVM
     @EnvironmentObject private var navigationVM: NavigationRouter
     
-    @State var currentTab = TabBarId.home
+    @State var currentTab = TabBarId.messages
     
     var body: some View {
         //HStack {
             TabView(selection: $currentTab) {
+                
+                MessagesScreen().tabItem {
+                    VStack {
+                        Text("Messages")
+                        
+                    }
+                }.tag(TabBarId.messages)
                 
                 TemplateScreen(tab: $currentTab).tabItem {
                     VStack {
