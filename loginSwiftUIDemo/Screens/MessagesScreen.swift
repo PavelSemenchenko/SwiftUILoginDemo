@@ -25,15 +25,20 @@ struct MessagesScreen: View {
             if (items.isEmpty) {
                 Text("No messages")
             } else {
+                
                 List(items) { item in
                     if (item.sender == messagesVM.sender) {
-                        VStack(alignment: .trailing) {
-                            Text( item.text ?? "")
-                        }
-                    } else {
-                        VStack(aligment: .leading) {
+                        HStack {
+                            Spacer()
                             Text(item.text ?? "")
-                        }
+                                
+                        }.frame(maxWidth: .infinity,
+                                alignment: .leading)
+                    } else {
+                        HStack {
+                            Text(item.text ?? "")
+                        }.frame(maxWidth: .infinity,
+                                alignment: .leading)
                     }
                 }
             }
@@ -41,7 +46,7 @@ struct MessagesScreen: View {
                 Task {
                     await messagesVM.send()
                 }
-            }
+            }.padding()
         }
     }
 }
@@ -74,7 +79,7 @@ class MessagesVM: ObservableObject {
         }
         
         let message = Message(sender: currentUserId,
-                              recipient: recipient,
+                              recipient: "3Xvd2rbVdbf1OXONG0ykK90QCD42",
                               read: false,
                               text: "Hello",
                               attachments: nil,
