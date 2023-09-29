@@ -237,14 +237,7 @@ class ContactsVM: ObservableObject {
      }*/
     
     @MainActor func load(more: Bool = false) async  {
-        
-        /*
-         for name in names {
-         try? await Firestore.firestore().collection("people").addDocument(data: ["name": name.lowercased()])
-         }
-         */
-        await FollowersVM().load()
-        
+                
         if more && (allLoaded || status == .moreLoading) {
             return
         }
@@ -294,7 +287,6 @@ class ContactsVM: ObservableObject {
         }.compactMap { $0 }
         status = .loaded
         items.append(contentsOf: contacts)
-        //items  = contacts
     }
     
 }

@@ -7,56 +7,59 @@
 
 import SwiftUI
 
-struct EndlessList<Items, ItemBody>: View where Items : RandomAccessCollection, Items.Element: Hashable, ItemBody : View {
+struct EndlessList<Item, ItemBody>: View where Item : Hashable, ItemBody : View {
+     
+    let vm:BaseListVM<Item>
     
-    @Binding var items: Items?
-    @Binding var empty : String?
-    @Binding var error: String?
+    var content: (Item) -> ItemBody
     
-    var loadMore: () -> Void
-    var refresh: () -> Void
-    var content: (Items.Element) -> ItemBody
-    
-    init(items: Binding<Items?>,
-         empty: Binding<String?>,
-         error: Binding<String?>,
-         loadMore: @escaping () -> Void,
-         refresh: @escaping () -> Void,
-         content: @escaping (Items.Element) -> ItemBody) {
-        _items = items
-        _empty = empty
-        _error = error
-        self.loadMore = loadMore
-        self.refresh = refresh
+    init(vm: BaseListVM<Item>,
+         content: @escaping (Item) -> ItemBody) {
+        self.vm = vm
         self.content = content
     }
     
     var body: some View {
-        if let error = error {
+        if let error = vm.errorText {
             ZStack(alignment: .center) {
                 Text(error)
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
-        } else if items?.isEmpty == true {
+        } else if vm.items?.isEmpty == true {
             ZStack(alignment: .center) {
-                Text(empty ?? "No items")
+                Text(vm.emptyText ?? "No items")
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
-        } else if let items = items, !items.isEmpty {
+        } else if let items = vm.items, !items.isEmpty {
             List {
                 ForEach(items, id: \.self) { item in
                     content(item)
                         .onAppear {
                             if item == items.last {
-                                loadMore()
+                                Task {
+                                    await vm.loadMore()
+                                    print("------- load in appear ------" )
+                                }
                             }
                         }
                 }
+            }.refreshable {
+                Task {
+                    await vm.load()
+                    print("------- refresh ------" )
+                }
             }
         } else {
-            ProgressView()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
+            ZStack(alignment: .center) {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .onAppear {
+                        Task {
+                            await vm.load()
+                            print("------- load ------ if something" )
+                        }
+                    }
+            }
         }
     }
 }
