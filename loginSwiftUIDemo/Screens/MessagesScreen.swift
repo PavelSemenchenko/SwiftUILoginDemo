@@ -27,6 +27,17 @@ struct MessagesScreen: View {
             } else {
                 
                 List(items) { item in
+                    HStack {
+                        if item.sender == messagesVM.sender {
+                            Text(item.text ?? "")
+                        } else {
+                            Text(item.text ?? "")
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: item.sender == messagesVM.sender ? .trailing : .leading)
+                }
+                /*
+                List(items) { item in
                     if (item.sender == messagesVM.sender) {
                         HStack {
                             Spacer()
@@ -40,7 +51,7 @@ struct MessagesScreen: View {
                         }.frame(maxWidth: .infinity,
                                 alignment: .leading)
                     }
-                }
+                }*/
             }
             Button("Send") {
                 Task {
