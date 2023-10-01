@@ -29,9 +29,19 @@ struct MessagesScreen: View {
                 List(items) { item in
                     HStack {
                         if item.sender == messagesVM.sender {
+                            Spacer()
                             Text(item.text ?? "")
+                                .padding(10)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         } else {
                             Text(item.text ?? "")
+                                .padding(10)
+                                .background(Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                            Spacer()
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: item.sender == messagesVM.sender ? .trailing : .leading)
@@ -74,8 +84,8 @@ class MessagesVM: ObservableObject {
     lazy var items: AnyPublisher<[Message], Never> = {
         Firestore.firestore().collection("messages")
             .order(by: "created", descending: true)
-            .whereField("sender", isEqualTo: sender)
-            .whereField("recipient", isEqualTo: recipient)
+            //.whereField("sender", isEqualTo: sender)
+            //.whereField("recipient", isEqualTo: recipient)
             .snapshotPublisher()
             .map { $0.documents }
             .map { $0.map { doc in try? doc.data(as: Message.self)}}
