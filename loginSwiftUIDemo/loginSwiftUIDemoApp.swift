@@ -59,7 +59,7 @@ struct loginSwiftUIDemoApp: App {
                         }
                     }
             }.environmentObject(navigationVM)
-                .environment(\.colorScheme, .dark)
+                .environment(\.colorScheme, .light)
         }
     }
 }

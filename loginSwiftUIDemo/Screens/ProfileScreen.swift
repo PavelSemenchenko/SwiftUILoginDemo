@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ProfileScreen: View {
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
                 Text("user nickname")
+                    .badge(3)
                     .fontWeight(.bold)
-//                    .badge(3)
                     .padding()
                 Spacer()
                 Button(action: {}, label: {
@@ -25,31 +25,35 @@ struct ProfileScreen: View {
                         .foregroundColor(.black)
                 }).padding()
             }
-            HStack {
-                VStack {
-                    Image("empty_user")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                        .overlay {
-                            Circle().stroke(.gray, lineWidth: 4)
-                        }.shadow(radius: 7)
-                        .padding(5)
-                    Text("user name")
-                }
-                VStack {
-                    Text("97")
-                    Text("posts")
-                }.padding()
-                VStack {
-                    Text("239")
-                    Text("Followers")
-                }.padding()
-                VStack {
-                    Text("725")
-                    Text("Following")
-                }.padding()
+                HStack {
+                    VStack {
+                        Image("empty_user")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle().stroke(.gray, lineWidth: 4)
+                            }.shadow(radius: 7)
+                            .padding(5)
+                    }.padding()
+                    VStack {
+                        Text("97")
+                            .fontWeight(.bold)
+                        Text("Posts")
+                    }
+                    VStack {
+                        Text("239")
+                            .fontWeight(.bold)
+                        Text("Followers")
+                    }
+                    VStack {
+                        Text("725")
+                            .fontWeight(.bold)
+                        Text("Following")
+                    }
+                
             }
+            Text("user name").padding()
             Button(action: {}) {
                 Text("Edit profile")
                     .foregroundColor(.black)

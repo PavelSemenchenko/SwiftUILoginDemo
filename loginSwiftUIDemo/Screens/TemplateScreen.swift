@@ -92,6 +92,10 @@ struct TemplateScreen: View {
                             Image(systemName: "person.crop.circle.badge.checkmark")
                             Text("Followings")
                         }
+                        NavigationLink(destination: ProfileScreen()) {
+                            Text("Profile")
+                        }
+                        
                     }
                     Spacer()
                 }
