@@ -13,13 +13,16 @@ struct ProfileScreen: View {
             HStack {
                 Text("user nickname")
                     .fontWeight(.bold)
+//                    .badge(3)
                     .padding()
                 Spacer()
                 Button(action: {}, label: {
                     Image(systemName: "plus.app")
+                        .foregroundColor(.black)
                 }).padding()
                 Button(action: {}, label: {
                     Image(systemName: "text.justify")
+                        .foregroundColor(.black)
                 }).padding()
             }
             HStack {
@@ -49,14 +52,14 @@ struct ProfileScreen: View {
             }
             Button(action: {}) {
                 Text("Edit profile")
-                    .foregroundColor(.white)
-                    
+                    .foregroundColor(.black)
+                
             }.frame(maxWidth: .infinity)
                 .frame(height: 32)
-                .background(Color.gray.opacity(0.4))
+                .background(Color.gray.opacity(0.2))
                 .cornerRadius(8)
                 .padding(10)
-                
+            
         }
     }
 }
