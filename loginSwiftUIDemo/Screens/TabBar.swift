@@ -33,7 +33,7 @@ struct TabBar: View {
                 MessagesScreen().tabItem {
                     VStack {
                         Text("Messages")
-                        
+                        Image(systemName: "message")
                     }
                 }.tag(TabBarId.messages)
                 

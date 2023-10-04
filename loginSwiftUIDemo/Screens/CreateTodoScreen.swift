@@ -93,10 +93,10 @@ final class KeyboardResponder: ObservableObject {
     lazy var key1boardHeight: AnyPublisher<CGFloat, Never> = {
         keyboardHeightActive.merge(with: keyboardHeightInactive).eraseToAnyPublisher()
     }()
-    
+    /*
     init() {
         
-    }
+    }*/
     
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

@@ -13,6 +13,10 @@ import FirebaseFirestoreSwift
 import FirebaseFirestoreCombineSwift
 
 struct MessagesScreen: View {
+    @State private var keyboardHeight: CGFloat = 0
+    @ObservedObject private var keyboardResposder = KeyboardResponder()
+    @Environment(\.dismiss) var dismiss
+    
     @StateObject var messagesVM: MessagesVM = MessagesVM()
     @State var items: [Message] = []
     @State var message: String = ""
@@ -47,6 +51,7 @@ struct MessagesScreen: View {
                     }
                     .frame(maxWidth: .infinity, alignment: item.sender == messagesVM.sender ? .trailing : .leading)
                 }
+                //.padding(.bottom, keyboardHeight / 2)
             }
             HStack {
                 TextField("Type text", text: $message)
@@ -58,6 +63,12 @@ struct MessagesScreen: View {
                 }.disabled(message.isEmpty)
             }.padding()
         }
+        .onTapGesture {
+            keyboardResposder.hideKeyboard()
+        }
+        .onReceive(keyboardResposder.key1boardHeight, perform: { height in
+            keyboardHeight = height - 50
+        })
     }
 }
 
@@ -122,6 +133,8 @@ class MessagesVM: ObservableObject {
     }
 }
 
+/*
 #Preview {
     MessagesScreen()
 }
+*/

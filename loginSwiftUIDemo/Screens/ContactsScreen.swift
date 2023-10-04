@@ -13,7 +13,6 @@ import FirebaseFirestoreCombineSwift
 
 
 struct ContactsScreen: View {
-    //@EnvironmentObject var contactsVM: ContactsVM
     @StateObject var contactsVM: ContactsVM = ContactsVM()
     @State private var keyboardHeight: CGFloat = 0
     @ObservedObject private var keyboardResposder = KeyboardResponder()
