@@ -33,6 +33,7 @@
 		04C9B59A2A7A600C00F66DFE /* ContactsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9B5992A7A600C00F66DFE /* ContactsScreen.swift */; };
 		04C9B59C2A7A60A600F66DFE /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9B59B2A7A60A600F66DFE /* Entities.swift */; };
 		04C9B59E2A7A967600F66DFE /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9B59D2A7A967600F66DFE /* TabBar.swift */; };
+		2A01BCCB2ACD5BE4007856FA /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A01BCCA2ACD5BE4007856FA /* ProfileScreen.swift */; };
 		2A04397F2A4CB50200881A44 /* CreateTodoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */; };
 		2A1ED8202AC55B33004E1B5E /* MessagesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1ED81F2AC55B33004E1B5E /* MessagesScreen.swift */; };
 		2A26F21E2ABA285E00D00E48 /* BaseListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A26F21D2ABA285E00D00E48 /* BaseListVM.swift */; };
@@ -69,6 +70,7 @@
 		04C9B5992A7A600C00F66DFE /* ContactsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsScreen.swift; sourceTree = "<group>"; };
 		04C9B59B2A7A60A600F66DFE /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		04C9B59D2A7A967600F66DFE /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		2A01BCCA2ACD5BE4007856FA /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoScreen.swift; sourceTree = "<group>"; };
 		2A1ED81F2AC55B33004E1B5E /* MessagesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesScreen.swift; sourceTree = "<group>"; };
 		2A26F21D2ABA285E00D00E48 /* BaseListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListVM.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				2A1ED81F2AC55B33004E1B5E /* MessagesScreen.swift */,
 				0429BE402A37AE07002EF45F /* SignUpScreen.swift */,
 				2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */,
+				2A01BCCA2ACD5BE4007856FA /* ProfileScreen.swift */,
 				048A91042A41A64D0068BC16 /* TodosScreen.swift */,
 				04C9B5992A7A600C00F66DFE /* ContactsScreen.swift */,
 				2ADE44F52A9538170007FC79 /* FollowersScreen.swift */,
@@ -331,6 +334,7 @@
 				0429BE3F2A37ACBF002EF45F /* MainButton.swift in Sources */,
 				2ADE44F62A9538170007FC79 /* FollowersScreen.swift in Sources */,
 				2ACDAE632A817791002F34AB /* PasswordField.swift in Sources */,
+				2A01BCCB2ACD5BE4007856FA /* ProfileScreen.swift in Sources */,
 				2A2D62A52AB74E48005D0EAE /* SettingsContent.swift in Sources */,
 				04C9B59E2A7A967600F66DFE /* TabBar.swift in Sources */,
 				2A639FA92AB76C8A00EC9EBE /* SettingsView.swift in Sources */,
