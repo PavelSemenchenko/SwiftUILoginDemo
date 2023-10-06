@@ -29,9 +29,10 @@ struct MessagesScreen: View {
                 }
             if (items.isEmpty) {
                 Text("No messages")
+                    .font(.headline).padding(5)
             } else {
                 
-                List(items) { item in
+                List(items.reversed()) { item in
                     HStack {
                         if item.sender == messagesVM.sender {
                             Spacer()
@@ -39,14 +40,18 @@ struct MessagesScreen: View {
                                 .padding(10)
                                 .background(Color.blue)
                                 .foregroundColor(.white)
-                                .cornerRadius(10)
+                                .cornerRadius(16)
                         } else {
-                            Text(item.text ?? "")
-                                .padding(10)
-                                .background(Color.gray)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                            Spacer()
+                            HStack{
+                                Text(item.text ?? "")
+                                    .padding(10)
+                                    .background(Color.gray)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(16)
+                                Spacer()
+                            }.task {
+                                await messagesVM.markRead(message: item)
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: item.sender == messagesVM.sender ? .trailing : .leading)
@@ -58,6 +63,7 @@ struct MessagesScreen: View {
                 Button("Send") {
                     Task {
                         await messagesVM.send(message)
+                        keyboardResposder.hideKeyboard()
                         message = ""
                     }
                 }.disabled(message.isEmpty)
@@ -109,6 +115,15 @@ class MessagesVM: ObservableObject {
             .eraseToAnyPublisher()
     }()
     
+    @MainActor func markRead(message: Message) async {
+        guard let id = message.id else {
+            return
+        }
+        try? await Firestore.firestore().collection("message")
+            .document(id)
+            .updateData(["read" : true])
+    }
+    
     @MainActor func send(_ text: String) async {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
             return
@@ -132,6 +147,13 @@ class MessagesVM: ObservableObject {
          */
     }
 }
+
+struct MessagesScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        MessagesScreen()
+    }
+}
+
 
 /*
 #Preview {

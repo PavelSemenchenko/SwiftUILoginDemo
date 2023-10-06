@@ -6,6 +6,11 @@
 //
 
 import SwiftUI
+import Combine
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseFirestoreCombineSwift
 
 enum TabBarId: Int, Hashable {
     case home = 0
@@ -24,6 +29,9 @@ struct TabBar: View {
     @EnvironmentObject private var loginVM: SignInVM
     @EnvironmentObject private var navigationVM: NavigationRouter
     
+    @ObservedObject var homeVM = HomeVM()
+    @State var unreadCount: Int = 0
+    
     @State var currentTab = TabBarId.messages
     
     var body: some View {
@@ -36,6 +44,7 @@ struct TabBar: View {
                         Image(systemName: "message")
                     }
                 }.tag(TabBarId.messages)
+                    .badge(unreadCount)
                 
                 TemplateScreen(tab: $currentTab).tabItem {
                     VStack {
@@ -44,8 +53,6 @@ struct TabBar: View {
                         
                     }
                 }.tag(TabBarId.home)
-                
-                
                 TodosScreen().tabItem {
                     VStack {
                         Text("Todos ")
@@ -53,12 +60,9 @@ struct TabBar: View {
                     }
                 }.badge(todosCount)
                     .tag(TabBarId.todo)
-                    //.environmentObject(SignInVM())
                     .onReceive(todosVM.todos) { todos in
                         todosCount = todos.count
                     }
-                    //.toolbarBackground(Color.yellow, for: .tabBar)
-                
                 
                 ContactsScreen().tabItem {
                     VStack {
@@ -83,7 +87,9 @@ struct TabBar: View {
                     }
                 }.tag(TabBarId.followings)
                 
-            }.navigationBarBackButtonHidden(true)
+            }.onReceive(homeVM.unreadCount) { amount in
+            unreadCount = amount}
+            .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -94,4 +100,16 @@ struct TabBar_Previews: PreviewProvider {
             .environmentObject(NavigationRouter())
             .environmentObject(SignInVM())
     }
+}
+
+class HomeVM: ObservableObject {
+    lazy var unreadCount: AnyPublisher<Int, Never> = {
+        Firestore.firestore().collection("messages")
+            .whereField("read", isEqualTo: false)
+            .whereField("recipient", isEqualTo: Auth.auth().currentUser!.uid)
+            .snapshotPublisher()
+            .map { $0.documents.count }
+            .replaceError(with: 0)
+            .eraseToAnyPublisher()
+    }()
 }

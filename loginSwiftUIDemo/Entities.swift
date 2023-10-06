@@ -53,7 +53,7 @@ struct Message: Codable, Identifiable,Hashable {
     let sender: String
     let recipient: String
     
-    let read: Bool
+    var read: Bool
     let text: String?
     let attachments: [Attachment]?
     
