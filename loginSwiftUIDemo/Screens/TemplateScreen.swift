@@ -19,10 +19,12 @@ struct TemplateScreen: View {
     @State private var name: String?
     
     @State private var isShowingSettings = false
+    @State private var isShowingProfileScreen = false
+    
     
     // принимаем значение которое заменим
     @Binding var tab: TabBarId
-     
+    
     var body: some View {
         VStack(){
             HStack{
@@ -92,8 +94,13 @@ struct TemplateScreen: View {
                             Image(systemName: "person.crop.circle.badge.checkmark")
                             Text("Followings")
                         }
-                        NavigationLink(destination: ProfileScreen()) {
-                            Text("Profile")
+                        Button(action: {
+                            isShowingProfileScreen.toggle()
+                        }) {
+                            Text("Open Profile")
+                        }
+                        .sheet(isPresented: $isShowingProfileScreen) {
+                            ProfileScreen()
                         }
                         
                     }
