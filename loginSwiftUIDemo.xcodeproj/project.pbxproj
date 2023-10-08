@@ -207,17 +207,17 @@
 			isa = PBXGroup;
 			children = (
 				2A3848E62A38B9F5007FF32D /* SplashScreen.swift */,
+				0429BE402A37AE07002EF45F /* SignUpScreen.swift */,
 				0426DF3D2A2E717500BB5790 /* SignInScreen.swift */,
+				04C9B59D2A7A967600F66DFE /* TabBar.swift */,
 				2AA4817D2AD2E6090069F7CA /* ConversationsScreen.swift */,
 				2A1ED81F2AC55B33004E1B5E /* MessagesScreen.swift */,
-				0429BE402A37AE07002EF45F /* SignUpScreen.swift */,
+				048A91042A41A64D0068BC16 /* TodosScreen.swift */,
 				2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */,
 				2A01BCCA2ACD5BE4007856FA /* ProfileScreen.swift */,
-				048A91042A41A64D0068BC16 /* TodosScreen.swift */,
 				04C9B5992A7A600C00F66DFE /* ContactsScreen.swift */,
 				2ADE44F52A9538170007FC79 /* FollowersScreen.swift */,
 				2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */,
-				04C9B59D2A7A967600F66DFE /* TabBar.swift */,
 				2A300DC22A9E79B000EC3EAF /* TemplateScreen.swift */,
 			);
 			path = Screens;

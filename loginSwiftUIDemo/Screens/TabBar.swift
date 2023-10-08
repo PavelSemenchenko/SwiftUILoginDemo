@@ -36,7 +36,7 @@ struct TabBar: View {
     @State var currentTab = TabBarId.home
     
     var body: some View {
-        //HStack {
+        NavigationView {
             TabView(selection: $currentTab) {
                 
                 
@@ -98,8 +98,9 @@ struct TabBar: View {
                 }.tag(TabBarId.followings)
                 
             }.onReceive(homeVM.unreadCount) { amount in
-            unreadCount = amount}
+                unreadCount = amount}
             .navigationBarBackButtonHidden(true)
+        }.navigationBarBackButtonHidden(true)
     }
 }
 

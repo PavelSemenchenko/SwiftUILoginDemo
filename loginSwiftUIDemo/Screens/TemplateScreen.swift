@@ -20,7 +20,7 @@ struct TemplateScreen: View {
     
     @State private var isShowingSettings = false
     @State private var isShowingProfileScreen = false
-    
+    @State private var isShowingMessagesScreen = false
     
     // принимаем значение которое заменим
     @Binding var tab: TabBarId
@@ -111,6 +111,9 @@ struct TemplateScreen: View {
                     HStack{
                         Spacer()
                         MentorView(name: "Doc first", imageName: "psy1")
+                            .onTapGesture {
+                                isShowingMessagesScreen.toggle()
+                            }
                         Spacer()
                         MentorView(name: "Doc second", imageName: "psy2")
                         Spacer()
@@ -131,6 +134,9 @@ struct TemplateScreen: View {
                     Spacer()
                 }.scrollIndicators(.hidden)
             }.scrollIndicators(.hidden)
+        }
+        .sheet(isPresented: $isShowingMessagesScreen) {
+            MessagesScreen()
         }
     }
 }
@@ -177,6 +183,7 @@ class TemplateVM: ObservableObject {
         }
     }
 }
+    
 
 
 struct MentorView: View {
