@@ -19,6 +19,7 @@ enum TabBarId: Int, Hashable {
     case followers = 3
     case followings = 4
     case messages = 5
+    case conversations = 6
 }
 
 struct TabBar: View {
@@ -32,11 +33,20 @@ struct TabBar: View {
     @ObservedObject var homeVM = HomeVM()
     @State var unreadCount: Int = 0
     
-    @State var currentTab = TabBarId.messages
+    @State var currentTab = TabBarId.home
     
     var body: some View {
         //HStack {
             TabView(selection: $currentTab) {
+                
+                
+                ConversationsScreen().tabItem {
+                    VStack {
+                        Text("Conversations")
+                        Image(systemName: "rectangle.3.group.bubble.left")
+                    }
+                }.tag(TabBarId.conversations)
+                    .badge(unreadCount)
                 
                 MessagesScreen().tabItem {
                     VStack {
@@ -103,10 +113,12 @@ struct TabBar_Previews: PreviewProvider {
 }
 
 class HomeVM: ObservableObject {
+    let currentUserId = Auth.auth().currentUser?.uid
+    
     lazy var unreadCount: AnyPublisher<Int, Never> = {
         Firestore.firestore().collection("messages")
             .whereField("read", isEqualTo: false)
-            .whereField("recipient", isEqualTo: Auth.auth().currentUser!.uid)
+            .whereField("recipient", isEqualTo: currentUserId!)
             .snapshotPublisher()
             .map { $0.documents.count }
             .replaceError(with: 0)

@@ -24,15 +24,13 @@ struct MessagesScreen: View {
     var body: some View {
         VStack {
             Text("Messages")
-                .onReceive(messagesVM.items) {
-                    items = $0
-                }
+                
             if (items.isEmpty) {
                 Text("No messages")
                     .font(.headline).padding(5)
             } else {
                 
-                List(items.reversed()) { item in
+                List(items) { item in
                     HStack {
                         if item.sender == messagesVM.sender {
                             Spacer()
@@ -56,7 +54,6 @@ struct MessagesScreen: View {
                     }
                     .frame(maxWidth: .infinity, alignment: item.sender == messagesVM.sender ? .trailing : .leading)
                 }
-                //.padding(.bottom, keyboardHeight / 2)
             }
             HStack {
                 TextField("Type text", text: $message)
@@ -75,6 +72,9 @@ struct MessagesScreen: View {
         .onReceive(keyboardResposder.key1boardHeight, perform: { height in
             keyboardHeight = height - 50
         })
+        .onReceive(messagesVM.items) {
+            items = $0
+        }
     }
 }
 
@@ -119,7 +119,7 @@ class MessagesVM: ObservableObject {
         guard let id = message.id else {
             return
         }
-        try? await Firestore.firestore().collection("message")
+        try? await Firestore.firestore().collection("messages")
             .document(id)
             .updateData(["read" : true])
     }
@@ -135,28 +135,25 @@ class MessagesVM: ObservableObject {
                               text: text,
                               attachments: nil,
                               created: Date())
-        let _ = Firestore.firestore().collection("messages").addDocument(from: message)
-        /*
-        let message1 = Message(sender: "3Xvd2rbVdbf1OXONG0ykK90QCD42",
-                               recipient: currentUserId,
-                               read: false,
-                               text: "\(text) back",
-                               attachments: nil,
-                               created: Date())
-        let _ = Firestore.firestore().collection("messages").addDocument(from: message1)
-         */
+        let doc = try? await Firestore.firestore().collection("messages")
+            .addDocument(from: message).value
+        
+        let _ = Firestore.firestore().collection("people")
+            .document(currentUserId)
+            .collection("conversations")
+            .document(recipient)
+            .setData(from: Conversations(messageId: doc!.documentID))
+        
+        let _ = Firestore.firestore().collection("people")
+            .document(recipient)
+            .collection("conversations")
+            .document(currentUserId)
+            .setData(from: Conversations(messageId: doc!.documentID))
+        
     }
 }
 
-struct MessagesScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        MessagesScreen()
-    }
-}
-
-
-/*
 #Preview {
     MessagesScreen()
 }
-*/
+

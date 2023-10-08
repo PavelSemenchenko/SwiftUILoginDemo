@@ -49,6 +49,7 @@
 		2A805B702AA11A0300CCBC50 /* FollowingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */; };
 		2A8A84972AB499020005101E /* EndlessList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A84962AB499020005101E /* EndlessList.swift */; };
 		2A8A84992AB4A22E0005101E /* CommonUserItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A84982AB4A22E0005101E /* CommonUserItem.swift */; };
+		2AA4817E2AD2E6090069F7CA /* ConversationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA4817D2AD2E6090069F7CA /* ConversationsScreen.swift */; };
 		2ACDAE632A817791002F34AB /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACDAE622A817791002F34AB /* PasswordField.swift */; };
 		2ADE44F62A9538170007FC79 /* FollowersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE44F52A9538170007FC79 /* FollowersScreen.swift */; };
 		2AE2393A2A9284FE00094099 /* NinaCTT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AE239392A9284FE00094099 /* NinaCTT.ttf */; };
@@ -86,6 +87,7 @@
 		2A805B6F2AA11A0300CCBC50 /* FollowingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingScreen.swift; sourceTree = "<group>"; };
 		2A8A84962AB499020005101E /* EndlessList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndlessList.swift; sourceTree = "<group>"; };
 		2A8A84982AB4A22E0005101E /* CommonUserItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUserItem.swift; sourceTree = "<group>"; };
+		2AA4817D2AD2E6090069F7CA /* ConversationsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsScreen.swift; sourceTree = "<group>"; };
 		2ACDAE622A817791002F34AB /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
 		2ADE44F52A9538170007FC79 /* FollowersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersScreen.swift; sourceTree = "<group>"; };
 		2AE239392A9284FE00094099 /* NinaCTT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NinaCTT.ttf; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			children = (
 				2A3848E62A38B9F5007FF32D /* SplashScreen.swift */,
 				0426DF3D2A2E717500BB5790 /* SignInScreen.swift */,
+				2AA4817D2AD2E6090069F7CA /* ConversationsScreen.swift */,
 				2A1ED81F2AC55B33004E1B5E /* MessagesScreen.swift */,
 				0429BE402A37AE07002EF45F /* SignUpScreen.swift */,
 				2A04397E2A4CB50200881A44 /* CreateTodoScreen.swift */,
@@ -325,6 +328,7 @@
 				2A805B702AA11A0300CCBC50 /* FollowingScreen.swift in Sources */,
 				2A3848E72A38B9F5007FF32D /* SplashScreen.swift in Sources */,
 				0426DF3E2A2E717500BB5790 /* SignInScreen.swift in Sources */,
+				2AA4817E2AD2E6090069F7CA /* ConversationsScreen.swift in Sources */,
 				2A7F406E2AA7B773005C7309 /* FollowButton.swift in Sources */,
 				0426DF3C2A2E717500BB5790 /* loginSwiftUIDemoApp.swift in Sources */,
 				2A8A84972AB499020005101E /* EndlessList.swift in Sources */,
