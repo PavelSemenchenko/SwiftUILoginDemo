@@ -80,29 +80,36 @@ struct TemplateScreen: View {
                         }.shadow(radius: 7)
                         .padding(.bottom, 15)
                     Spacer()
-                    VStack(alignment: .leading){
-                        Button(action: {
-                            tab = .followers
-                        }) {
-                            Image(systemName: "person.line.dotted.person.fill")
-                            Text("Followers")
+                    NavigationView {
+                        VStack(alignment: .leading){
+                            Button(action: {
+                                tab = .followers
+                            }) {
+                                Image(systemName: "person.line.dotted.person.fill")
+                                Text("Followers")
+                            }
+                            
+                            Button(action: {
+                                tab = .followings
+                            }) {
+                                Image(systemName: "person.crop.circle.badge.checkmark")
+                                Text("Followings")
+                            }
+                            Button(action: {
+                                isShowingProfileScreen.toggle()
+                            }) {
+                                Text("Open Profile binding")
+                            }
+                            .sheet(isPresented: $isShowingProfileScreen) {
+                                ProfileScreen()
+                            }
+                            Button(action: {navigationVM.pushProfileScreen(route: .profile)}, label: {
+                                Text("push to")
+                            })
+                            NavigationLink(destination: ProfileScreen()) {
+                                Text("nav link")
+                            }
                         }
-                        
-                        Button(action: {
-                            tab = .followings
-                        }) {
-                            Image(systemName: "person.crop.circle.badge.checkmark")
-                            Text("Followings")
-                        }
-                        Button(action: {
-                            isShowingProfileScreen.toggle()
-                        }) {
-                            Text("Open Profile")
-                        }
-                        .sheet(isPresented: $isShowingProfileScreen) {
-                            ProfileScreen()
-                        }
-                        
                     }
                     Spacer()
                 }
@@ -149,7 +156,8 @@ class TemplateVM: ObservableObject {
     @MainActor func getName() async {
         // получили идентификатор текущего пользователя
         guard let userId = Auth.auth().currentUser?.uid else {
-            fatalError("You need to be authenticated")
+            return print ("John Doe")
+            //fatalError("You need to be authenticated")
         }
         
         do {
@@ -249,5 +257,6 @@ struct PlaceView: View {
 struct TemplateScreen_Previews: PreviewProvider {
     static var previews: some View {
         TemplateScreen(tab: .constant(.home))
+            .environmentObject(TemplateVM())
     }
 }

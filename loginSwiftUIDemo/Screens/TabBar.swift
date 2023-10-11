@@ -39,7 +39,6 @@ struct TabBar: View {
         NavigationView {
             TabView(selection: $currentTab) {
                 
-                
                 ConversationsScreen().tabItem {
                     VStack {
                         Text("Conversations")
@@ -63,6 +62,7 @@ struct TabBar: View {
                         
                     }
                 }.tag(TabBarId.home)
+                /*
                 TodosScreen().tabItem {
                     VStack {
                         Text("Todos ")
@@ -73,7 +73,7 @@ struct TabBar: View {
                     .onReceive(todosVM.todos) { todos in
                         todosCount = todos.count
                     }
-                
+                */
                 ContactsScreen().tabItem {
                     VStack {
                         Text("Contacts")
@@ -103,7 +103,7 @@ struct TabBar: View {
         }.navigationBarBackButtonHidden(true)
     }
 }
-
+/*
 struct TabBar_Previews: PreviewProvider {
     static var previews: some View {
         TabBar()
@@ -111,7 +111,7 @@ struct TabBar_Previews: PreviewProvider {
             .environmentObject(NavigationRouter())
             .environmentObject(SignInVM())
     }
-}
+}*/
 
 class HomeVM: ObservableObject {
     let currentUserId = Auth.auth().currentUser?.uid

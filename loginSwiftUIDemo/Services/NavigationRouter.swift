@@ -18,6 +18,7 @@ enum NavigationRoute: Hashable {
     case contacts
     case tabBar
     case followers
+    case profile
     
     
 }
@@ -44,5 +45,8 @@ class NavigationRouter: ObservableObject {
     }
     func pushTabBar(route: NavigationRoute) {
         pushScreen(route: .tabBar)
+    }
+    func pushProfileScreen(route: NavigationRoute) {
+        currentRoute.append(route)
     }
 }

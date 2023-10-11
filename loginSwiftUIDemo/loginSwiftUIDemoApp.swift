@@ -56,6 +56,8 @@ struct loginSwiftUIDemoApp: App {
                                 .environmentObject(FollowersVM())
                         //case .followings:
                                 //.environmentObject(FollowingsVM())
+                        case .profile:
+                            ProfileScreen()
                         }
                     }
             }.environmentObject(navigationVM)
