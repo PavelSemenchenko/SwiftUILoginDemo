@@ -23,9 +23,23 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationView {
-            List(settings) { item in
-                NavigationLink(destination: destinationView(for: item)) {
-                    SettingsRow(settings: item)
+            VStack {
+                List {
+                    Section(header: Text("This is a list")) {
+                        ForEach(settings) { item in
+                            NavigationLink(destination: destinationView(for: item)) {
+                                SettingsRow(settings: item)
+                            }
+                        }
+                    }
+                    Section(header: Text("This is a second")) {
+                        ForEach(settings) { item in
+                            NavigationLink(destination: destinationView(for: item)) {
+                                SettingsRow(settings: item)
+                            }
+                        }
+                    }
+
                 }
             }
             .navigationBarTitle("Настройки")
