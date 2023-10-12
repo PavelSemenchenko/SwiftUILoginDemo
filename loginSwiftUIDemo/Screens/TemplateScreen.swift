@@ -56,7 +56,6 @@ struct TemplateScreen: View {
             
             ScrollView(.vertical) {
                 VStack{
-                    
                     Text("Hello, \(templateVM.name)")
                         .padding()
                         .font(.system(size: 24,weight: .bold))
@@ -80,7 +79,6 @@ struct TemplateScreen: View {
                         }.shadow(radius: 7)
                         .padding(.bottom, 15)
                     Spacer()
-                    NavigationView {
                         VStack(alignment: .leading){
                             Button(action: {
                                 tab = .followers
@@ -103,14 +101,11 @@ struct TemplateScreen: View {
                             .sheet(isPresented: $isShowingProfileScreen) {
                                 ProfileScreen()
                             }
-                            Button(action: {navigationVM.pushProfileScreen(route: .profile)}, label: {
-                                Text("push to")
-                            })
                             NavigationLink(destination: ProfileScreen()) {
                                 Text("nav link")
                             }
                         }
-                    }
+                    
                     Spacer()
                 }
                 Spacer()

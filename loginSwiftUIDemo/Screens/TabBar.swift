@@ -36,7 +36,6 @@ struct TabBar: View {
     @State var currentTab = TabBarId.home
     
     var body: some View {
-        NavigationView {
             TabView(selection: $currentTab) {
                 
                 ConversationsScreen().tabItem {
@@ -55,13 +54,17 @@ struct TabBar: View {
                 }.tag(TabBarId.messages)
                     .badge(unreadCount)
                 
-                TemplateScreen(tab: $currentTab).tabItem {
+                NavigationStack {
+                    TemplateScreen(tab: $currentTab)
+                }
+                        .tabItem {
                     VStack {
                         Text("Home")
                         Image(systemName: "house")
                         
                     }
                 }.tag(TabBarId.home)
+                
                 /*
                 TodosScreen().tabItem {
                     VStack {
@@ -100,7 +103,6 @@ struct TabBar: View {
             }.onReceive(homeVM.unreadCount) { amount in
                 unreadCount = amount}
             .navigationBarBackButtonHidden(true)
-        }.navigationBarBackButtonHidden(true)
     }
 }
 /*
