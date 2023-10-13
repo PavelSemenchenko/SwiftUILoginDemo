@@ -25,7 +25,8 @@ struct loginSwiftUIDemoApp: App {
     var body: some Scene {
         WindowGroup {
             if SignInVM.isAuthenticated {
-                TabBar()
+                TabBar().environmentObject(SignInVM())
+                    .environmentObject(TodoVM())
             } else {
                 NavigationStack(path: $navigationVM.currentRoute) {
                     SplashView()

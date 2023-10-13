@@ -37,6 +37,13 @@ struct TabBar: View {
     
     var body: some View {
             TabView(selection: $currentTab) {
+                ContactsScreen().tabItem {
+                    VStack {
+                        Text("Contacts")
+                        Image(systemName: "person.3.sequence")
+                    }
+                }.tag(TabBarId.contacts)
+                    .environmentObject(ContactsVM())
                 
                 ConversationsScreen().tabItem {
                     VStack {
@@ -65,7 +72,7 @@ struct TabBar: View {
                     }
                 }.tag(TabBarId.home)
                 
-                /*
+                
                 TodosScreen().tabItem {
                     VStack {
                         Text("Todos ")
@@ -76,15 +83,9 @@ struct TabBar: View {
                     .onReceive(todosVM.todos) { todos in
                         todosCount = todos.count
                     }
-                */
-                ContactsScreen().tabItem {
-                    VStack {
-                        Text("Contacts")
-                        Image(systemName: "person.3.sequence")
-                    }
-                }.tag(TabBarId.contacts)
-                    .environmentObject(ContactsVM())
                 
+                
+                /*
                 FollowersScreen().tabItem {
                     VStack{
                         Text("Followers")
@@ -99,7 +100,7 @@ struct TabBar: View {
                         Image(systemName: "person.crop.circle.badge.checkmark")
                     }
                 }.tag(TabBarId.followings)
-                
+                */
             }.onReceive(homeVM.unreadCount) { amount in
                 unreadCount = amount}
             .navigationBarBackButtonHidden(true)

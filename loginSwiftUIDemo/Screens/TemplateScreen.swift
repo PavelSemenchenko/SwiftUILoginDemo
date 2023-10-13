@@ -93,6 +93,7 @@ struct TemplateScreen: View {
                                 Image(systemName: "person.crop.circle.badge.checkmark")
                                 Text("Followings")
                             }
+                            /*
                             Button(action: {
                                 isShowingProfileScreen.toggle()
                             }) {
@@ -101,9 +102,12 @@ struct TemplateScreen: View {
                             .sheet(isPresented: $isShowingProfileScreen) {
                                 ProfileScreen()
                             }
+                             */
                             NavigationLink(destination: ProfileScreen()) {
-                                Text("nav link")
+                                Text("Open Profile full")
                             }
+                            NavigationLink(destination: TodosScreen()) { Text("Todos")
+                            }.environmentObject(TodoVM())
                         }
                     
                     Spacer()

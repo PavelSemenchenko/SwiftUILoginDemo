@@ -12,6 +12,7 @@ struct SettingsView: View {
     @EnvironmentObject private var loginVM: SignInVM
     @Environment(\.presentationMode) var presentationMode
     @Binding var tab: TabBarId
+    @State private var isAlertPresented = false
     
     let settings: [Setting] = [
         Setting(name: "Сменить язык"),
@@ -33,13 +34,19 @@ struct SettingsView: View {
                         }
                     }
                     Section(header: Text("This is a second")) {
-                        ForEach(settings) { item in
-                            NavigationLink(destination: destinationView(for: item)) {
-                                SettingsRow(settings: item)
-                            }
-                        }
+                        Text("first")
+                        Text("second")
                     }
-
+                    Section(header: Text("About")) {
+                        Button(action: {
+                            isAlertPresented = true
+                        }) {
+                            Text("ver.  0.0.1")
+                                .foregroundColor(.blue)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                    
                 }
             }
             .navigationBarTitle("Настройки")
@@ -48,6 +55,8 @@ struct SettingsView: View {
             }) {
                 Image(systemName: "xmark")
             })
+        }.alert(isPresented: $isAlertPresented) {
+            Alert(title: Text("woow"), message: Text("Это тестовая версия"), dismissButton: .default(Text("OK")))
         }
     }
     
