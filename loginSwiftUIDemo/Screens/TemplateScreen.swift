@@ -52,7 +52,6 @@ struct TemplateScreen: View {
                 .padding(8)
             }
             
-            Spacer()
             
             ScrollView(.vertical) {
                 VStack{
@@ -80,19 +79,23 @@ struct TemplateScreen: View {
                         .padding(.bottom, 15)
                     Spacer()
                         VStack(alignment: .leading){
+                            /*
                             Button(action: {
                                 tab = .followers
                             }) {
                                 Image(systemName: "person.line.dotted.person.fill")
                                 Text("Followers")
-                            }
+                            }*/
+                            NavigationLink(destination: FollowersScreen()) {
+                                Text("Followers")
+                            }.environmentObject(FollowersVM())
                             
-                            Button(action: {
-                                tab = .followings
-                            }) {
-                                Image(systemName: "person.crop.circle.badge.checkmark")
-                                Text("Followings")
+                            NavigationLink(destination: FollowingScreen()) {
+                                Text("Following")
                             }
+                            //.environmentObject(FollowingScreen())
+                            
+                            
                             /*
                             Button(action: {
                                 isShowingProfileScreen.toggle()
@@ -106,7 +109,11 @@ struct TemplateScreen: View {
                             NavigationLink(destination: ProfileScreen()) {
                                 Text("Open Profile full")
                             }
-                            NavigationLink(destination: TodosScreen()) { Text("Todos")
+                            
+                            Button(action: {
+                                tab = .todo
+                            }) {
+                                Text("Todo")
                             }.environmentObject(TodoVM())
                         }
                     
@@ -251,11 +258,15 @@ struct PlaceView: View {
     }
 }
 
-
-
+#Preview("UA") {
+    TemplateScreen(tab: .constant(.home))
+        .environment(\.locale, Locale(identifier: "UA"))
+        .environmentObject(TemplateVM())
+}
+/*
 struct TemplateScreen_Previews: PreviewProvider {
     static var previews: some View {
         TemplateScreen(tab: .constant(.home))
             .environmentObject(TemplateVM())
     }
-}
+}*/
