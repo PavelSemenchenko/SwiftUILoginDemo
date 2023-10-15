@@ -108,7 +108,7 @@ struct TemplateScreen: View {
                              */
                             NavigationLink(destination: ProfileScreen()) {
                                 Text("Open Profile full")
-                            }
+                            }.foregroundColor(.black)
                             
                             Button(action: {
                                 tab = .todo
@@ -123,16 +123,16 @@ struct TemplateScreen: View {
                 ScrollView(.horizontal) {
                     HStack{
                         Spacer()
-                        MentorView(name: "Doc first", imageName: "psy1")
+                        MentorView(name: "Doc 1", imageName: "psy1")
                             .onTapGesture {
                                 isShowingMessagesScreen.toggle()
                             }
                         Spacer()
-                        MentorView(name: "Doc second", imageName: "psy2")
+                        MentorView(name: "Doc 2", imageName: "psy2")
                         Spacer()
-                        MentorView(name: "Doc third", imageName: "psy3")
+                        MentorView(name: "Doc 3", imageName: "psy3")
                         Spacer()
-                        MentorView(name: "Doc forth", imageName: "psy4")
+                        MentorView(name: "Doc 4", imageName: "psy4")
                     }
                 }
                 .scrollIndicators(.hidden)
@@ -207,10 +207,11 @@ struct MentorView: View {
     var body: some View {
         VStack {
             Text(name)
+                .multilineTextAlignment(.center)
                 .padding(5)
             Image(imageName)
                 .resizable()
-                .frame(width: 96, height: 86)
+                .frame(width: 82, height: 64)
             Button("Chat") {
                 
             }.padding(5)
