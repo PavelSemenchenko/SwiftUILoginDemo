@@ -35,7 +35,6 @@ struct TemplateScreen: View {
                     .padding(1)
                 
                 Spacer()
-                
                 Button(action: {
                     isShowingSettings.toggle()
                 }) {
@@ -51,7 +50,6 @@ struct TemplateScreen: View {
                 }
                 .padding(8)
             }
-            
             
             ScrollView(.vertical) {
                 VStack{
@@ -258,16 +256,16 @@ struct PlaceView: View {
          .stroke(Color.blue, lineWidth: 2))*/
     }
 }
-
+/*
 #Preview("UA") {
     TemplateScreen(tab: .constant(.home))
         .environment(\.locale, Locale(identifier: "UA"))
         .environmentObject(TemplateVM())
-}
-/*
+}*/
+
 struct TemplateScreen_Previews: PreviewProvider {
     static var previews: some View {
         TemplateScreen(tab: .constant(.home))
             .environmentObject(TemplateVM())
     }
-}*/
+}

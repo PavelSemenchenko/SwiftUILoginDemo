@@ -142,18 +142,18 @@ class MessagesVM: ObservableObject {
             .document(currentUserId)
             .collection("conversations")
             .document(recipient)
-            .setData(from: Conversations(messageId: doc!.documentID))
+            .setData(from: Conversation(messageId: doc!.documentID))
         
         let _ = Firestore.firestore().collection("people")
             .document(recipient)
             .collection("conversations")
             .document(currentUserId)
-            .setData(from: Conversations(messageId: doc!.documentID))
+            .setData(from: Conversation(messageId: doc!.documentID))
         
     }
 }
-
+/*
 #Preview {
     MessagesScreen()
-}
+}*/
 
