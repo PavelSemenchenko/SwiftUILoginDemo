@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct EndlessList<Item, ItemBody>: View where Item : Hashable, ItemBody : View {
+struct EndlessList<Item, ItemBody>: View where Item : Hashable & Identifiable, ItemBody : View {
      
-    let vm:BaseListVM<Item>
+    let vm: any BaseListVM
     
     var content: (Item) -> ItemBody
     
-    init(vm: BaseListVM<Item>,
+    init(vm: any BaseListVM,
          content: @escaping (Item) -> ItemBody) {
         self.vm = vm
         self.content = content
@@ -33,7 +33,7 @@ struct EndlessList<Item, ItemBody>: View where Item : Hashable, ItemBody : View 
         } else if let items = vm.items, !items.isEmpty {
             List {
                 ForEach(items, id: \.self) { item in
-                    content(item)
+                    content(item as! Item)
                         .onAppear {
                             if item == items.last {
                                 Task {

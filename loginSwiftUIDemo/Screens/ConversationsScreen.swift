@@ -20,21 +20,31 @@ struct ConversationsScreen: View {
             Text("Conversations")
                     .font(.headline)
                     .padding(5)
-            EndlessList(vm: ConversationsVM()) { item in
+            EndlessList(vm: ConversationsVM) { (item: ConversationItem) in
                 CommonUserItem(item: item.user)
             }
         }
     }
 }
 // model for visualisation
-struct ConversationItem: Hashable {
+struct ConversationItem: Hashable, Identifiable {
+    var id: String? {
+        get {
+            message.id
+        }
+    }
     let user: Contact
     let message: Message
 }
 
 class ConversationsVM: BaseListVM<ConversationItem> {
-
-    override func loadData(userId: String) async throws -> [ConversationItem] {
+    
+    @Published var items: [ConversationItem]? = nil
+    @Published var emptyText: String? = nil
+    @Published var errorText: String? = nil
+    
+   
+    func loadData(userId: String) async throws -> [ConversationItem] {
 
         let snapshot = try? await
         Firestore.firestore()
@@ -89,7 +99,7 @@ class ConversationsVM: BaseListVM<ConversationItem> {
 
     }
 }
-/*
+
 #Preview {
     ConversationsScreen()
-}*/
+}

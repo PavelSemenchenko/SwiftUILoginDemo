@@ -8,12 +8,19 @@
 import Foundation
 import FirebaseAuth
 
-class BaseListVM<E> : ObservableObject where E: Hashable {
-    @Published var items: [E]? = nil
-    @Published var emptyText: String? = nil
-    @Published var errorText: String? = nil
+protocol BaseListVM: ObservableObject {
+    associatedtype E : Hashable , Identifiable
     
-    @MainActor func load() async {
+    var items: [E]? { get set }
+    var emptyText: String? { get set }
+    var errorText: String? { get set }
+    
+        
+    func loadData(userId: String) async throws -> [E] 
+}
+
+extension BaseListVM {
+    func load() async {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
             errorText = "You need to be authenticated"
             return
@@ -31,14 +38,10 @@ class BaseListVM<E> : ObservableObject where E: Hashable {
         }
     }
     
-    @MainActor func loadMore() async {
+    func loadMore() async {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
             errorText = "You need to be authenticated"
             return
         }
-    }
-    
-    func loadData(userId: String) async throws -> [E] {
-        fatalError("Must be ovverriden in subclass")
     }
 }
