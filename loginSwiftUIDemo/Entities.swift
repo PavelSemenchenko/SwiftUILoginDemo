@@ -61,7 +61,7 @@ struct Message: Codable, Identifiable,Hashable {
     @ServerTimestamp var delivered: Date?
 }
 
-struct Conversation: Codable, Hashable {
+struct Conversations: Codable, Hashable {
     @DocumentID var oponent: String?
     let messageId: String
 }

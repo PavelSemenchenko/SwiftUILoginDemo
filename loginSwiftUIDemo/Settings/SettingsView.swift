@@ -15,6 +15,8 @@ struct SettingsView: View {
     @State private var isAlertPresented = false
     
     let settings: [Setting] = [
+        Setting(name: "Сменить язык"),
+        Setting(name: "Использовать промокод"),
         Setting(name: "Cтать премиум участником"),
         Setting(name: "Подписывайтесь на нас в Instagram"),
         Setting(name: "Выйти")

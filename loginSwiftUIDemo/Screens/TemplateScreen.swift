@@ -35,6 +35,7 @@ struct TemplateScreen: View {
                     .padding(1)
                 
                 Spacer()
+                
                 Button(action: {
                     isShowingSettings.toggle()
                 }) {
@@ -50,6 +51,8 @@ struct TemplateScreen: View {
                 }
                 .padding(8)
             }
+            
+            Spacer()
             
             ScrollView(.vertical) {
                 VStack{
@@ -77,23 +80,19 @@ struct TemplateScreen: View {
                         .padding(.bottom, 15)
                     Spacer()
                         VStack(alignment: .leading){
-                            /*
                             Button(action: {
                                 tab = .followers
                             }) {
                                 Image(systemName: "person.line.dotted.person.fill")
                                 Text("Followers")
-                            }*/
-                            NavigationLink(destination: FollowersScreen()) {
-                                Text("Followers")
-                            }.environmentObject(FollowersVM())
-                            
-                            NavigationLink(destination: FollowingScreen()) {
-                                Text("Following")
                             }
-                            //.environmentObject(FollowingScreen())
                             
-                            
+                            Button(action: {
+                                tab = .followings
+                            }) {
+                                Image(systemName: "person.crop.circle.badge.checkmark")
+                                Text("Followings")
+                            }
                             /*
                             Button(action: {
                                 isShowingProfileScreen.toggle()
@@ -106,12 +105,8 @@ struct TemplateScreen: View {
                              */
                             NavigationLink(destination: ProfileScreen()) {
                                 Text("Open Profile full")
-                            }.foregroundColor(.black)
-                            
-                            Button(action: {
-                                tab = .todo
-                            }) {
-                                Text("Todo")
+                            }
+                            NavigationLink(destination: TodosScreen()) { Text("Todos")
                             }.environmentObject(TodoVM())
                         }
                     
@@ -121,16 +116,16 @@ struct TemplateScreen: View {
                 ScrollView(.horizontal) {
                     HStack{
                         Spacer()
-                        MentorView(name: "Doc 1", imageName: "psy1")
+                        MentorView(name: "Doc first", imageName: "psy1")
                             .onTapGesture {
                                 isShowingMessagesScreen.toggle()
                             }
                         Spacer()
-                        MentorView(name: "Doc 2", imageName: "psy2")
+                        MentorView(name: "Doc second", imageName: "psy2")
                         Spacer()
-                        MentorView(name: "Doc 3", imageName: "psy3")
+                        MentorView(name: "Doc third", imageName: "psy3")
                         Spacer()
-                        MentorView(name: "Doc 4", imageName: "psy4")
+                        MentorView(name: "Doc forth", imageName: "psy4")
                     }
                 }
                 .scrollIndicators(.hidden)
@@ -205,11 +200,10 @@ struct MentorView: View {
     var body: some View {
         VStack {
             Text(name)
-                .multilineTextAlignment(.center)
                 .padding(5)
             Image(imageName)
                 .resizable()
-                .frame(width: 82, height: 64)
+                .frame(width: 96, height: 86)
             Button("Chat") {
                 
             }.padding(5)
@@ -256,12 +250,8 @@ struct PlaceView: View {
          .stroke(Color.blue, lineWidth: 2))*/
     }
 }
-/*
-#Preview("UA") {
-    TemplateScreen(tab: .constant(.home))
-        .environment(\.locale, Locale(identifier: "UA"))
-        .environmentObject(TemplateVM())
-}*/
+
+
 
 struct TemplateScreen_Previews: PreviewProvider {
     static var previews: some View {

@@ -27,13 +27,9 @@ struct FollowersScreen: View {
 }
 
 
-class FollowersVM: BaseListVM {
-    
-    @Published var items: [Contact]? = nil
-    @Published var emptyText: String? = nil
-    @Published var errorText: String? = nil
+class FollowersVM: BaseListVM<Contact> {
         
-    func loadData(userId: String) async throws -> [Contact] {
+    override func loadData(userId: String) async throws -> [Contact] {
         
         let snapshot = try? await
         Firestore.firestore().collection("followers")
